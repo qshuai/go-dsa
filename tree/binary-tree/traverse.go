@@ -1,6 +1,9 @@
 package binary_tree
 
-import "fmt"
+import (
+	"container/list"
+	"fmt"
+)
 
 type Node struct {
 	Value int
@@ -36,4 +39,28 @@ func PostOrderTraverse(tree *Node) {
 	PostOrderTraverse(tree.Left)
 	PostOrderTraverse(tree.Right)
 	fmt.Println(tree.Value)
+}
+
+// BFS
+func BreadthFirstSearch(tree *Node) {
+	if tree == nil {
+		return
+	}
+
+	l := new(list.List)
+	l.PushBack(tree)
+
+	for l.Len() > 0 {
+		ele := l.Front().Value.(*Node)
+		l.Remove(l.Front())
+
+		if ele.Left != nil {
+			l.PushBack(ele.Left)
+		}
+		if ele.Right != nil {
+			l.PushBack(ele.Right)
+		}
+
+		fmt.Println(ele.Value)
+	}
 }

@@ -72,3 +72,19 @@ func ExamplePostOrderTraverse() {
 	// 3
 	// 1
 }
+
+func ExampleLayerOrderTraverse() {
+	tree := buildTree()
+
+	BreadthFirstSearch(tree)
+	// Output:
+	// 1
+	// 2
+	// 3
+	// 4
+	// 5
+	// 6
+	// 7
+	// 8
+	// 9
+}
