@@ -6,7 +6,7 @@ func binarySearchNoRecursion(array []int, target int) int {
 	var mid int
 
 	for start <= end {
-		mid = (start + end) / 2
+		mid = start + (end - start) / 2
 		if array[mid] > target {
 			end = mid - 1
 		} else if array[mid] < target {
@@ -25,7 +25,7 @@ func binarySearchWithRecursion(array []int, start, end, target int) int {
 		return -1
 	}
 
-	mid := (start + end) / 2
+	mid := start + (end - start) / 2
 	if array[mid] < target {
 		return binarySearchWithRecursion(array, mid+1, end, target)
 	} else if array[mid] > target {
