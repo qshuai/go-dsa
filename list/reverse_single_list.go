@@ -5,7 +5,7 @@ type Node struct {
 	Next  *Node
 }
 
-func reverseSingleList(list *Node) *Node {
+func ReverseSingleList(list *Node) *Node {
 	cur := list
 	var prev *Node
 

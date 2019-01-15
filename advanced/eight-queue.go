@@ -35,7 +35,7 @@ func show() {
 }
 
 func check(row, col int) bool {
-	//上
+	// 上
 	for i := row - 1; i >= 0; i-- {
 		if arr[i][col] == 1 {
 			return false

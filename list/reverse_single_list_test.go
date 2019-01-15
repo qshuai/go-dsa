@@ -11,7 +11,7 @@ func ExampleReverseSingleList() {
 	list.Next.Next.Next = &Node{4, nil}
 	list.Next.Next.Next.Next = &Node{5, nil}
 
-	reversed := reverseSingleList(&list)
+	reversed := ReverseSingleList(&list)
 	for reversed != nil {
 		fmt.Println(reversed.Value)
 
