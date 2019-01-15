@@ -6,8 +6,15 @@ package dynamic
 //  [1, 2, 3, -40, 40] => 40
 //  [10, -2, 12, -30, 2] => 20
 func calcMaxSumForSubSequence(arr []int) int {
-	sum, prevSum := arr[0], arr[0]
+	// boundary condition
+	if arr == nil {
+		return 0
+	}
+	if len(arr) == 1 {
+		return arr[0]
+	}
 
+	sum, prevSum := arr[0], arr[0]
 	for i := 1; i < len(arr); i++ {
 		if prevSum < 0 {
 			prevSum = arr[i]
