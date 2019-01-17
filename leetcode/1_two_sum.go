@@ -1,5 +1,7 @@
 package leetcode
 
+// Link: https://leetcode.com/problems/two-sum/
+
 func twoSum(nums []int, target int) []int {
 	if len(nums) <= 1 {
 		return nil
