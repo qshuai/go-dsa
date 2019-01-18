@@ -55,5 +55,12 @@ func TestSplitStringWithRepeatedChar(t *testing.T) {
 				test.name, test.expected, ret)
 
 		}
+
+		ret2 := SplitStringWithRepeatedChar2(test.str)
+		if !reflect.DeepEqual(ret2, test.expected) {
+			t.Errorf("%s, want: %v, but got: %v",
+				test.name, test.expected, ret2)
+
+		}
 	}
 }

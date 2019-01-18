@@ -43,3 +43,32 @@ func SplitStringWithRepeatedChar(str string) []string {
 
 	return ret
 }
+
+func SplitStringWithRepeatedChar2(str string) []string {
+	var ret []string
+
+	var tmp string
+	for i := 0; i < len(str); {
+		j := i + 1
+		for j < len(str) && str[j] == str[j-1] {
+			j++
+		}
+
+		if j-i == 1 {
+			tmp += string(str[i])
+		} else {
+			if tmp != "" {
+				ret = append(ret, tmp)
+			}
+			tmp = ""
+		}
+
+		i = j
+	}
+
+	if tmp != "" {
+		ret = append(ret, tmp)
+	}
+
+	return ret
+}
