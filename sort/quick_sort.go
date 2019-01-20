@@ -1,21 +1,22 @@
 package sort
 
 func QuickSort(array []int) []int {
-	QSort(array, 0, len(array)-1)
+	low := 0
+	high := len(array) - 1
+
+	if low < high {
+		pivot := Partition(array)
+
+		QuickSort(array[:pivot])
+		QuickSort(array[pivot+1:])
+	}
 
 	return array
 }
 
-func QSort(array []int, low, high int) {
-	if low < high {
-		pivot := Partition(array, low, high)
-
-		QSort(array, low, pivot)
-		QSort(array, pivot+1, high)
-	}
-}
-
-func Partition(array []int, low, high int) int {
+func Partition(array []int) int {
+	low := 0
+	high := len(array) - 1
 	pivotKey := array[low]
 
 	for low < high {
