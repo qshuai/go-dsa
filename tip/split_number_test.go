@@ -35,7 +35,8 @@ func TestGetNumBits(t *testing.T) {
 	for _, test := range tests {
 		bits := getNumBits(test.num)
 		if bits != test.bits {
-			t.Errorf("test case: %s(target num: %d), want: %d but got: %d", test.name, test.num, test.bits, bits)
+			t.Errorf("test case: %s(target num: %d), want: %d but got: %d",
+				test.name, test.num, test.bits, bits)
 		}
 	}
 }
@@ -66,7 +67,8 @@ func TestSplitNum(t *testing.T) {
 	for _, test := range tests {
 		result := SplitNum(test.num)
 		if !equalSlice(result, test.ret) {
-			t.Errorf("test case: %s(target num: %d), want: %v but got: %v", test.name, test.num, test.ret, result)
+			t.Errorf("test case: %s(target num: %d), want: %v but got: %v",
+				test.name, test.num, test.ret, result)
 		}
 	}
 }
