@@ -1,10 +1,5 @@
 package list
 
-type Node struct {
-	Value int
-	Next  *Node
-}
-
 func ReverseSingleList(list *Node) *Node {
 	cur := list
 	var prev *Node
