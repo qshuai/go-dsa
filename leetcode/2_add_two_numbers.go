@@ -1,6 +1,6 @@
 package leetcode
 
-// Link: https://leetcode.com/problems/add-two-numbers/
+// Reference: https://leetcode.com/problems/add-two-numbers/
 
 type ListNode struct {
 	Val  int
