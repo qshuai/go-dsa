@@ -2,6 +2,7 @@ package leetcode
 
 // Reference: https://leetcode.com/problems/two-sum/
 
+// using external type: map
 func twoSum(nums []int, target int) []int {
 	if len(nums) <= 1 {
 		return nil
@@ -24,7 +25,7 @@ func twoSumN2(nums []int, target int) []int {
 		return nil
 	}
 
-	for i := 0; i < len(nums)-2; i++ {
+	for i := 0; i < len(nums)-1; i++ {
 		for j := i + 1; j < len(nums); j++ {
 			if nums[i]+nums[j] == target {
 				return []int{i, j}
@@ -32,5 +33,9 @@ func twoSumN2(nums []int, target int) []int {
 		}
 	}
 
+	return nil
+}
+
+func twoSumN3(nums []int, target int) []int {
 	return nil
 }

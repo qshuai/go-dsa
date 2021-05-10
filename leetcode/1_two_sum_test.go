@@ -23,6 +23,12 @@ func TestTwoSum(t *testing.T) {
 			array:  []int{1, 2, 3, 4, 5},
 			ret:    []int{2, 4},
 		},
+		{
+			name:   "exits",
+			target: 6,
+			array:  []int{3, 2, 4},
+			ret:    []int{1, 2},
+		},
 	}
 
 	for _, test := range tests {
