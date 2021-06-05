@@ -1,5 +1,7 @@
 package leetcode
 
+// https://leetcode.com/problems/longest-substring-without-repeating-characters/
+// lengthOfLongestSubstring: abcabcbb -> 3(abc); bbbbb -> 1(b); pwwkew -> 3(kew)
 func lengthOfLongestSubstring(s string) int {
 	if len(s) == 1 {
 		return 1
