@@ -4,6 +4,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/qshuai/go-dsa)](https://goreportcard.com/report/github.com/qshuai/go-dsa)
 [![Release](https://img.shields.io/github/v/release/qshuai/go-dsa.svg?style=flat-square)](https://github.com/qshuai/go-dsa)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Implementation for partial data structure and algorithm in Go.
 
 Study purpose for Data Structure and Algorithm!
