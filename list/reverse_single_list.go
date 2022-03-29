@@ -1,8 +1,12 @@
 package list
 
-func ReverseSingleList(list *Node) *Node {
+import (
+	"github.com/qshuai/go-dsa/types"
+)
+
+func ReverseSingleList(list *types.ListNode) *types.ListNode {
 	cur := list
-	var prev *Node
+	var prev *types.ListNode
 
 	for cur != nil {
 		tmp := cur.Next

@@ -1,8 +1,12 @@
 package list
 
-// 将两个有序的链表合并，要求合并之后的链表依然有序
+import (
+	"github.com/qshuai/go-dsa/types"
+)
 
-func mergeSortedList(l1 *Node, l2 *Node) *Node {
+// mergeSortedList 将两个有序的链表合并，且合并之后的链表依然有序
+// 注意该方法默认链表元素的类型为int
+func mergeSortedList(l1 *types.ListNode, l2 *types.ListNode) *types.ListNode {
 	if l1 == nil || l2 == nil {
 		if l1 != nil {
 			return l1
@@ -15,11 +19,11 @@ func mergeSortedList(l1 *Node, l2 *Node) *Node {
 		return nil
 	}
 
-	var ret *Node
+	var ret *types.ListNode
 	lastNode := ret
-	var head *Node
+	var head *types.ListNode
 	for l1 != nil && l2 != nil {
-		if l1.Value < l2.Value {
+		if l1.Value.(int) < l2.Value.(int) {
 			ret = l1
 			l1 = l1.Next
 		} else {

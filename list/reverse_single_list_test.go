@@ -2,14 +2,16 @@ package list
 
 import (
 	"fmt"
+
+	"github.com/qshuai/go-dsa/types"
 )
 
 func ExampleReverseSingleList() {
-	list := Node{1, nil}
-	list.Next = &Node{2, nil}
-	list.Next.Next = &Node{3, nil}
-	list.Next.Next.Next = &Node{4, nil}
-	list.Next.Next.Next.Next = &Node{5, nil}
+	list := types.ListNode{1, nil}
+	list.Next = &types.ListNode{2, nil}
+	list.Next.Next = &types.ListNode{3, nil}
+	list.Next.Next.Next = &types.ListNode{4, nil}
+	list.Next.Next.Next.Next = &types.ListNode{5, nil}
 
 	reversed := ReverseSingleList(&list)
 	for reversed != nil {
