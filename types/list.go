@@ -14,7 +14,7 @@ type ListNode struct {
 func NewListNode(v interface{}, next *ListNode) *ListNode {
 	return &ListNode{
 		Value: v,
-		Next: next,
+		Next:  next,
 	}
 }
 
