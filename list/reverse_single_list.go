@@ -7,9 +7,10 @@ import (
 func ReverseSingleList(list *types.ListNode) *types.ListNode {
 	cur := list
 	var prev *types.ListNode
+	var tmp *types.ListNode
 
 	for cur != nil {
-		tmp := cur.Next
+		tmp = cur.Next
 		cur.Next = prev
 		prev = cur
 		cur = tmp
