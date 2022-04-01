@@ -7,8 +7,8 @@ import (
 )
 
 func ExampleMergeSortedList() {
-	l1 := &types.ListNode{Value: 1, Next: &types.ListNode{2, &types.ListNode{3, nil}}}
-	l2 := &types.ListNode{Value: 1, Next: &types.ListNode{2, &types.ListNode{3, nil}}}
+	l1 := types.NewListNode(1, 3)
+	l2 := types.NewListNode(1, 3)
 
 	list := mergeSortedList(l1, l2)
 	for list != nil {

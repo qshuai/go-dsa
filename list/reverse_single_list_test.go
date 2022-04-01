@@ -7,13 +7,9 @@ import (
 )
 
 func ExampleReverseSingleList() {
-	list := types.ListNode{1, nil}
-	list.Next = &types.ListNode{2, nil}
-	list.Next.Next = &types.ListNode{3, nil}
-	list.Next.Next.Next = &types.ListNode{4, nil}
-	list.Next.Next.Next.Next = &types.ListNode{5, nil}
+	list := types.NewListNode(1, 5)
 
-	reversed := ReverseSingleList(&list)
+	reversed := ReverseSingleList(list)
 	for reversed != nil {
 		fmt.Println(reversed.Value)
 

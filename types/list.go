@@ -11,11 +11,59 @@ type ListNode struct {
 }
 
 // NewListNode creates a singly linked list
-func NewListNode(v interface{}, next *ListNode) *ListNode {
-	return &ListNode{
-		Value: v,
-		Next:  next,
+func NewListNode(start, length int) *ListNode {
+	head := &ListNode{
+		Value: start,
+		Next:  nil,
 	}
+
+	prev := head
+	for i := 1; i < length; i++ {
+		start++
+		newNode := &ListNode{
+			Value: start,
+			Next:  nil,
+		}
+		prev.Next = newNode
+		prev = newNode
+	}
+
+	return head
+}
+
+// Append append the node to the tail. panic if the linked list is nil.
+func (list *ListNode) Append(node *ListNode) *ListNode {
+	if list == nil {
+		panic("nil linked list can not append node")
+	}
+
+	head := list
+	for list.Next != nil {
+		list = list.Next
+	}
+
+	list.Next = node
+	return head
+}
+
+func (list *ListNode) String() string {
+	sb := strings.Builder{}
+	sb.WriteString("singly linked list: [")
+	for list != nil {
+		if v, ok := list.Value.(fmt.Stringer); ok {
+			sb.WriteString(fmt.Sprintf("%s", v))
+		} else {
+			sb.WriteString(fmt.Sprintf("%v", list.Value))
+		}
+
+		list = list.Next
+		if list != nil {
+			sb.WriteString(", ")
+		}
+	}
+	sb.WriteString("]")
+
+	return sb.String()
 }
 
 // DListNode represents doubly linked list

@@ -24,7 +24,7 @@ func Test_hasCycle(t *testing.T) {
 		},
 		{
 			name: "single element linked list",
-			args: types.NewListNode(1, nil),
+			args: types.NewListNode(1, 1),
 			want: false,
 		},
 	}
@@ -49,11 +49,11 @@ func buildCycleLinkedList(length, pos int) *types.ListNode {
 		panic("invalid pos")
 	}
 
-	head := types.NewListNode(0, nil)
+	head := types.NewListNode(0, 1)
 	prev := head
 	target := head
 	for i := 1; i < length; i++ {
-		newNode := types.NewListNode(i, nil)
+		newNode := types.NewListNode(i, 1)
 		prev.Next = newNode
 		prev = newNode
 
