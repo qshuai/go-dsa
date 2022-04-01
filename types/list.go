@@ -31,6 +31,23 @@ func NewListNode(start, length int) *ListNode {
 	return head
 }
 
+// NewListNodeFromSlice construct linked list from slice
+func NewListNodeFromSlice(s []int) *ListNode {
+	if len(s) <= 0 {
+		return nil
+	}
+
+	head := &ListNode{Value: s[0]}
+	cursor := head
+	for i := 1; i < len(s); i++ {
+		newNode := &ListNode{Value: s[i]}
+		cursor.Next = newNode
+		cursor = newNode
+	}
+
+	return head
+}
+
 // Append append the node to the tail. panic if the linked list is nil.
 func (list *ListNode) Append(node *ListNode) *ListNode {
 	if list == nil {

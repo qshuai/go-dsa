@@ -72,3 +72,25 @@ func TestListNode_RemoveByPosition(t *testing.T) {
 		})
 	}
 }
+
+func TestNewListNodeFromSlice(t *testing.T) {
+	tests := []struct {
+		name string
+		args []int
+		want *ListNode
+	}{
+		{
+			name: "general case",
+			args: []int{1, 2, 3},
+			want: NewListNode(1, 3),
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewListNodeFromSlice(tt.args); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewListNodeFromSlice() = %v want %v", got, tt.want)
+			}
+		})
+	}
+}
