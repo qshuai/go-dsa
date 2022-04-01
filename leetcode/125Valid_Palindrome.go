@@ -19,7 +19,7 @@ func isPalindrome(s string) bool {
 		return true
 	}
 
-	i, j := 0, len(s) -1
+	i, j := 0, len(s)-1
 	for j > i {
 		// 从前往后寻找alphanumeric
 		var a byte

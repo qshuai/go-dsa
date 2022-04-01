@@ -14,12 +14,12 @@ func Test_hasCycle(t *testing.T) {
 	}{
 		{
 			name: "cycle linked list",
-			args: buildCycleLinkedList(4,1),
+			args: buildCycleLinkedList(4, 1),
 			want: true,
 		},
 		{
 			name: "head-tail cycle linked list",
-			args: buildCycleLinkedList(2,0),
+			args: buildCycleLinkedList(2, 0),
 			want: true,
 		},
 		{
