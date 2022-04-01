@@ -46,6 +46,40 @@ func (list *ListNode) Append(node *ListNode) *ListNode {
 	return head
 }
 
+// RemoveByPosition remove the Nth using 0-based indexing node
+// from begin of linked list
+func (list *ListNode) RemoveByPosition(idx int) *ListNode {
+	if list == nil {
+		panic("nil linked list can not remove element")
+	}
+	if idx < 0 {
+		panic("idx should be larger or equal than zero")
+	}
+
+	// 删除第一个元素
+	if idx == 0 {
+		return list.Next
+	}
+
+	head := list
+	i := 1
+	for list != nil {
+		if i == idx {
+			if list.Next == nil {
+				panic("idx out of bounds")
+			}
+
+			list.Next = list.Next.Next
+			return head
+		}
+
+		i++
+		list = list.Next
+	}
+
+	return head
+}
+
 func (list *ListNode) String() string {
 	sb := strings.Builder{}
 	sb.WriteString("singly linked list: [")
