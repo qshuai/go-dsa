@@ -5,14 +5,14 @@ import (
 )
 
 // https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+// removeNthFromEnd Given the head of a linked list, remove the nth node
+// from the end of the list and return its head.
 // Constraints:
 //	The number of nodes in the list is sz.
 //	1 <= sz <= 30
 //	0 <= Node.val <= 100
 //	1 <= n <= sz
-
-// removeNthFromEnd Given the head of a linked list, remove the nth node
-// from the end of the list and return its head.
 func removeNthFromEnd(head *types.ListNode, n int) *types.ListNode {
 	if head == nil {
 		return nil

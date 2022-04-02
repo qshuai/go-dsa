@@ -4,8 +4,12 @@ import (
 	"github.com/qshuai/go-dsa/types"
 )
 
-// Reference: https://leetcode.com/problems/add-two-numbers/
+// https://leetcode.com/problems/add-two-numbers/
 
+// addTwoNumbers You are given two non-empty linked lists representing two non-negative integers.
+// The digits are stored in reverse order, and each of their nodes contains a single digit. Add
+// the two numbers and return the sum as a linked list.
+// You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 func addTwoNumbers(l1 *types.ListNode, l2 *types.ListNode) *types.ListNode {
 	var ret types.ListNode
 	tmp := &ret

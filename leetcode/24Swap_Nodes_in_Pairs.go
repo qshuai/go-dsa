@@ -4,6 +4,10 @@ import (
 	"github.com/qshuai/go-dsa/types"
 )
 
+// https://leetcode.com/problems/swap-nodes-in-pairs/
+
+// swapPairs Given a linked list, swap every two adjacent nodes and return its head. You must solve
+// the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)
 func swapPairs(head *types.ListNode) *types.ListNode {
 	if head == nil || head.Next == nil {
 		return head

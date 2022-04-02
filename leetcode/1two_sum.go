@@ -1,8 +1,12 @@
 package leetcode
 
-// Reference: https://leetcode.com/problems/two-sum/
+// https://leetcode.com/problems/two-sum/
 
-// using external type: map
+// twoSum Given an array of integers nums and an integer target,
+// return indices of the two numbers such that they add up to target.
+// You may assume that each input would have exactly one solution,
+// and you may not use the same element twice.
+// You can return the answer in any order.
 func twoSum(nums []int, target int) []int {
 	if len(nums) <= 1 {
 		return nil
@@ -33,9 +37,5 @@ func twoSumN2(nums []int, target int) []int {
 		}
 	}
 
-	return nil
-}
-
-func twoSumN3(nums []int, target int) []int {
 	return nil
 }
