@@ -14,7 +14,7 @@ func Test_letterCombinations(t *testing.T) {
 		{
 			name: "two letters",
 			args: "23",
-			want: []string{"ad","ae","af","bd","be","bf","cd","ce","cf"},
+			want: []string{"ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"},
 		},
 	}
 	for _, tt := range tests {
