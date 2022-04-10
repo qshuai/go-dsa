@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestQuickSort(t *testing.T) {
+func Test_QuickSort(t *testing.T) {
 	tests := []struct {
 		name   string
 		array  []int

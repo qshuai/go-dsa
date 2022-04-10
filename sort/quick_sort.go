@@ -1,5 +1,6 @@
 package sort
 
+// QuickSort 快速排序
 func QuickSort(array []int) []int {
 	low := 0
 	high := len(array) - 1

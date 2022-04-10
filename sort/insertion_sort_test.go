@@ -1,14 +1,11 @@
 package sort
 
 import (
-	"math/rand"
 	"reflect"
-	"sort"
 	"testing"
-	"time"
 )
 
-func TestSelectSort(t *testing.T) {
+func Test_InsertionSort(t *testing.T) {
 	tests := []struct {
 		name     string
 		target   []int
@@ -37,36 +34,10 @@ func TestSelectSort(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		sorted := selectSort(test.target)
-		if !reflect.DeepEqual(sorted, test.expected) {
+		insertionSort(test.target)
+		if !reflect.DeepEqual(test.target, test.expected) {
 			t.Errorf("test: %s failed, expected: %v, but got: %v",
-				test.name, test.expected, sorted)
-		}
-	}
-}
-
-func TestRandomArray(t *testing.T) {
-	// random array sort testing
-	arrayLength := 255
-	seed := rand.New(rand.NewSource(time.Now().Unix()))
-	for i := 0; i < 10000; i++ {
-		array := make([]int, arrayLength)
-		compare := make([]int, arrayLength)
-
-		for j := 0; j < arrayLength; j++ {
-			array[j] = seed.Int()
-		}
-		copy(compare, array)
-
-		// compare group
-		sort.Ints(compare)
-
-		// implementation group
-		calcRet := selectSort(array)
-
-		if !reflect.DeepEqual(calcRet, compare) {
-			t.Errorf("test: random array sort failed, expected: %v,"+
-				" but got: %v", compare, calcRet)
+				test.name, test.expected, test.target)
 		}
 	}
 }
