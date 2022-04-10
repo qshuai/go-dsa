@@ -2,6 +2,7 @@ package sort
 
 import (
 	"math/rand"
+	"reflect"
 	"sort"
 	"testing"
 	"time"
@@ -37,7 +38,7 @@ func TestSelectSort(t *testing.T) {
 
 	for _, test := range tests {
 		sorted := selectSort(test.target)
-		if !equal(sorted, test.expected) {
+		if !reflect.DeepEqual(sorted, test.expected) {
 			t.Errorf("test: %s failed, expected: %v, but got: %v",
 				test.name, test.expected, sorted)
 		}
@@ -63,7 +64,7 @@ func TestRandomArray(t *testing.T) {
 		// implementation group
 		calcRet := selectSort(array)
 
-		if !equal(calcRet, compare) {
+		if !reflect.DeepEqual(calcRet, compare) {
 			t.Errorf("test: random array sort failed, expected: %v,"+
 				" but got: %v", compare, calcRet)
 		}
