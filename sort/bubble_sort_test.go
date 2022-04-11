@@ -3,6 +3,8 @@ package sort
 import (
 	"reflect"
 	"testing"
+
+	"github.com/qshuai/go-dsa/types"
 )
 
 func Test_BubbleSort(t *testing.T) {
@@ -34,5 +36,33 @@ func Test_BubbleSort(t *testing.T) {
 			t.Errorf("test: %s failed, expected: %v, but got: %v",
 				test.name, test.expected, sorted)
 		}
+	}
+}
+
+func Test_ListBubbleSort(t *testing.T) {
+	tests := []struct {
+		name string
+		args *types.ListNode
+		want *types.ListNode
+	}{
+		{
+			name: "case-1",
+			args: types.NewListNodeFromSlice([]int{5, 4, 3, 2, 1}),
+			want: types.NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+		},
+		{
+			name: "case-2",
+			args: types.NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+			want: types.NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			if got := listBubbleSort(test.args); !reflect.DeepEqual(test.want, got) {
+				t.Errorf("listBubbleSort() %s failed, expected: %s, but got %s",
+					test.name, test.want, got)
+			}
+		})
 	}
 }
