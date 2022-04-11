@@ -124,6 +124,32 @@ type DListNode struct {
 	Next  *DListNode
 }
 
+// NewDoublyLinkedListFromSlice 从数组生成双向链表
+func NewDoublyLinkedListFromSlice(arr []int) *DListNode {
+	if len(arr) <= 0 {
+		return nil
+	}
+
+	head := &DListNode{
+		Value: arr[0],
+		Prev:  nil,
+		Next:  nil,
+	}
+	prev := head
+	for i := 1; i < len(arr); i++ {
+		newNode := &DListNode{
+			Value: arr[i],
+			Prev:  prev,
+			Next:  nil,
+		}
+		prev.Next = newNode
+
+		prev = newNode
+	}
+
+	return head
+}
+
 // String return readable string representing doubly linked list
 func (n *DListNode) String() string {
 	if n == nil {

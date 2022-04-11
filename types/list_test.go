@@ -94,3 +94,44 @@ func TestNewListNodeFromSlice(t *testing.T) {
 		})
 	}
 }
+
+func TestNewDoublyLinkedListFromSlice(t *testing.T) {
+	head := &DListNode{
+		Value: 1,
+		Prev:  nil,
+		Next:  nil,
+	}
+	node2 := &DListNode{
+		Value: 2,
+		Prev:  head,
+		Next:  nil,
+	}
+	head.Next = node2
+	node3 := &DListNode{
+		Value: 3,
+		Prev:  node2,
+		Next:  nil,
+	}
+	node2.Next = node3
+
+	tests := []struct {
+		name string
+		args []int
+		want *DListNode
+	}{
+		{
+			name: "general case",
+			args: []int{1, 2, 3},
+			want: head,
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			if got := NewDoublyLinkedListFromSlice(test.args); !reflect.DeepEqual(got, test.want) {
+				t.Errorf("NewDoublyLinkedListFromSlice() %s want: %s, but got: %s",
+					test.name, test.want.String(), got.String())
+			}
+		})
+	}
+}
