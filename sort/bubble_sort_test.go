@@ -115,9 +115,37 @@ func Test_DoublyListBubbleSort(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			if got := DoublyListBubbleSort(test.args); !reflect.DeepEqual(test.want, got) {
-				t.Errorf("listBubbleSortChangValue() %s failed, expected: %s, but got %s",
+			if got := doublyListBubbleSort(test.args); !reflect.DeepEqual(test.want, got) {
+				t.Errorf("DoublyListBubbleSort() %s failed, expected: %s, but got %s",
 					test.name, test.want, got)
+			}
+		})
+	}
+}
+
+func Test_DoublyListBubbleSortChangeValue(t *testing.T) {
+	tests := []struct {
+		name string
+		args *types.DListNode
+		want *types.DListNode
+	}{
+		{
+			name: "case-1",
+			args: types.NewDoublyLinkedListFromSlice([]int{5, 4, 3, 2, 1}),
+			want: types.NewDoublyLinkedListFromSlice([]int{1, 2, 3, 4, 5}),
+		},
+		{
+			name: "case-2",
+			args: types.NewDoublyLinkedListFromSlice([]int{1, 2, 3, 4, 5}),
+			want: types.NewDoublyLinkedListFromSlice([]int{1, 2, 3, 4, 5}),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			if doublyListBubbleSortChangeValue(test.args); !reflect.DeepEqual(test.want, test.args) {
+				t.Errorf("DoublyListBubbleSortChangeValue() %s failed, expected: %s, but got %s",
+					test.name, test.want, test.args)
 			}
 		})
 	}

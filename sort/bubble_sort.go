@@ -100,7 +100,7 @@ func listBubbleSortChangValue(node *types.ListNode) {
 
 // DoublyListBubbleSort 双向链表的冒泡排序算法（元素值为int类型）
 // Constraints: 不可以修改元素值
-func DoublyListBubbleSort(head *types.DListNode) *types.DListNode {
+func doublyListBubbleSort(head *types.DListNode) *types.DListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
@@ -148,4 +148,35 @@ func DoublyListBubbleSort(head *types.DListNode) *types.DListNode {
 
 	guard.Next.Prev = nil
 	return guard.Next
+}
+
+// DoublyListBubbleSortChangeValue 双向链表的冒泡排序算法（元素值为int类型）
+// Constraints: 可以修改元素值
+func doublyListBubbleSortChangeValue(head *types.DListNode) {
+	if head == nil || head.Next == nil {
+		return
+	}
+
+	var swapCnt int
+	cursor := head
+	for {
+		if cursor.Next == nil {
+			if swapCnt == 0 {
+				break
+			}
+
+			cursor = head
+			swapCnt = 0
+			continue
+		}
+
+		if cursor.Value.(int) <= cursor.Next.Value.(int) {
+			cursor = cursor.Next
+			continue
+		}
+
+		swapCnt++
+		cursor.Value, cursor.Next.Value = cursor.Next.Value, cursor.Value
+		cursor = cursor.Next
+	}
 }
