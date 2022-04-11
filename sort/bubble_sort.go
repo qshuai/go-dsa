@@ -68,3 +68,32 @@ func listBubbleSort(node *types.ListNode) *types.ListNode {
 
 	return guard.Next
 }
+
+// listBubbleSortChangValue 单向链表的冒泡排序算法（元素值为int类型）
+// Constraints: 可以修改元素字段值
+func listBubbleSortChangValue(node *types.ListNode) {
+	if node == nil || node.Next == nil {
+		return
+	}
+
+	cursor := node
+	var swapCnt int
+	for {
+		if cursor.Next == nil {
+			if swapCnt == 0 {
+				break
+			}
+
+			cursor = node
+			swapCnt = 0
+		}
+
+		if cursor.Value.(int) <= cursor.Next.Value.(int) {
+			cursor = cursor.Next
+			continue
+		}
+
+		swapCnt++
+		cursor.Value, cursor.Next.Value = cursor.Next.Value, cursor.Value
+	}
+}

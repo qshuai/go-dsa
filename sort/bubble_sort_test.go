@@ -66,3 +66,31 @@ func Test_ListBubbleSort(t *testing.T) {
 		})
 	}
 }
+
+func Test_ListBubbleSortChangValue(t *testing.T) {
+	tests := []struct {
+		name string
+		args *types.ListNode
+		want *types.ListNode
+	}{
+		{
+			name: "case-1",
+			args: types.NewListNodeFromSlice([]int{5, 4, 3, 2, 1}),
+			want: types.NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+		},
+		{
+			name: "case-2",
+			args: types.NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+			want: types.NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			if listBubbleSortChangValue(test.args); !reflect.DeepEqual(test.want, test.args) {
+				t.Errorf("listBubbleSortChangValue() %s failed, expected: %s, but got %s",
+					test.name, test.want, test.args)
+			}
+		})
+	}
+}
