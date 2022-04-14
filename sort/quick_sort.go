@@ -1,35 +1,34 @@
 package sort
 
 // QuickSort 快速排序
-func QuickSort(array []int) []int {
-	low := 0
-	high := len(array) - 1
-
-	if low < high {
-		pivot := Partition(array)
-
-		QuickSort(array[:pivot])
-		QuickSort(array[pivot+1:])
+func QuickSort(arr []int) {
+	if len(arr) <= 0 {
+		return
 	}
 
-	return array
+	pivot := partition(arr)
+	QuickSort(arr[:pivot])
+	QuickSort(arr[pivot+1:])
 }
 
-func Partition(array []int) int {
+func partition(arr []int) int {
 	low := 0
-	high := len(array) - 1
-	pivotKey := array[low]
+	high := len(arr) - 1
 
-	for low < high {
-		for low < high && pivotKey < array[high] {
-			high--
+	for {
+		if low >= high {
+			break
 		}
-		array[low], array[high] = array[high], array[low]
 
-		for low < high && array[low] <= pivotKey {
+		for low < high && arr[low] < arr[high] {
 			low++
 		}
-		array[low], array[high] = array[high], array[low]
+		arr[low], arr[high] = arr[high], arr[low]
+
+		for low < high && arr[low] < arr[high] {
+			high--
+		}
+		arr[low], arr[high] = arr[high], arr[low]
 	}
 
 	return low

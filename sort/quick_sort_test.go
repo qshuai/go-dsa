@@ -19,10 +19,10 @@ func Test_QuickSort(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		ret := QuickSort(test.array)
-		if !reflect.DeepEqual(ret, test.sorted) {
+		QuickSort(test.array)
+		if !reflect.DeepEqual(test.array, test.sorted) {
 			t.Errorf("%s, want: %v, but got: %v",
-				test.name, test.sorted, ret)
+				test.name, test.sorted, test.array)
 		}
 	}
 }
