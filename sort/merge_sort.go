@@ -18,28 +18,33 @@ func mergeSort(arr []int) []int {
 	return merge(left, right)
 }
 
-func merge(a, b []int) []int {
-	if len(a) <= 0 && len(b) <= 0 {
+func merge(left, right []int) []int {
+	if len(left) <= 0 && len(right) <= 0 {
 		return []int{}
 	}
 
-	ret := make([]int, 0, len(a)+len(b))
+	// 创建临时slice只存放left部分，可以减少内存分配
+	tmp := make([]int, len(left))
+	copy(tmp, left)
+	left = left[:0]
+
 	var i, j int
-	for ; i < len(a) && j < len(b); {
-		if a[i] <= b[j] {
-			ret = append(ret, a[i])
+	for ; i < len(tmp) && j < len(right); {
+		// <=中的=条件，可以保证该排序是稳定排序（相等元素，左边的还在左边）
+		if tmp[i] <= right[j] {
+			left = append(left, tmp[i])
 			i++
 		} else {
-			ret = append(ret, b[j])
+			left = append(left, right[j])
 			j++
 		}
 	}
-	if i < len(a) {
-		ret = append(ret, a[i:]...)
+	if i < len(tmp) {
+		left = append(left, tmp[i:]...)
 	}
-	if j < len(b) {
-		ret = append(ret, b[j:]...)
+	if j < len(right) {
+		left = append(left, right[j:]...)
 	}
 
-	return ret
+	return left
 }
