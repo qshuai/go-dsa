@@ -1,6 +1,7 @@
 package sort
 
-// mergeSort 合并排序算法
+// mergeSort 合并排序算法，非原地排序算法（merge方法无法原地执行），稳定的排序算法
+// 时间复杂度为nlogn
 func mergeSort(arr []int) []int {
 	if len(arr) <= 1 {
 		return arr
@@ -29,7 +30,7 @@ func merge(left, right []int) []int {
 	left = left[:0]
 
 	var i, j int
-	for ; i < len(tmp) && j < len(right); {
+	for i < len(tmp) && j < len(right) {
 		// <=中的=条件，可以保证该排序是稳定排序（相等元素，左边的还在左边）
 		if tmp[i] <= right[j] {
 			left = append(left, tmp[i])

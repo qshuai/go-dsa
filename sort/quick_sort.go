@@ -1,6 +1,7 @@
 package sort
 
-// QuickSort 快速排序
+// QuickSort 快速排序，原地排序算法，不稳定的排序算法
+// 时间复杂度为nlogn（最坏的时间复杂度为n^2，取决于pivot的选取是否尽可能将数组平分）
 func QuickSort(arr []int) {
 	if len(arr) <= 0 {
 		return
@@ -12,24 +13,17 @@ func QuickSort(arr []int) {
 }
 
 func partition(arr []int) int {
-	low := 0
-	high := len(arr) - 1
-
-	for {
-		if low >= high {
-			break
+	pivot := arr[len(arr)-1]
+	var i int
+	for j := 0; j < len(arr); j++ {
+		if arr[j] >= pivot {
+			continue
 		}
 
-		for low < high && arr[low] < arr[high] {
-			low++
-		}
-		arr[low], arr[high] = arr[high], arr[low]
-
-		for low < high && arr[low] < arr[high] {
-			high--
-		}
-		arr[low], arr[high] = arr[high], arr[low]
+		arr[i], arr[j] = arr[j], arr[i]
+		i++
 	}
 
-	return low
+	arr[i], arr[len(arr)-1] = arr[len(arr)-1], arr[i]
+	return i
 }

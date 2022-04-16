@@ -1,4 +1,4 @@
-package search
+package leetcode
 
 import (
 	"testing"
@@ -38,10 +38,18 @@ func Test_searchRankK(t *testing.T) {
 			},
 			want: 2,
 		},
+		{
+			name: "case-4",
+			args: args{
+				arr: []int{-1, -1},
+				k:   2,
+			},
+			want: -1,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := searchRankK(tt.args.arr, tt.args.k); got != tt.want {
+			if got := findKthLargest(tt.args.arr, tt.args.k); got != tt.want {
 				t.Errorf("searchRankK() = %v, want %v", got, tt.want)
 			}
 		})
