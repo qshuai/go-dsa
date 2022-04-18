@@ -32,7 +32,7 @@ func Test_maximumGap(t *testing.T) {
 		},
 		{
 			name: "case-5",
-			args: []int{1,1,1,1,1,5,5,5,5,5},
+			args: []int{1, 1, 1, 1, 1, 5, 5, 5, 5, 5},
 			want: 4,
 		},
 	}

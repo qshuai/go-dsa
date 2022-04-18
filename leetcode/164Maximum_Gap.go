@@ -1,5 +1,7 @@
 package leetcode
 
+// https://leetcode.com/problems/maximum-gap/
+
 // maximumGap Given an integer array nums, return the maximum difference between two
 // successive elements in its sorted form. If the array contains less than two elements, return 0.
 // You must write an algorithm that runs in linear time and uses linear extra space.
@@ -47,7 +49,7 @@ func maximumGap(nums []int) int {
 	var maxgap int
 	var i, j int
 	var diff int
-	for ; i < buckets; {
+	for i < buckets {
 		j = i + 1
 		for j < buckets && maximum[j] == nil && minimum[j] == nil {
 			j++
