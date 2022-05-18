@@ -2,6 +2,9 @@ package sort
 
 // QuickSort 快速排序，原地排序算法，不稳定的排序算法
 // 时间复杂度为nlogn（最坏的时间复杂度为n^2，取决于pivot的选取是否尽可能将数组平分）
+// 基本思路：选择一个pivot，通过移动元素，达到pivot左侧的都小于它，右侧的均大约等于它；
+// 整个数组按照pivot切分后，对每个小数组再次进行上述操作，直到每个小数组只剩下1个元素，
+// 整个数组将达成有序的状态
 func QuickSort(arr []int, fn func([]int) int) {
 	if len(arr) <= 1 {
 		return

@@ -7,14 +7,16 @@ import (
 )
 
 // bubbleSort 冒泡排序（稳定排序；时间复杂度O(n^2)）
+// 基本思路：一次遍历每一个元素，如果该元素比下一个元素大，就交换两个元素的位置。这样的过程
+// 执行n-1即可达到有序的状态
 func bubbleSort(arr []int) []int {
 	var sorted bool
 	for i := 0; i < len(arr)-1 && !sorted; i++ {
 		sorted = true
-		for i := 0; i < len(arr)-1; i++ {
-			if arr[i] > arr[i+1] {
+		for j := 0; j < len(arr)-1; j++ {
+			if arr[j] > arr[j+1] {
 				sorted = false
-				arr[i], arr[i+1] = arr[i+1], arr[i]
+				arr[j], arr[j+1] = arr[j+1], arr[j]
 			}
 		}
 	}
