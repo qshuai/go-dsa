@@ -1,6 +1,7 @@
-package tip
+package other
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -33,7 +34,7 @@ func TestGetNumBits(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		bits := getNumBits(test.num)
+		bits := GetNumBits(test.num)
 		if bits != test.bits {
 			t.Errorf("test case: %s(target num: %d), want: %d but got: %d",
 				test.name, test.num, test.bits, bits)
@@ -66,23 +67,9 @@ func TestSplitNum(t *testing.T) {
 
 	for _, test := range tests {
 		result := SplitNum(test.num)
-		if !equalSlice(result, test.ret) {
+		if !reflect.DeepEqual(result, test.ret) {
 			t.Errorf("test case: %s(target num: %d), want: %v but got: %v",
 				test.name, test.num, test.ret, result)
 		}
 	}
-}
-
-func equalSlice(s1 []int, s2 []int) bool {
-	if len(s1) != len(s2) {
-		return false
-	}
-
-	for i := 0; i < len(s1); i++ {
-		if s1[i] != s2[i] {
-			return false
-		}
-	}
-
-	return true
 }

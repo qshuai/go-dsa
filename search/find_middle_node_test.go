@@ -1,4 +1,4 @@
-package list
+package search
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 
 func ExampleFindMiddleNode() {
 	node := types.NewListNode(1, 5)
-	fmt.Println(findMiddleNode(node).Value)
+	fmt.Println(FindMiddleNode(node).Value)
 
 	// Output:
 	// 3

@@ -97,6 +97,22 @@ func (list *ListNode) RemoveByPosition(idx int) *ListNode {
 	return head
 }
 
+// ReverseSingleList 单链表反转
+func ReverseSingleList(list *ListNode) *ListNode {
+	cur := list
+	var prev *ListNode
+	var tmp *ListNode
+
+	for cur != nil {
+		tmp = cur.Next
+		cur.Next = prev
+		prev = cur
+		cur = tmp
+	}
+
+	return prev
+}
+
 func (list *ListNode) String() string {
 	sb := strings.Builder{}
 	sb.WriteString("singly linked list: [")

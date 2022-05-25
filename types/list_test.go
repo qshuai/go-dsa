@@ -1,6 +1,7 @@
 package types
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -93,6 +94,24 @@ func TestNewListNodeFromSlice(t *testing.T) {
 			}
 		})
 	}
+}
+
+func ExampleReverseSingleList() {
+	list := NewListNode(1, 5)
+
+	reversed := ReverseSingleList(list)
+	for reversed != nil {
+		fmt.Println(reversed.Value)
+
+		reversed = reversed.Next
+	}
+
+	// Output:
+	// 5
+	// 4
+	// 3
+	// 2
+	// 1
 }
 
 func TestNewDoublyLinkedListFromSlice(t *testing.T) {

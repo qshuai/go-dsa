@@ -1,4 +1,4 @@
-package for_offer
+package search
 
 import "testing"
 
@@ -9,12 +9,12 @@ func TestFindDuplicationElement(t *testing.T) {
 		target int
 	}{
 		{
-			name:   "sorted array without duplicated element",
+			name:   "sorted args without duplicated element",
 			array:  []int{0, 1, 2, 3, 4, 5},
 			target: -1,
 		},
 		{
-			name:   "shuffle array without duplicated element",
+			name:   "shuffle args without duplicated element",
 			array:  []int{3, 5, 0, 2, 1, 4},
 			target: -1,
 		},
@@ -36,7 +36,7 @@ func TestFindDuplicationElement(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		target := findDuplicationElement(test.array)
+		target := FindDuplicationElement(test.array)
 		if target != test.target {
 			t.Errorf("%s: find duplicated element, want: %d, but got: %d",
 				test.name, test.target, target)

@@ -1,12 +1,11 @@
-package list
+package search
 
 import (
 	"github.com/qshuai/go-dsa/types"
 )
 
-// 给定一个链表的头结点，要求找到中间节点并返回
-
-func findMiddleNode(node *types.ListNode) *types.ListNode {
+// FindMiddleNode 给定一个链表的头结点，要求找到中间节点并返回
+func FindMiddleNode(node *types.ListNode) *types.ListNode {
 	if node == nil {
 		return nil
 	}

@@ -1,4 +1,4 @@
-package binary_tree
+package types
 
 import (
 	"container/list"
