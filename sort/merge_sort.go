@@ -1,9 +1,9 @@
 package sort
 
-// mergeSort 合并排序算法，非原地排序算法（merge方法无法原地执行），稳定的排序算法
+// MergeSort 合并排序算法，非原地排序算法（merge方法无法原地执行），稳定的排序算法
 // 时间复杂度为nlogn
 // 基本思路：将数组一分为二，每个子数组达成有序状态后，在进行合并，合并之后的数组达到整体有序
-func mergeSort(arr []int) []int {
+func MergeSort(arr []int) []int {
 	if len(arr) <= 1 {
 		return arr
 	}
@@ -15,8 +15,8 @@ func mergeSort(arr []int) []int {
 	}
 
 	mid := len(arr) / 2
-	left := mergeSort(arr[:mid])
-	right := mergeSort(arr[mid:])
+	left := MergeSort(arr[:mid])
+	right := MergeSort(arr[mid:])
 	return merge(left, right)
 }
 

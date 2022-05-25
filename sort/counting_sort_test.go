@@ -3,34 +3,16 @@ package sort
 import (
 	"reflect"
 	"testing"
+
+	"github.com/qshuai/go-dsa/sort/testdata"
 )
 
 func TestCountingSort(t *testing.T) {
-	type args struct {
-		nums []int
-		min  int
-		max  int
-	}
-	tests := []struct {
-		name     string
-		args     args
-		expected []int
-	}{
-		{
-			name: "case-1",
-			args: args{
-				nums: []int{-1, 1, 2, 1, 3},
-				min:  -1,
-				max:  3,
-			},
-			expected: []int{-1, 1, 1, 2, 3},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			CountingSort(tt.args.nums, tt.args.min, tt.args.max)
-			if !reflect.DeepEqual(tt.expected, tt.args.nums) {
-				t.Errorf("%s expected: %v, bug got: %v", tt.name, tt.expected, tt.args.nums)
+	for _, tt := range testdata.GetTestCases() {
+		t.Run(tt.Name, func(t *testing.T) {
+			CountingSort(tt.Args, tt.Min, tt.Max)
+			if !reflect.DeepEqual(tt.Expected, tt.Args) {
+				t.Errorf("CountingSort[%s] expected: %v, bug got: %v", tt.Name, tt.Expected, tt.Args)
 			}
 		})
 	}

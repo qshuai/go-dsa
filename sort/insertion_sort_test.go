@@ -3,41 +3,17 @@ package sort
 import (
 	"reflect"
 	"testing"
+
+	"github.com/qshuai/go-dsa/sort/testdata"
 )
 
 func Test_InsertionSort(t *testing.T) {
-	tests := []struct {
-		name     string
-		target   []int
-		expected []int
-	}{
-		{
-			name:     "case1(has sorted array)",
-			target:   []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
-			expected: []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
-		},
-		{
-			name:     "case2(reversed array)",
-			target:   []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1},
-			expected: []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
-		},
-		{
-			name:     "case3(truffle array)",
-			target:   []int{2, 3, 1, 345, 2, 56, 86, 34, 0, -23},
-			expected: []int{-23, 0, 1, 2, 2, 3, 34, 56, 86, 345},
-		},
-		{
-			name:     "case4(one step sort)",
-			target:   []int{2, 1, 3, 4, 5, 6, 7, 8, 9, 10},
-			expected: []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
-		},
-	}
-
-	for _, test := range tests {
-		insertionSort(test.target)
-		if !reflect.DeepEqual(test.target, test.expected) {
-			t.Errorf("test: %s failed, expected: %v, but got: %v",
-				test.name, test.expected, test.target)
-		}
+	for _, tt := range testdata.GetTestCases() {
+		t.Run(tt.Name, func(t *testing.T) {
+			InsertionSort(tt.Args)
+			if !reflect.DeepEqual(tt.Expected, tt.Args) {
+				t.Errorf("InsertionSort[%s] expected: %v, bug got: %v", tt.Name, tt.Expected, tt.Args)
+			}
+		})
 	}
 }

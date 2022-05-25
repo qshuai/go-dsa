@@ -6,10 +6,10 @@ import (
 	"github.com/qshuai/go-dsa/types"
 )
 
-// bubbleSort 冒泡排序（稳定排序；时间复杂度O(n^2)）
+// BubbleSort 冒泡排序（稳定排序；时间复杂度O(n^2)）
 // 基本思路：一次遍历每一个元素，如果该元素比下一个元素大，就交换两个元素的位置。这样的过程
 // 执行n-1即可达到有序的状态
-func bubbleSort(arr []int) []int {
+func BubbleSort(arr []int) {
 	var sorted bool
 	for i := 0; i < len(arr)-1 && !sorted; i++ {
 		sorted = true
@@ -20,8 +20,6 @@ func bubbleSort(arr []int) []int {
 			}
 		}
 	}
-
-	return arr
 }
 
 // listBubbleSort 单向链表的冒泡排序算法（元素值为int类型）
