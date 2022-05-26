@@ -19,12 +19,12 @@ func TestFindDuplicationElement(t *testing.T) {
 			target: -1,
 		},
 		{
-			name:   "duplicated element at index 0",
+			name:   "duplicated element at expect 0",
 			array:  []int{2, 0, 5, 2, 1, 3},
 			target: 2,
 		},
 		{
-			name:   "duplicated element at arbitrary index",
+			name:   "duplicated element at arbitrary expect",
 			array:  []int{3, 4, 0, 1, 5, 4},
 			target: 4,
 		},

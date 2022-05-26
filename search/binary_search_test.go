@@ -5,47 +5,140 @@ import "testing"
 func TestBinarySearch(t *testing.T) {
 	tests := []struct {
 		name   string
-		array  []int
+		nums   []int
 		target int
-		index  int
+		expect int
 	}{
 		{
 			name:   "exist",
-			array:  []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+			nums:   []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
 			target: 6,
-			index:  5,
+			expect: 5,
 		},
 		{
 			name:   "not exist",
-			array:  []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+			nums:   []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
 			target: 11,
-			index:  -1,
+			expect: -1,
 		},
 		{
 			name:   "exist(end subtracts start is 1 at last)",
-			array:  []int{1, 2, 3, 4, 5},
+			nums:   []int{1, 2, 3, 4, 5},
 			target: 2,
-			index:  1,
+			expect: 1,
 		},
 		{
 			name:   "not exist(end subtracts start is 1 at last)",
-			array:  []int{1, 2, 4, 5, 6},
+			nums:   []int{1, 2, 4, 5, 6},
 			target: 3,
-			index:  -1,
+			expect: -1,
 		},
 	}
 
-	for _, test := range tests {
-		index := binarySearchNoRecursion(test.array, test.target)
-		if index != test.index {
-			t.Errorf("target number: %d index, want: %d, but got: %d",
-				test.target, test.index, index)
-		}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			index := FindAny(tt.nums, tt.target)
+			if index != tt.expect {
+				t.Errorf("FindAny[%s] want: %d, but got: %d",
+					tt.name, tt.expect, index)
+			}
 
-		index2 := binarySearchWithRecursion(test.array, 0, len(test.array)-1, test.target)
-		if index2 != test.index {
-			t.Errorf("target number: %d index, want: %d, but got: %d",
-				test.target, test.index, index2)
-		}
+			index = FindAnyRecursive(tt.nums, tt.target)
+			if index != tt.expect {
+				t.Errorf("FindAnyRecursive[%s] want: %d, but got: %d",
+					tt.name, tt.expect, index)
+			}
+		})
+	}
+}
+
+func TestFirstIndex(t *testing.T) {
+	tests := []struct {
+		name          string
+		nums          []int
+		target        int
+		firstIndex    int
+		lastIndex     int
+		firstGteIndex int
+		lastLteIndex  int
+	}{
+		{
+			name:          "empty container",
+			nums:          nil,
+			target:        1,
+			firstIndex:    -1,
+			lastIndex:     -1,
+			firstGteIndex: -1,
+			lastLteIndex:  -1,
+		},
+		{
+			name:          "one element container",
+			nums:          []int{5},
+			target:        5,
+			firstIndex:    0,
+			lastIndex:     0,
+			firstGteIndex: 0,
+			lastLteIndex:  0,
+		},
+		{
+			name:          "not contained",
+			nums:          []int{1, 2, 3, 4, 5},
+			target:        8,
+			firstIndex:    -1,
+			lastIndex:     -1,
+			firstGteIndex: -1,
+			lastLteIndex:  4,
+		},
+		{
+			name:          "not duplicative element container",
+			nums:          []int{1, 2, 3, 4, 5},
+			target:        2,
+			firstIndex:    1,
+			lastIndex:     1,
+			firstGteIndex: 1,
+			lastLteIndex:  1,
+		},
+		{
+			name:          "duplicative element container",
+			nums:          []int{1, 2, 3, 3, 4, 5},
+			target:        3,
+			firstIndex:    2,
+			lastIndex:     3,
+			firstGteIndex: 2,
+			lastLteIndex:  3,
+		},
+		{
+			name:          "first gte(or last lte) example",
+			nums:          []int{1, 3, 4, 5, 6},
+			target:        2,
+			firstIndex:    -1,
+			lastIndex:     -1,
+			firstGteIndex: 1,
+			lastLteIndex:  0,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			idx := FirstIndex(tt.nums, tt.target)
+			if idx != tt.firstIndex {
+				t.Errorf("FirstIndex[%s] expected: %d, but got: %d", tt.name, tt.firstIndex, idx)
+			}
+
+			idx = LastIndex(tt.nums, tt.target)
+			if idx != tt.lastIndex {
+				t.Errorf("LastIndex[%s] expected: %d, but got: %d", tt.name, tt.lastIndex, idx)
+			}
+
+			idx = FirstGteIndex(tt.nums, tt.target)
+			if idx != tt.firstGteIndex {
+				t.Errorf("FirstGteIndex[%s] expected: %d, but got: %d", tt.name, tt.firstGteIndex, idx)
+			}
+
+			idx = LastLteIndex(tt.nums, tt.target)
+			if idx != tt.lastLteIndex {
+				t.Errorf("LastLteIndex[%s] expected: %d, but got: %d", tt.name, tt.lastLteIndex, idx)
+			}
+		})
 	}
 }
