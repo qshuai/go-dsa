@@ -49,24 +49,24 @@ func NewListNodeFromSlice(s []int) *ListNode {
 }
 
 // Append the node to the tail. panic if the linked list is nil.
-func (list *ListNode) Append(node *ListNode) *ListNode {
-	if list == nil {
+func (n *ListNode) Append(node *ListNode) *ListNode {
+	if n == nil {
 		panic("nil linked list can not append node")
 	}
 
-	head := list
-	for list.Next != nil {
-		list = list.Next
+	head, cursor := n, n
+	for cursor.Next != nil {
+		cursor = cursor.Next
 	}
 
-	list.Next = node
+	cursor.Next = node
 	return head
 }
 
 // RemoveByPosition remove the Nth using 0-based indexing node
 // from begin of linked list
-func (list *ListNode) RemoveByPosition(idx int) *ListNode {
-	if list == nil {
+func (n *ListNode) RemoveByPosition(idx int) *ListNode {
+	if n == nil {
 		panic("nil linked list can not remove element")
 	}
 	if idx < 0 {
@@ -75,23 +75,23 @@ func (list *ListNode) RemoveByPosition(idx int) *ListNode {
 
 	// 删除第一个元素
 	if idx == 0 {
-		return list.Next
+		return n.Next
 	}
 
-	head := list
+	head, cursor := n, n
 	i := 1
-	for list != nil {
+	for cursor != nil {
 		if i == idx {
-			if list.Next == nil {
+			if cursor.Next == nil {
 				panic("idx out of bounds")
 			}
 
-			list.Next = list.Next.Next
+			cursor.Next = cursor.Next.Next
 			return head
 		}
 
 		i++
-		list = list.Next
+		cursor = cursor.Next
 	}
 
 	return head
@@ -113,18 +113,19 @@ func ReverseSingleList(list *ListNode) *ListNode {
 	return prev
 }
 
-func (list *ListNode) String() string {
+func (n *ListNode) String() string {
 	sb := strings.Builder{}
 	sb.WriteString("singly linked list: [")
-	for list != nil {
-		if v, ok := list.Value.(fmt.Stringer); ok {
+	cursor := n
+	for cursor != nil {
+		if v, ok := cursor.Value.(fmt.Stringer); ok {
 			sb.WriteString(fmt.Sprintf("%s", v))
 		} else {
-			sb.WriteString(fmt.Sprintf("%v", list.Value))
+			sb.WriteString(fmt.Sprintf("%v", cursor.Value))
 		}
 
-		list = list.Next
-		if list != nil {
+		cursor = cursor.Next
+		if cursor != nil {
 			sb.WriteString(", ")
 		}
 	}
@@ -174,9 +175,10 @@ func (n *DListNode) String() string {
 
 	sb := strings.Builder{}
 	sb.WriteString("nil")
-	for n != nil {
+	cursor := n
+	for cursor != nil {
 		sb.WriteString(fmt.Sprintf(" <=> %v", n.Value))
-		n = n.Next
+		cursor = cursor.Next
 	}
 	sb.WriteString(" <=> nil")
 
