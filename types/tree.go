@@ -6,7 +6,7 @@ import (
 )
 
 type Node struct {
-	Value int
+	Value any
 	Left  *Node
 	Right *Node
 }

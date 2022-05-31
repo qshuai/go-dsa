@@ -2,7 +2,7 @@ package utils
 
 import "sort"
 
-// 查询元素是否在切片中
+// InInts 查询元素是否在切片中
 func InInts(nums []int, target int) bool {
 	if len(nums) <= 0 {
 		return false

@@ -6,7 +6,7 @@ import (
 )
 
 type ListNode struct {
-	Value interface{}
+	Value any
 	Next  *ListNode
 }
 
@@ -48,7 +48,7 @@ func NewListNodeFromSlice(s []int) *ListNode {
 	return head
 }
 
-// Append append the node to the tail. panic if the linked list is nil.
+// Append the node to the tail. panic if the linked list is nil.
 func (list *ListNode) Append(node *ListNode) *ListNode {
 	if list == nil {
 		panic("nil linked list can not append node")
@@ -135,7 +135,7 @@ func (list *ListNode) String() string {
 
 // DListNode represents doubly linked list
 type DListNode struct {
-	Value interface{}
+	Value any
 	Prev  *DListNode
 	Next  *DListNode
 }
