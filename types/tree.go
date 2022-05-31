@@ -11,6 +11,7 @@ type Node struct {
 	Right *Node
 }
 
+// PreOrderTraverse 前序遍历
 func PreOrderTraverse(tree *Node) {
 	if tree == nil {
 		return
@@ -21,6 +22,7 @@ func PreOrderTraverse(tree *Node) {
 	PreOrderTraverse(tree.Right)
 }
 
+// InOrderTraverse 中序遍历
 func InOrderTraverse(tree *Node) {
 	if tree == nil {
 		return
@@ -31,6 +33,7 @@ func InOrderTraverse(tree *Node) {
 	InOrderTraverse(tree.Right)
 }
 
+// PostOrderTraverse 后序遍历
 func PostOrderTraverse(tree *Node) {
 	if tree == nil {
 		return
@@ -41,7 +44,7 @@ func PostOrderTraverse(tree *Node) {
 	fmt.Println(tree.Value)
 }
 
-// BFS
+// BreadthFirstSearch 广度优先搜索BSF
 func BreadthFirstSearch(tree *Node) {
 	if tree == nil {
 		return
