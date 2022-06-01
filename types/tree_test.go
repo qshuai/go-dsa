@@ -1,5 +1,10 @@
 package types
 
+import (
+	"reflect"
+	"testing"
+)
+
 var root = buildTree()
 
 func ExamplePreOrderTraverse() {
@@ -81,4 +86,46 @@ func buildTree() *Node {
 	root.Right.Right.Right = &Node{9, nil, nil}
 
 	return &root
+}
+
+func TestBuildBSTFromSlice(t *testing.T) {
+	tests := []struct {
+		name string
+		args []int
+		want *BST[int]
+	}{
+		{
+			name: "case-1",
+			args: []int{1, 2, 3},
+			want: &BST[int]{Value: 1, Right: &BST[int]{Value: 2, Right: &BST[int]{Value: 3}}},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := BuildBSTFromSlice(tt.args); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("BuildBSTFromSlice() = %+v, want %+v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestBST_Height(t *testing.T) {
+	tests := []struct {
+		name string
+		args *BST[int]
+		want int
+	}{
+		{
+			name: "case-1",
+			args: BuildBSTFromSlice([]int{1, 2, 3}),
+			want: 2,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.args.Height(); got != tt.want {
+				t.Errorf("Height() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }
