@@ -1,7 +1,5 @@
 package utils
 
-import "sort"
-
 // InInts 查询元素是否在切片中
 func InInts(nums []int, target int) bool {
 	if len(nums) <= 0 {
@@ -18,7 +16,7 @@ func InInts(nums []int, target int) bool {
 }
 
 // ElementEqual 查看两个slice是否元素相同，不区分元素顺序
-func ElementEqual(a []int, b []int) bool {
+func ElementEqual[T comparable](a []T, b []T) bool {
 	if len(a) != len(b) {
 		return false
 	}
@@ -27,11 +25,11 @@ func ElementEqual(a []int, b []int) bool {
 		return true
 	}
 
-	sort.Ints(a)
-	sort.Ints(b)
 	for i := 0; i < len(a); i++ {
-		if a[i] != b[i] {
-			return false
+		for j := 0; j < len(b); j++ {
+			if a[i] == a[j] {
+				break
+			}
 		}
 	}
 
@@ -39,7 +37,7 @@ func ElementEqual(a []int, b []int) bool {
 }
 
 // EmbeddedSliceEqual 判断内嵌的slice是否相同，不区分元素顺序
-func EmbeddedSliceEqual(a [][]int, b [][]int) bool {
+func EmbeddedSliceEqual[T comparable](a [][]T, b [][]T) bool {
 	if len(a) != len(b) {
 		return false
 	}
@@ -52,7 +50,6 @@ func EmbeddedSliceEqual(a [][]int, b [][]int) bool {
 	for i := 0; i < len(a); i++ {
 		for j := 0; j < len(b); j++ {
 			if _, ok := passedMapping[j]; ok {
-				// 已经匹配过的位置
 				continue
 			}
 
