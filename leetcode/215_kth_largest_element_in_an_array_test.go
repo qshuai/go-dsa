@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"github.com/qshuai/go-dsa/utils"
 	"testing"
 )
 
@@ -49,8 +50,12 @@ func Test_searchRankK(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := findKthLargest(tt.args.arr, tt.args.k); got != tt.want {
-				t.Errorf("searchRankK() = %v, want %v", got, tt.want)
+			if got := findKthLargest(utils.Copy(tt.args.arr), tt.args.k); got != tt.want {
+				t.Errorf("findKthLargest() = %v, want %v", got, tt.want)
+			}
+
+			if got := findKthLargest2(utils.Copy(tt.args.arr), tt.args.k); got != tt.want {
+				t.Errorf("findKthLargest2() = %v, want %v", got, tt.want)
 			}
 		})
 	}

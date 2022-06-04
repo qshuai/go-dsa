@@ -40,22 +40,7 @@ func (h *Heap[T]) DeleteHeapTop() (ele T) {
 	// length - 1
 	*h = (*h)[:len(*h)-1]
 
-	var i int
-	for {
-		maxPos := i
-		if i<<1+1 < len(*h) && (*h)[i<<1+1] > (*h)[i] {
-			maxPos = i<<1 + 1
-		}
-		if i<<1+2 < len(*h) && (*h)[maxPos] < (*h)[i<<1+2] {
-			maxPos = i<<1 + 2
-		}
-		if maxPos == i {
-			break
-		}
-
-		(*h)[i], (*h)[maxPos] = (*h)[maxPos], (*h)[i]
-		i = maxPos
-	}
+	h.MaxHeapify(len(*h)-1, 0)
 
 	return
 }
@@ -69,22 +54,27 @@ func (h Heap[T]) Sort() {
 	for i := len(h) - 1; i > 0; i-- {
 		h[i], h[0] = h[0], h[i]
 
-		h.heapifyToBottom(i)
+		for j := 0; j < i<<1-1; j++ {
+			h.MaxHeapify(i, 0)
+		}
 	}
 }
 
-// NewHeap return a heapifyToTop sequence
+// NewHeap return a buildHeap sequence
 func NewHeap[T constraints.Ordered](nums []T) Heap[T] {
 	if len(nums) <= 0 {
 		return nil
 	}
 
 	heap := (Heap[T])(nums)
-	heap.heapifyToTop()
+	for i := len(heap)>>1 - 1; i >= 0; i-- {
+		heap.MaxHeapify(len(heap), i)
+	}
+
 	return heap
 }
 
-// NewHeapWithCapacity return a heapifyToTop sequence with capacity
+// NewHeapWithCapacity return a buildHeap sequence with capacity
 func NewHeapWithCapacity[T constraints.Ordered](nums []T, capacity int) Heap[T] {
 	if len(nums) <= 0 {
 		return nil
@@ -100,57 +90,47 @@ func NewHeapWithCapacity[T constraints.Ordered](nums []T, capacity int) Heap[T] 
 	}
 
 	heap := (Heap[T])(nums)
-	heap.heapifyToTop()
+	for i := len(heap)>>1 - 1; i >= 0; i-- {
+		heap.MaxHeapify(len(heap), i)
+	}
+
 	return heap
 }
 
-// heapifyToTop maintains heap property from bottom to top
-func (h Heap[T]) heapifyToTop() {
-	for i := len(h)>>1 - 1; i >= 0; i-- {
-		tmp := i
-		for {
-			maxPos := i
-			if i<<1+1 < len(h) && h[i<<1+1] > h[i] {
-				maxPos = i<<1 + 1
-			}
-			if i<<1+2 < len(h) && h[i<<1+2] > h[maxPos] {
-				maxPos = i<<1 + 2
-			}
-			if maxPos == i {
-				break
-			}
-
-			h[i], h[maxPos] = h[maxPos], h[i]
-			i = maxPos
+// MinHeapify maintains a min-heap property from top to bottom
+func (h Heap[T]) MinHeapify(length int, index int) {
+	for {
+		minPos := index
+		if index<<1+1 < length && h[index] > h[index<<1+1] {
+			minPos = index<<1 + 1
 		}
-		i = tmp
+		if index<<1+2 < length && h[minPos] > h[index<<1+2] {
+			minPos = index<<1 + 2
+		}
+		if minPos == index {
+			break
+		}
+
+		h[index], h[minPos] = h[minPos], h[index]
+		index = minPos
 	}
 }
 
-// heapifyToBottom maintains heap property from top to bottom
-func (h Heap[T]) heapifyToBottom(length int) {
-	if length <= 0 {
-		return
-	}
-
-	for i := 0; i < length-1; i++ {
-		tmp := i
-		for {
-			maxPos := i
-			if i<<1+1 < length && h[i<<1+1] > h[i] {
-				maxPos = i<<1 + 1
-			}
-			if i<<1+2 < length && h[i<<1+2] > h[maxPos] {
-				maxPos = i<<1 + 2
-			}
-			if maxPos == i {
-				break
-			}
-
-			// swap
-			h[i], h[maxPos] = h[maxPos], h[i]
-			i = maxPos
+// MaxHeapify maintains a max-heap property from top to bottom
+func (h Heap[T]) MaxHeapify(length int, index int) {
+	for {
+		maxPos := index
+		if index<<1+1 < length && h[index] < h[index<<1+1] {
+			maxPos = index<<1 + 1
 		}
-		i = tmp
+		if index<<1+2 < length && h[maxPos] < h[index<<1+2] {
+			maxPos = index<<1 + 2
+		}
+		if maxPos == index {
+			break
+		}
+
+		h[index], h[maxPos] = h[maxPos], h[index]
+		index = maxPos
 	}
 }

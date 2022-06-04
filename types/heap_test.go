@@ -5,27 +5,6 @@ import (
 	"testing"
 )
 
-func TestHeap_heapify(t *testing.T) {
-	tests := []struct {
-		name string
-		h    Heap[int]
-		want Heap[int]
-	}{
-		{
-			name: "case-1",
-			h:    Heap[int]{7, 5, 19, 8, 4, 1, 20, 13, 16},
-			want: Heap[int]{20, 16, 19, 13, 4, 1, 7, 5, 8},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if tt.h.heapifyToTop(); !reflect.DeepEqual(tt.h, tt.want) {
-				t.Errorf("heapifyToTop() = %v want %v", tt.h, tt.want)
-			}
-		})
-	}
-}
-
 func TestHeap_Sort(t *testing.T) {
 	tests := []struct {
 		name string
@@ -145,6 +124,29 @@ func TestHeap_Insert(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if tt.h.Insert(tt.args); !reflect.DeepEqual(tt.h, tt.want) {
 				t.Errorf("Insert() = %v want %v", tt.h, tt.want)
+			}
+		})
+	}
+}
+
+func TestHeap_MaxHeapify(t *testing.T) {
+	tests := []struct {
+		name  string
+		h     Heap[int]
+		index int
+		want  Heap[int]
+	}{
+		{
+			name:  "case-1",
+			h:     []int{0, 5, 6, 4, 2, 1},
+			index: 0,
+			want:  []int{6, 5, 1, 4, 2, 0},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if tt.h.MaxHeapify(len(tt.h), tt.index); !reflect.DeepEqual(tt.h, tt.want) {
+				t.Errorf("heapify() = %v want %v", tt.h, tt.want)
 			}
 		})
 	}

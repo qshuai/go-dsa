@@ -1,5 +1,19 @@
 package utils
 
+// Copy returns the copy of given slice
+func Copy[T any](src []T) []T {
+	if src == nil {
+		return nil
+	}
+	if len(src) <= 0 {
+		return []T{}
+	}
+
+	dst := make([]T, len(src))
+	copy(dst, src)
+	return dst
+}
+
 // InInts 查询元素是否在切片中
 func InInts(nums []int, target int) bool {
 	if len(nums) <= 0 {
