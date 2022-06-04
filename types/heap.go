@@ -7,6 +7,13 @@ import (
 // Heap represents a max-heap
 type Heap[T constraints.Ordered] []T
 
+type HeapDir byte
+
+const (
+	HeapMaxDir HeapDir = iota
+	HeapMinDir
+)
+
 // Insert adds a new element to heap
 func (h *Heap[T]) Insert(ele T) {
 	// todo 这里为了简单实现，不做slice的自动扩容
@@ -67,9 +74,7 @@ func NewHeap[T constraints.Ordered](nums []T) Heap[T] {
 	}
 
 	heap := (Heap[T])(nums)
-	for i := len(heap)>>1 - 1; i >= 0; i-- {
-		heap.MaxHeapify(len(heap), i)
-	}
+	heap.Heapify(HeapMaxDir)
 
 	return heap
 }
@@ -90,11 +95,25 @@ func NewHeapWithCapacity[T constraints.Ordered](nums []T, capacity int) Heap[T] 
 	}
 
 	heap := (Heap[T])(nums)
-	for i := len(heap)>>1 - 1; i >= 0; i-- {
-		heap.MaxHeapify(len(heap), i)
-	}
+	heap.Heapify(HeapMaxDir)
 
 	return heap
+}
+
+// Heapify according to dir
+func (h Heap[T]) Heapify(dir HeapDir) {
+	switch dir {
+	case HeapMinDir:
+		for i := len(h)>>1 - 1; i >= 0; i-- {
+			h.MinHeapify(len(h), i)
+		}
+	case HeapMaxDir:
+		for i := len(h)>>1 - 1; i >= 0; i-- {
+			h.MaxHeapify(len(h), i)
+		}
+	default:
+		panic("unrecognised heap dir")
+	}
 }
 
 // MinHeapify maintains a min-heap property from top to bottom
