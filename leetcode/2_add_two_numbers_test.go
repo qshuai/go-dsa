@@ -1,9 +1,10 @@
 package leetcode
 
 import (
-	"github.com/qshuai/go-dsa/types"
 	"reflect"
 	"testing"
+
+	"github.com/qshuai/go-dsa/types"
 )
 
 func Test_addTwoNumbers(t *testing.T) {

@@ -1,8 +1,9 @@
 package leetcode
 
 import (
-	"github.com/qshuai/go-dsa/utils"
 	"testing"
+
+	"github.com/qshuai/go-dsa/utils"
 )
 
 func Test_permute(t *testing.T) {

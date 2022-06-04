@@ -1,8 +1,9 @@
 package testdata
 
 import (
-	"github.com/qshuai/go-dsa/utils"
 	"math"
+
+	"github.com/qshuai/go-dsa/utils"
 )
 
 type TestItem struct {

@@ -3,6 +3,7 @@ package types
 import (
 	"container/list"
 	"fmt"
+
 	"golang.org/x/exp/constraints"
 )
 

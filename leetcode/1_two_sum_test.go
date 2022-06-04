@@ -1,8 +1,9 @@
 package leetcode
 
 import (
-	"github.com/qshuai/go-dsa/utils"
 	"testing"
+
+	"github.com/qshuai/go-dsa/utils"
 )
 
 func TestTwoSum(t *testing.T) {
