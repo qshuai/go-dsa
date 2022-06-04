@@ -9,11 +9,12 @@ import (
 )
 
 func Test_BubbleSort(t *testing.T) {
-	for _, test := range testdata.GetTestCases() {
-		BubbleSort(test.Args)
-		if !reflect.DeepEqual(test.Args, test.Expected) {
-			t.Errorf("BubbleSort[%s] expected: %v, but got: %v", test.Name, test.Expected, test.Args)
-		}
+	for _, tt := range testdata.GetTestCases() {
+		t.Run(tt.Name, func(t *testing.T) {
+			if BubbleSort(tt.Args); !reflect.DeepEqual(tt.Args, tt.Expected) {
+				t.Errorf("BubbleSort() = %v, want: %v", tt.Args, tt.Expected)
+			}
+		})
 	}
 }
 
@@ -35,11 +36,10 @@ func Test_ListBubbleSort(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			if got := ListBubbleSort(test.args); !reflect.DeepEqual(test.want, got) {
-				t.Errorf("ListBubbleSort() %s failed, expected: %s, but got %s",
-					test.name, test.want, got)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ListBubbleSort(tt.args); !reflect.DeepEqual(tt.want, got) {
+				t.Errorf("ListBubbleSort() = %s, want: %s", got, tt.want)
 			}
 		})
 	}
@@ -63,11 +63,10 @@ func Test_ListBubbleSortChangValue(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			if ListBubbleSortChangValue(test.args); !reflect.DeepEqual(test.want, test.args) {
-				t.Errorf("ListBubbleSortChangValue() %s failed, expected: %s, but got %s",
-					test.name, test.want, test.args)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if ListBubbleSortChangValue(tt.args); !reflect.DeepEqual(tt.want, tt.args) {
+				t.Errorf("ListBubbleSortChangValue() = %s, want: %s", tt.args, tt.want)
 			}
 		})
 	}
@@ -91,11 +90,10 @@ func Test_DoublyListBubbleSort(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			if got := DoublyListBubbleSort(test.args); !reflect.DeepEqual(test.want, got) {
-				t.Errorf("DoublyListBubbleSort() %s failed, expected: %s, but got %s",
-					test.name, test.want, got)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := DoublyListBubbleSort(tt.args); !reflect.DeepEqual(tt.want, got) {
+				t.Errorf("DoublyListBubbleSort() = %s, want: %s", got, tt.want)
 			}
 		})
 	}
@@ -119,11 +117,10 @@ func Test_DoublyListBubbleSortChangeValue(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			if DoublyListBubbleSortChangeValue(test.args); !reflect.DeepEqual(test.want, test.args) {
-				t.Errorf("DoublyListBubbleSortChangeValue() %s failed, expected: %s, but got %s",
-					test.name, test.want, test.args)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if DoublyListBubbleSortChangeValue(tt.args); !reflect.DeepEqual(tt.want, tt.args) {
+				t.Errorf("DoublyListBubbleSortChangeValue() = %s, want: %s", tt.args, tt.want)
 			}
 		})
 	}

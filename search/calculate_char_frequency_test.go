@@ -44,11 +44,11 @@ func Test_calculateCharFrequency(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := CalcCharCntWithCaseInsensitive(tt.args); !reflect.DeepEqual(got, tt.ExpectedCaseInsensitive) {
-				t.Errorf("CalcCharCntWithCaseInsensitive[%s] = %v, want %v", tt.name, got, tt.ExpectedCaseInsensitive)
+				t.Errorf("CalcCharCntWithCaseInsensitive() = %v, want %v", got, tt.ExpectedCaseInsensitive)
 			}
 
 			if got := CalcCharCntWithCaseSensitive(tt.args); !reflect.DeepEqual(got, tt.ExpectedCaseSensitive) {
-				t.Errorf("CalcCharCntWithCaseSensitive[%s] = %v, want %v", tt.name, got, tt.ExpectedCaseSensitive)
+				t.Errorf("CalcCharCntWithCaseSensitive() = %v, want %v", got, tt.ExpectedCaseSensitive)
 			}
 		})
 	}

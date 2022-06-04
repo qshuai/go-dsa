@@ -32,9 +32,8 @@ func TestCalcMaxSumForSubSequence(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			ret := CalcMaxSumForSubSequence(tt.args)
-			if ret != tt.expected {
-				t.Errorf("%s, want: %d, but got: %d", tt.name, tt.expected, ret)
+			if got := CalcMaxSumForSubSequence(tt.args); got != tt.expected {
+				t.Errorf("CalcMaxSumForSubSequence() = %d, want: %d", got, tt.expected)
 			}
 		})
 	}

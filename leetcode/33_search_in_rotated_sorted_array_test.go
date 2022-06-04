@@ -51,7 +51,7 @@ func TestSearchInRotatedArray(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := SearchInRotatedArray(tt.nums, tt.target); got != tt.expected {
-				t.Errorf("SearchInRotatedArray[%s] = %v, want %v", tt.name, got, tt.expected)
+				t.Errorf("SearchInRotatedArray() = %v, want %v", got, tt.expected)
 			}
 		})
 	}

@@ -8,26 +8,26 @@ func TestIsHappyNum(t *testing.T) {
 	tests := []struct {
 		name string
 		num  int
-		ret  bool
+		want bool
 	}{
 		{
 			name: "a valid happy number",
 			num:  19,
-			ret:  true,
+			want: true,
 		},
 		{
 			name: "invalid happy number(infinite loop if considering duplicate)",
 			num:  11,
-			ret:  false,
+			want: false,
 		},
 	}
 
-	for _, test := range tests {
-		result := IsHappyNum(test.num)
-		if test.ret != result {
-			t.Errorf("test case: %s(target num: %d), want: %t but got: %t",
-				test.name, test.num, test.ret, result)
-		}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := IsHappyNum(tt.num); tt.want != got {
+				t.Errorf("IsHappyNum() = %t, want: %t", got, tt.want)
+			}
+		})
 	}
 }
 
@@ -49,11 +49,11 @@ func TestGetSquareSum(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		result := getSquareSum(test.num)
-		if result != test.ret {
-			t.Errorf("test case: %s(target num: %d), want: %d but got: %d",
-				test.name, test.num, test.ret, result)
-		}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := getSquareSum(tt.num); got != tt.ret {
+				t.Errorf("getSquareSum() = %d, want: %d ", got, tt.ret)
+			}
+		})
 	}
 }

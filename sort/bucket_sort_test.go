@@ -11,7 +11,7 @@ func TestBucketSort(t *testing.T) {
 	for _, tt := range testdata.GetTestCases() {
 		t.Run(tt.Name, func(t *testing.T) {
 			if got := BucketSort(tt.Args); !reflect.DeepEqual(got, tt.Expected) {
-				t.Errorf("BucketSort[%s] expected: %v, but got: %v", tt.Name, tt.Expected, got)
+				t.Errorf("BucketSort() = %v, want: %v", got, tt.Expected)
 			}
 		})
 	}

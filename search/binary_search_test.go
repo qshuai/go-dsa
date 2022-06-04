@@ -37,16 +37,12 @@ func TestBinarySearch(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			index := FindAny(tt.nums, tt.target)
-			if index != tt.expect {
-				t.Errorf("FindAny[%s] want: %d, but got: %d",
-					tt.name, tt.expect, index)
+			if got := FindAny(tt.nums, tt.target); got != tt.expect {
+				t.Errorf("FindAny() = %d, want: %d", got, tt.expect)
 			}
 
-			index = FindAnyRecursive(tt.nums, tt.target)
-			if index != tt.expect {
-				t.Errorf("FindAnyRecursive[%s] want: %d, but got: %d",
-					tt.name, tt.expect, index)
+			if got := FindAnyRecursive(tt.nums, tt.target); got != tt.expect {
+				t.Errorf("FindAnyRecursive() = %d, want: %d", got, tt.expect)
 			}
 		})
 	}
@@ -120,24 +116,20 @@ func TestFirstIndex(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			idx := FirstIndex(tt.nums, tt.target)
-			if idx != tt.firstIndex {
-				t.Errorf("FirstIndex[%s] expected: %d, but got: %d", tt.name, tt.firstIndex, idx)
+			if got := FirstIndex(tt.nums, tt.target); got != tt.firstIndex {
+				t.Errorf("FirstIndex() = %d, want: %d", got, tt.firstIndex)
 			}
 
-			idx = LastIndex(tt.nums, tt.target)
-			if idx != tt.lastIndex {
-				t.Errorf("LastIndex[%s] expected: %d, but got: %d", tt.name, tt.lastIndex, idx)
+			if got := LastIndex(tt.nums, tt.target); got != tt.lastIndex {
+				t.Errorf("LastIndex() = %d, want: %d", tt.lastIndex, got)
 			}
 
-			idx = FirstGteIndex(tt.nums, tt.target)
-			if idx != tt.firstGteIndex {
-				t.Errorf("FirstGteIndex[%s] expected: %d, but got: %d", tt.name, tt.firstGteIndex, idx)
+			if got := FirstGteIndex(tt.nums, tt.target); got != tt.firstGteIndex {
+				t.Errorf("FirstGteIndex() = %d, want: %d", tt.firstGteIndex, got)
 			}
 
-			idx = LastLteIndex(tt.nums, tt.target)
-			if idx != tt.lastLteIndex {
-				t.Errorf("LastLteIndex[%s] expected: %d, but got: %d", tt.name, tt.lastLteIndex, idx)
+			if got := LastLteIndex(tt.nums, tt.target); got != tt.lastLteIndex {
+				t.Errorf("LastLteIndex() = %d, want: %d", tt.lastLteIndex, got)
 			}
 		})
 	}

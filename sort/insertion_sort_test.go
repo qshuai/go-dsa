@@ -10,9 +10,8 @@ import (
 func Test_InsertionSort(t *testing.T) {
 	for _, tt := range testdata.GetTestCases() {
 		t.Run(tt.Name, func(t *testing.T) {
-			InsertionSort(tt.Args)
-			if !reflect.DeepEqual(tt.Expected, tt.Args) {
-				t.Errorf("InsertionSort[%s] expected: %v, bug got: %v", tt.Name, tt.Expected, tt.Args)
+			if InsertionSort(tt.Args); !reflect.DeepEqual(tt.Expected, tt.Args) {
+				t.Errorf("InsertionSort() = %v, want: %v", tt.Args, tt.Expected)
 			}
 		})
 	}

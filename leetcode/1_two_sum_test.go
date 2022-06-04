@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"github.com/qshuai/go-dsa/utils"
 	"testing"
 )
 
@@ -31,31 +32,15 @@ func TestTwoSum(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		result := twoSum(test.array, test.target)
-		if !EqualArray(test.ret, result) {
-			t.Errorf("test case(twoSum): %s, want: %v but got: %v", test.name, test.ret, result)
-		}
-	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if result := twoSum(tt.array, tt.target); !utils.ElementEqual(tt.ret, result) {
+				t.Errorf("twoSum() = %v want %v", result, tt.ret)
+			}
 
-	for _, test := range tests {
-		result := twoSumN2(test.array, test.target)
-		if !EqualArray(test.ret, result) {
-			t.Errorf("test case(twoSumN2): %s, want: %v but got: %v", test.name, test.ret, result)
-		}
+			if result := twoSumN2(tt.array, tt.target); !utils.ElementEqual(tt.ret, result) {
+				t.Errorf("twoSumN2() = %v want %v", result, tt.ret)
+			}
+		})
 	}
-}
-
-func EqualArray(s1 []int, s2 []int) bool {
-	if len(s1) != len(s2) {
-		return false
-	}
-
-	for i := 0; i < len(s1); i++ {
-		if s1[i] != s2[i] {
-			return false
-		}
-	}
-
-	return true
 }

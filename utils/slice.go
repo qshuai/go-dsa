@@ -1,6 +1,7 @@
 package utils
 
-// Copy returns the copy of given slice
+// Copy returns the copy of given slice. Maybe shallow copy
+// depending on the type T, eg: pointer or map
 func Copy[T any](src []T) []T {
 	if src == nil {
 		return nil

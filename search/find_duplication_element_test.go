@@ -35,11 +35,12 @@ func TestFindDuplicationElement(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		target := FindDuplicationElement(test.array)
-		if target != test.target {
-			t.Errorf("%s: find duplicated element, want: %d, but got: %d",
-				test.name, test.target, target)
-		}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FindDuplicationElement(tt.array); got != tt.target {
+				t.Errorf("FindDuplicationElement() = %d, want: %d", got, tt.target)
+			}
+		})
+
 	}
 }

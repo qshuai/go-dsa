@@ -1,6 +1,7 @@
 package testdata
 
 import (
+	"github.com/qshuai/go-dsa/utils"
 	"math"
 )
 
@@ -71,25 +72,12 @@ func GetTestCases() []TestItem {
 	for _, item := range cases {
 		ret = append(ret, TestItem{
 			Name:     item.Name,
-			Args:     copyArray(item.Args),
+			Args:     utils.Copy(item.Args),
 			Min:      item.Min,
 			Max:      item.Max,
-			Expected: copyArray(item.Expected),
+			Expected: utils.Copy(item.Expected),
 		})
 	}
 
-	return ret
-}
-
-func copyArray[T any](src []T) []T {
-	if src == nil {
-		return nil
-	}
-	if len(src) <= 0 {
-		return []T{}
-	}
-
-	ret := make([]T, len(src))
-	copy(ret, src)
 	return ret
 }

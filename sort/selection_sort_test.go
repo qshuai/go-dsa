@@ -8,10 +8,11 @@ import (
 )
 
 func Test_SelectionSort(t *testing.T) {
-	for _, test := range testdata.GetTestCases() {
-		SelectionSort(test.Args)
-		if !reflect.DeepEqual(test.Args, test.Expected) {
-			t.Errorf("SelectionSort[%s] expected: %v, but got: %v", test.Name, test.Expected, test.Args)
-		}
+	for _, tt := range testdata.GetTestCases() {
+		t.Run(tt.Name, func(t *testing.T) {
+			if SelectionSort(tt.Args); !reflect.DeepEqual(tt.Args, tt.Expected) {
+				t.Errorf("SelectionSort() = %v, want: %v", tt.Args, tt.Expected)
+			}
+		})
 	}
 }

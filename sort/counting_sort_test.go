@@ -12,7 +12,7 @@ func TestCountingSort(t *testing.T) {
 		t.Run(tt.Name, func(t *testing.T) {
 			CountingSort(tt.Args, tt.Min, tt.Max)
 			if !reflect.DeepEqual(tt.Expected, tt.Args) {
-				t.Errorf("CountingSort[%s] expected: %v, bug got: %v", tt.Name, tt.Expected, tt.Args)
+				t.Errorf("CountingSort() = %v, want: %v", tt.Args, tt.Expected)
 			}
 		})
 	}

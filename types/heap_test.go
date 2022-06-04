@@ -151,3 +151,26 @@ func TestHeap_MaxHeapify(t *testing.T) {
 		})
 	}
 }
+
+func TestHeap_MinHeapify(t *testing.T) {
+	tests := []struct {
+		name  string
+		h     Heap[int]
+		index int
+		want  Heap[int]
+	}{
+		{
+			name:  "case-1",
+			h:     []int{9, 4, 5, 1, 0},
+			index: 0,
+			want:  []int{4, 0, 5, 1, 9},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if tt.h.MinHeapify(len(tt.h), tt.index); !reflect.DeepEqual(tt.h, tt.want) {
+				t.Errorf("MinHeapify() = %v want %v", tt.h, tt.want)
+			}
+		})
+	}
+}

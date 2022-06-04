@@ -6,29 +6,48 @@ import (
 	"github.com/qshuai/go-dsa/types"
 )
 
-func TestContainLoopInList(t *testing.T) {
-	// only one node
-	l1 := types.NewListNode(1, 1)
-	if ContainLoopInList(l1) {
-		t.Errorf("test case: only on node, not loop but got have loop")
+func TestContainLoopInList1(t *testing.T) {
+	tests := []struct {
+		name     string
+		node     *types.ListNode
+		loopFunc func(node *types.ListNode)
+		want     bool
+	}{
+		{
+			name:     "only one node",
+			node:     types.NewListNode(1, 1),
+			loopFunc: nil,
+			want:     false,
+		},
+		{
+			name:     "two node list",
+			node:     types.NewListNode(1, 2),
+			loopFunc: nil,
+			want:     false,
+		},
+		{
+			name:     "many node list without loop",
+			node:     types.NewListNode(1, 4),
+			loopFunc: nil,
+			want:     false,
+		},
+		{
+			name: "list with loop",
+			node: types.NewListNode(1, 4),
+			loopFunc: func(node *types.ListNode) {
+				node.Next.Next.Next = node.Next
+			},
+			want: true,
+		},
 	}
-
-	// two node list
-	l2 := types.NewListNode(1, 2)
-	if ContainLoopInList(l2) {
-		t.Errorf("test case: two nodes list, not loop but got have loop")
-	}
-
-	// many node list without loop
-	l3 := types.NewListNode(1, 4)
-	if ContainLoopInList(l3) {
-		t.Errorf("test case: arbitrarily nodes list, not loop but got have loop")
-	}
-
-	// list with loop
-	l4 := types.NewListNode(1, 4)
-	l4.Next.Next.Next = l4.Next
-	if !ContainLoopInList(l4) {
-		t.Errorf("test case: list with loop, have loop get no loop")
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if tt.loopFunc != nil {
+				tt.loopFunc(tt.node)
+			}
+			if got := ContainLoopInList(tt.node); got != tt.want {
+				t.Errorf("ContainLoopInList() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

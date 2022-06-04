@@ -12,22 +12,22 @@ func TestQuickSort(t *testing.T) {
 		t.Run(tt.Name, func(t *testing.T) {
 			QuickSort(tt.Args, PartitionHead)
 			if !reflect.DeepEqual(tt.Args, tt.Expected) {
-				t.Errorf("QuickSort-PartitionHead[%s] Expected: %v but got: %v", tt.Name, tt.Expected, tt.Args)
+				t.Errorf("QuickSort-PartitionHead() = %v, want: %v", tt.Args, tt.Expected)
 			}
 
 			QuickSort(tt.Args, PartitionMiddle)
 			if !reflect.DeepEqual(tt.Args, tt.Expected) {
-				t.Errorf("QuickSort-PartitionMiddle[%s] Expected: %v but got: %v", tt.Name, tt.Expected, tt.Args)
+				t.Errorf("QuickSort-PartitionMiddle() = %v, want: %v", tt.Args, tt.Expected)
 			}
 
 			QuickSort(tt.Args, PartitionTail)
 			if !reflect.DeepEqual(tt.Args, tt.Expected) {
-				t.Errorf("QuickSort-PartitionTail[%s] Expected: %v but got: %v", tt.Name, tt.Expected, tt.Args)
+				t.Errorf("QuickSort-PartitionTail() = %v, want: %v", tt.Args, tt.Expected)
 			}
 
 			QuickSort(tt.Args, PartitionMedian)
 			if !reflect.DeepEqual(tt.Args, tt.Expected) {
-				t.Errorf("QuickSort-PartitionMedian[%s] Expected: %v but got: %v", tt.Name, tt.Expected, tt.Args)
+				t.Errorf("QuickSort-PartitionMedian() = %v, want: %v", tt.Args, tt.Expected)
 			}
 		})
 	}

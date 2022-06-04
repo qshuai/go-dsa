@@ -48,19 +48,15 @@ func TestSplitStringWithRepeatedChar(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		ret := SplitStringWithRepeatedChar(test.str)
-		if !reflect.DeepEqual(ret, test.expected) {
-			t.Errorf("%s, want: %v, but got: %v",
-				test.name, test.expected, ret)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if ret := SplitStringWithRepeatedChar(tt.str); !reflect.DeepEqual(ret, tt.expected) {
+				t.Errorf("SplitStringWithRepeatedChar() = %v, want %v", ret, tt.expected)
+			}
 
-		}
-
-		ret2 := SplitStringWithRepeatedChar2(test.str)
-		if !reflect.DeepEqual(ret2, test.expected) {
-			t.Errorf("%s, want: %v, but got: %v",
-				test.name, test.expected, ret2)
-
-		}
+			if ret := SplitStringWithRepeatedChar2(tt.str); !reflect.DeepEqual(ret, tt.expected) {
+				t.Errorf("SplitStringWithRepeatedChar2() = %v, want %v", ret, tt.expected)
+			}
+		})
 	}
 }
