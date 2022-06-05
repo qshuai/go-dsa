@@ -13,7 +13,17 @@ func Test_lengthOfLongestSubstring(t *testing.T) {
 		{
 			name: "case-1",
 			s:    "abcabcbb",
-			want: 7,
+			want: 3,
+		},
+		{
+			name: "case-2",
+			s:    "bbbbb",
+			want: 1,
+		},
+		{
+			name: "case-3",
+			s:    "pwwkew",
+			want: 3,
 		},
 	}
 	for _, tt := range tests {
