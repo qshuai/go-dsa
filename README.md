@@ -8,7 +8,4 @@ Implementation for partial data structure and algorithm in Go.
 
 Study purpose for Data Structure and Algorithm!
 
-### TODO:
- - [ ] bitmap 
-
 > Github网页渲染目前并不支持原生的Markdown公式，如果在浏览公式相关的Markdown文档时，建议在使用支持渲染公式的Markdown软件中浏览！！！
