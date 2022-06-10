@@ -1,10 +1,11 @@
 package types
 
 import (
-	"github.com/qshuai/go-dsa/utils"
 	"reflect"
 	"strings"
 	"testing"
+
+	"github.com/qshuai/go-dsa/utils"
 )
 
 func TestBitMap_Add(t *testing.T) {
