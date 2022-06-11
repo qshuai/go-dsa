@@ -52,6 +52,22 @@ var indexOfCases = []struct {
 		},
 		want: -1,
 	},
+	{
+		name: "suffix",
+		args: args{
+			str: "yyyybdxbdyyy",
+			sub: "ybdxbd",
+		},
+		want: 3,
+	},
+	{
+		name: "prefix",
+		args: args{
+			str: "yyyybdxbdyyy",
+			sub: "bdxbd",
+		},
+		want: 4,
+	},
 }
 
 func TestIndexOfUsingBF(t *testing.T) {
