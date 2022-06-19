@@ -55,7 +55,7 @@ func IndexOfUsingRK(str, sub string) int {
 		prev = hashes[i]
 	}
 
-	// 计算主串初始的hash值
+	// 计算主串初始、模式串的hash值
 	const startVal = 'a'
 	modeHash := big.NewInt(0)
 	hash := big.NewInt(0)
@@ -95,10 +95,11 @@ func IndexOfUsingBM(str, sub string) int {
 		return -1
 	}
 
-	bc := buildAsciiArray(sub)
+	bc := buildAsciiPos(sub)
 	suffix, prefix := buildMatchedSegment(sub)
 	for i := 0; i <= len(str)-len(sub); {
 		j := len(sub) - 1
+		// 将模式串按照从后向前的顺序和主串进行比对，如果出现不匹配的情况，此时j就代表坏字符在模式串中的索引位置
 		for ; j >= 0; j-- {
 			if sub[j] != str[i+j] {
 				break
@@ -106,23 +107,30 @@ func IndexOfUsingBM(str, sub string) int {
 		}
 
 		if j < 0 {
-			// 找到匹配的子串
+			// 索引上面的for循环没有出现break的情况，此时j为-1
 			return i
 		}
 
+		// 按照坏字符规则，需要移动的步数
 		x := j - bc[str[i+j]] + 1
+
 		var y int
+		// j < len(sub)-1代表上面匹配比较时，出现模式串的后缀子串和主串有部分匹配
 		if j < len(sub)-1 {
 			y = moveByMatchedSegment(j, len(sub), suffix, prefix)
 		}
 
+		// 取坏字符规则、好后缀规则的最大移动步数
 		i += utils.Max(x, y)
+		utils.Max("", "")
 	}
 
 	return -1
 }
 
-func buildAsciiArray(m string) []int {
+// buildAsciiArray 构建字符串的ascii码值和位置的hash表。数组的索引代表字符的ascii码值，值为
+// 该字符在字符串中最后的索引+1（+1的目的是使数组的默认值0能够代表字符不存在的含义）
+func buildAsciiPos(m string) []int {
 	if len(m) <= 0 {
 		return nil
 	}
@@ -135,16 +143,20 @@ func buildAsciiArray(m string) []int {
 	return ret
 }
 
+// buildMatchedSegment 在模式串中构建和后缀子串匹配的前向字符串位置信息。suffix数组：索引代表匹配的长度，
+// 值为位置匹配的前向字符串起始索引+1（+1的目的是是数组的默认值0能够代表该长度的后缀子串没有匹配的前向字符串）。
+// prefix数组：索引代表匹配的长度，值如果为true，代表该匹配长度可以和模式串的前缀子串重合。
 func buildMatchedSegment(m string) ([]int, []bool) {
 	suffix := make([]int, len(m))
 	prefix := make([]bool, len(m))
 	for i := 0; i < len(m)-1; i++ {
-		var k int
-		j := i
+		// k代表匹配串的长度
+		j, k := i, 0
 		for j >= 0 && m[j] == m[len(m)-1-k] {
+			suffix[k+1] = j + 1
+
 			j--
 			k++
-			suffix[k] = j + 2
 		}
 
 		if j == -1 {
@@ -155,12 +167,15 @@ func buildMatchedSegment(m string) ([]int, []bool) {
 	return suffix, prefix
 }
 
+// moveByMatchedSegment 按照好后缀的规则计算向后移动的步数
 func moveByMatchedSegment(j, m int, suffix []int, prefix []bool) int {
 	k := m - 1 - j
 	if suffix[k] != 0 {
-		return j - suffix[k] + 2
+		// 代表好后缀存在匹配的前向子字符串
+		return j - (suffix[k] - 1) + 1
 	}
 
+	// 如果整个好后缀没有可匹配的前向子字符串的话，只能将好后缀的后缀子串和模式串的前缀子串进行尝试匹配
 	for i := j + 2; i < m-1; i++ {
 		if prefix[m-i] {
 			return i
