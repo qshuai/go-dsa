@@ -1,6 +1,8 @@
 package search
 
 import (
+	"math/big"
+
 	"github.com/qshuai/go-dsa/utils"
 )
 
@@ -22,6 +24,60 @@ func IndexOfUsingBF(str, sub string) int {
 		}
 
 		if matched {
+			return i
+		}
+	}
+
+	return -1
+}
+
+// IndexOfUsingRK returns the index of the first instance of sub string
+// from str, or -1 if not matched substring present from str.
+// Rabin-Karp algorithm
+func IndexOfUsingRK(str, sub string) int {
+	if len(sub) > len(str) {
+		return -1
+	}
+	if str == sub {
+		return 0
+	}
+
+	// 计算26的n次方，把结果缓存起来，为了之后重复、高效的计算字符串hash值
+	hashes := make([]*big.Int, len(sub))
+	hashes[0] = big.NewInt(1)
+	prev := hashes[0]
+	const base = 26
+	multiple := big.NewInt(base)
+	for i := 1; i < len(sub); i++ {
+		temp := big.NewInt(base)
+		hashes[i] = temp.Mul(temp, prev)
+
+		prev = hashes[i]
+	}
+
+	// 计算主串初始的hash值
+	const startVal = 'a'
+	modeHash := big.NewInt(0)
+	hash := big.NewInt(0)
+	for i := 0; i < len(sub); i++ {
+		modVal := big.NewInt(int64(sub[i] - startVal))
+		modeHash.Add(modeHash, modVal.Mul(modVal, hashes[i]))
+
+		val := big.NewInt(int64(str[i] - startVal))
+		hash.Add(hash, val.Mul(val, hashes[i]))
+	}
+	if hash.Cmp(modeHash) == 0 {
+		return 0
+	}
+
+	for i := 1; i < len(str)-len(sub)+1; i++ {
+		// 通过上一个位置的hash值，推算当前字符串的hash值
+		hash.Sub(hash, big.NewInt(int64(str[i-1]-startPoint)))
+		hash.Div(hash, multiple)
+		endVal := big.NewInt(int64(str[i+len(sub)-1] - startPoint))
+		hash.Add(hash, endVal.Mul(endVal, hashes[len(hashes)-1]))
+
+		if hash.Cmp(modeHash) == 0 {
 			return i
 		}
 	}
