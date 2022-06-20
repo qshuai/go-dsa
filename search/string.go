@@ -10,7 +10,7 @@ import (
 // from str, or -1 if not matched substring present from str.
 // Brute Force algorithm
 func IndexOfUsingBF(str, sub string) int {
-	if len(str) < len(sub) {
+	if len(str) < len(sub) || len(sub) <= 0 {
 		return -1
 	}
 
@@ -35,7 +35,7 @@ func IndexOfUsingBF(str, sub string) int {
 // from str, or -1 if not matched substring present from str.
 // Rabin-Karp algorithm
 func IndexOfUsingRK(str, sub string) int {
-	if len(sub) > len(str) {
+	if len(sub) > len(str) || len(sub) <= 0 {
 		return -1
 	}
 	if str == sub {
@@ -47,7 +47,6 @@ func IndexOfUsingRK(str, sub string) int {
 	hashes[0] = big.NewInt(1)
 	prev := hashes[0]
 	const base = 26
-	multiple := big.NewInt(base)
 	for i := 1; i < len(sub); i++ {
 		temp := big.NewInt(base)
 		hashes[i] = temp.Mul(temp, prev)
@@ -70,6 +69,7 @@ func IndexOfUsingRK(str, sub string) int {
 		return 0
 	}
 
+	multiple := big.NewInt(base)
 	for i := 1; i < len(str)-len(sub)+1; i++ {
 		// 通过上一个位置的hash值，推算当前字符串的hash值
 		hash.Sub(hash, big.NewInt(int64(str[i-1]-startPoint)))
@@ -87,11 +87,11 @@ func IndexOfUsingRK(str, sub string) int {
 
 // IndexOfUsingBM return the first index of matched sub string, or -1
 // if not found
-// Using Boyer-Moore algorithm
+// Boyer-Moore algorithm
 // Constraints:
 // str and sub are consist of ascii character
 func IndexOfUsingBM(str, sub string) int {
-	if len(str) < len(sub) {
+	if len(str) < len(sub) || len(sub) <= 0 {
 		return -1
 	}
 
@@ -123,6 +123,34 @@ func IndexOfUsingBM(str, sub string) int {
 		// 取坏字符规则、好后缀规则的最大移动步数
 		i += utils.Max(x, y)
 		utils.Max("", "")
+	}
+
+	return -1
+}
+
+// IndexOfUsingKMP  returns the index of the first instance of sub string
+// from str, or -1 if not matched substring present from str.
+// KMP algorithm(Knuth, Morris and Pratt)
+func IndexOfUsingKMP(str, sub string) int {
+	if len(str) < len(sub) || len(sub) <= 0 {
+		return -1
+	}
+
+	next := buildNextArray(sub)
+	var j int
+	for i := 0; i < len(str); {
+		if str[i] == sub[j] {
+			i++
+			j++
+		} else if j > 0 {
+			j = next[j-1]
+		} else {
+			i++
+		}
+
+		if j == len(sub) {
+			return i - j
+		}
 	}
 
 	return -1
@@ -183,4 +211,37 @@ func moveByMatchedSegment(j, m int, suffix []int, prefix []bool) int {
 	}
 
 	return m
+}
+
+// buildNextArray 获取KMP算法的next数组。索引和模式串的索引保持一致，
+// 值为该索引对应的模式串的前缀子串中最长公共前后缀子串长度。例如索引为i，对应
+// 的模式串子串为m[0:i]，如果该子串为"ababa"，那么最长匹配的公共前后缀
+// 长度为3（其中前缀为aba，后缀也为aba）
+func buildNextArray(m string) []int {
+	if len(m) <= 0 {
+		return nil
+	}
+
+	next := make([]int, 0, len(m))
+	next = append(next, 0)
+	var k int
+	for i := 1; i < len(m); {
+		if m[k] == m[i] {
+			// 如果匹配，将长度+1，游标向后移动一位
+			k++
+			i++
+			next = append(next, k)
+		} else {
+			if k == 0 {
+				// 之前没有可匹配的了，将当前匹配长度设置为0，并将游标向下移动一位
+				next = append(next, 0)
+				i++
+			} else {
+				// 使用前一位的匹配结果，继续检查
+				k = next[k-1]
+			}
+		}
+	}
+
+	return next
 }
