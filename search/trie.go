@@ -16,6 +16,7 @@ type TrieNode struct {
 	val      byte                        // math.MaxUint8 represents invalid value, that is the root node
 	children [characterSetSize]*TrieNode // 如果元素值为nil代表该元素不存在
 	leaf     bool
+	keyword  string
 }
 
 // AddEntry adds an entry to tire tree
@@ -37,12 +38,16 @@ func (t *TrieNode) AddEntry(keywords ...string) {
 				travel.children[char] = &TrieNode{
 					val:      char,
 					children: [characterSetSize]*TrieNode{},
-					leaf:     i == len(keyword)-1,
+				}
+				if i == len(keyword)-1 {
+					travel.children[char].leaf = true
+					travel.children[char].keyword = keyword
 				}
 			}
 
 			if !travel.children[char].leaf && i == len(keyword)-1 {
 				travel.children[char].leaf = true
+				travel.children[char].keyword = keyword
 			}
 			travel = travel.children[char]
 		}
@@ -57,39 +62,24 @@ func (t *TrieNode) Search(prefix string) []string {
 	}
 
 	travel := t
-	var self bool
 	for i := 0; i < len(prefix); i++ {
 		char := prefix[i] - startPoint
 		if travel.children[char] == nil {
 			return nil
 		}
 
-		if i == len(prefix)-1 && travel.children[char].leaf {
-			self = true
-		}
-
 		travel = travel.children[char]
-	}
-	if travel == nil {
-		if self {
-			return []string{prefix}
-		}
-
-		return nil
 	}
 
 	// 遍历节点获取，所有可能的字符串
 	var ret []string
+	if travel.leaf {
+		ret = append(ret, travel.keyword)
+	}
 	for i := 0; i < len(travel.children); i++ {
 		trieDfs(travel.children[i], &([]byte{}), &ret)
 	}
 
-	for idx, entry := range ret {
-		ret[idx] = prefix + entry
-	}
-	if self {
-		ret = append(ret, prefix)
-	}
 	return ret
 }
 
@@ -99,10 +89,8 @@ func trieDfs(t *TrieNode, temp *[]byte, collector *[]string) {
 		return
 	}
 
-	*temp = append(*temp, t.val+startPoint)
 	if t.leaf {
-		*collector = append(*collector, string(*temp))
-		*temp = (*temp)[:(len(*temp) - 1)]
+		*collector = append(*collector, t.keyword)
 	}
 
 	for i := 0; i < len(t.children); i++ {
