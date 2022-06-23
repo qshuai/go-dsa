@@ -42,8 +42,12 @@ func ElementEqual[T comparable](a []T, b []T) bool {
 
 	for i := 0; i < len(a); i++ {
 		for j := 0; j < len(b); j++ {
-			if a[i] == a[j] {
+			if a[i] == b[j] {
 				break
+			}
+
+			if j == len(b)-1 {
+				return false
 			}
 		}
 	}
