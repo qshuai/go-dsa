@@ -2,7 +2,7 @@ package other
 
 import "strconv"
 
-// restoreIpAddresses givens a string s containing only digits, return the number of all possible
+// validIpAddressCount givens a string s containing only digits, return the number of all possible
 // valid IP addresses that can be formed by inserting dots into s. You are not allowed to reorder
 // or remove any digits in s. You may return the valid IP addresses in any order.
 //
@@ -11,7 +11,7 @@ import "strconv"
 // s consists of digits only.
 //
 // Comment: 使用动态规划的思想，逐级递推，使得最后一个元素就是问题的解
-func restoreIpAddresses(s string) int {
+func validIpAddressCount(s string) int {
 	const ipNums = 4
 	if len(s) < ipNums {
 		return 0
@@ -20,7 +20,7 @@ func restoreIpAddresses(s string) int {
 	dp := make([][]int, ipNums+1)
 	dp[0] = make([]int, len(s)+1)
 	dp[0][0] = 1
-	for i := 1; i < ipNums+1; i++ {
+	for i := 1; i <= ipNums; i++ {
 		dp[i] = make([]int, len(s)+1)
 		for j := i; j <= len(s); j++ {
 			if i == j {
