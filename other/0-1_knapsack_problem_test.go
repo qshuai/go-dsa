@@ -1,6 +1,10 @@
 package other
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/qshuai/go-dsa/utils"
+)
 
 func Test_maxWeightUsingDfs(t *testing.T) {
 	type args struct {
@@ -79,6 +83,55 @@ func Test_maxValueUsingDynamicPrograming(t *testing.T) {
 
 			if got := maxValueUsingDynamicPrograming(tt.args.weight, tt.args.value, tt.args.maxWeight); got != tt.want {
 				t.Errorf("maxValueUsingDynamicPrograming() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_minimumLimitValueUsingDynamicPrograming(t *testing.T) {
+	type args struct {
+		value []int
+		limit int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "case-1",
+			args: args{
+				value: []int{10, 50, 30, 78, 93, 124, 25},
+				limit: 200,
+			},
+			want: []int{93, 78, 30},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := minimumLimitValueUsingDynamicPrograming(tt.args.value, tt.args.limit); !utils.ElementEqual(got, tt.want) {
+				t.Errorf("minimumLimitValueUsingDynamicPrograming() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_yanghuiTriangleUsingDynamicProgram(t *testing.T) {
+	tests := []struct {
+		name string
+		args [][]int
+		want int
+	}{
+		{
+			name: "case-1",
+			args: [][]int{{5}, {7, 8}, {2, 3, 4}, {4, 9, 6, 1}, {2, 7, 9, 4, 5}},
+			want: 20,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := yanghuiTriangleUsingDynamicProgram(tt.args); got != tt.want {
+				t.Errorf("yanghuiTriangleUsingDynamicProgram() = %v, want %v", got, tt.want)
 			}
 		})
 	}

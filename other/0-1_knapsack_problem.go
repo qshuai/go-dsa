@@ -1,5 +1,11 @@
 package other
 
+import (
+	"math"
+
+	"github.com/qshuai/go-dsa/utils"
+)
+
 // maxWeightUsingDfs 已知给出各物品的重量weight，以及背包能够承受的最大重量maxWeight
 // 在不超过背包最大承受重量的前提下，能够装载的最大重量
 //
@@ -200,4 +206,96 @@ func maxValueUsingDynamicPrograming(weight, value []int, maxWeight int) int {
 	}
 
 	return maxValue
+}
+
+// minimumLimitValueUsingDynamicPrograming value代表各个商品的价值，索引为商品编号。limit为最低价值要求。
+// 求出最近接近limit要求的商品组合(如果超过limit的3倍，则不在考虑范围内)
+func minimumLimitValueUsingDynamicPrograming(value []int, limit int) []int {
+	if len(value) <= 0 {
+		return nil
+	}
+
+	state := make([][]bool, len(value))
+	max := limit * 3
+	state[0] = make([]bool, max)
+	state[0][0] = true
+	if value[0] < max {
+		state[0][value[0]] = true
+	}
+	for i := 1; i < len(value); i++ {
+		state[i] = make([]bool, max)
+		for j := 0; j < max; j++ {
+			if !state[i-1][j] {
+				continue
+			}
+			state[i][j] = true
+
+			if value[i]+j >= max {
+				continue
+			}
+
+			state[i][value[i]+j] = true
+		}
+	}
+
+	var target int
+	for i := limit; i < max; i++ {
+		if state[len(value)-1][i] {
+			target = i
+			break
+		}
+	}
+	if target <= 0 {
+		return nil
+	}
+
+	var items []int
+	for i := len(value) - 1; i > 0; i-- {
+		if target-value[i] >= 0 && state[i-1][target-value[i]] {
+			items = append(items, value[i])
+			target -= value[i]
+		}
+	}
+	if target > 0 {
+		items = append(items, value[0])
+	}
+
+	return items
+}
+
+// yanghuiTriangleUsingDynamicProgram 给出一个杨辉三角，节点值为该路径的长度。
+// 要求从顶点出发，求出到达最底层的最短路径长度。
+// image: ../static/yanghui_triangle.png
+func yanghuiTriangleUsingDynamicProgram(matrix [][]int) int {
+	if len(matrix) <= 0 {
+		return 0
+	}
+
+	state := make([][]int, len(matrix))
+	state[0] = make([]int, 1)
+	state[0][0] = matrix[0][0]
+	for i := 1; i < len(matrix); i++ {
+		state[i] = make([]int, len(matrix[i]))
+		for j := 0; j < len(matrix[i]); j++ {
+			if j == 0 {
+				// 首个元素只能从上一个节点走过来
+				state[i][j] = state[i-1][j] + matrix[i][j]
+			} else if j == len(matrix[i])-1 {
+				// 最后一个元素只能沿着最后的边走过来
+				state[i][j] = state[i-1][j-1] + matrix[i][j]
+			} else {
+				// 中间节点可以从两个方先过来，既然都可以达到这个节点，当然选择路径最短的
+				state[i][j] = utils.Min(state[i-1][j-1], state[i-1][j]) + matrix[i][j]
+			}
+		}
+	}
+
+	minDistance := math.MaxInt
+	for i := 0; i < len(state[len(state)-1]); i++ {
+		if state[len(state)-1][i] < minDistance {
+			minDistance = state[len(state)-1][i]
+		}
+	}
+
+	return minDistance
 }
