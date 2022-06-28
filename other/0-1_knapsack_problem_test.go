@@ -136,3 +136,24 @@ func Test_yanghuiTriangleUsingDynamicProgram(t *testing.T) {
 		})
 	}
 }
+
+func Test_shortestPathInMatrixUsingDynamicProgram(t *testing.T) {
+	tests := []struct {
+		name string
+		args [][]int
+		want int
+	}{
+		{
+			name: "case-1",
+			args: [][]int{{1, 3, 5, 9}, {2, 1, 3, 4}, {5, 2, 6, 7}, {6, 8, 4, 3}},
+			want: 19,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := shortestPathInMatrixUsingDynamicProgram(tt.args); got != tt.want {
+				t.Errorf("shortestPathInMatrixUsingDynamicProgram() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

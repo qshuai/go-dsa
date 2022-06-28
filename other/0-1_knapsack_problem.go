@@ -299,3 +299,31 @@ func yanghuiTriangleUsingDynamicProgram(matrix [][]int) int {
 
 	return minDistance
 }
+
+// shortestPathInMatrixUsingDynamicProgram 给出一个矩阵，每个值代表移动到该位置的路径长度。
+// 要求从左上角移动到右下角，给出移动的最短路径长度
+func shortestPathInMatrixUsingDynamicProgram(matrix [][]int) int {
+	if len(matrix) <= 0 {
+		return 0
+	}
+
+	state := make([][]int, len(matrix))
+	state[0] = make([]int, len(matrix[0]))
+	state[0][0] = matrix[0][0]
+	for i := 1; i < len(matrix[0]); i++ {
+		// 第一行元素上面没有元素，做特殊处理
+		state[0][i] = state[0][i-1] + matrix[0][i]
+	}
+
+	for i := 1; i < len(matrix); i++ {
+		state[i] = make([]int, len(matrix[i]))
+		// 首列元素没有左边的元素，做特殊处理
+		state[i][0] = state[i-1][0] + matrix[i][0]
+
+		for j := 1; j < len(matrix[i]); j++ {
+			state[i][j] = utils.Min(state[i-1][j], state[i][j-1]) + matrix[i][j]
+		}
+	}
+
+	return state[len(state)-1][len(state[len(state)-1])-1]
+}
