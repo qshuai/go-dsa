@@ -21,6 +21,20 @@ func ExamplePreOrderTraverse() {
 	// 9
 }
 
+func ExamplePreOrderLoopTraverse() {
+	PreOrderLoopTraverse(root)
+	// Output:
+	// 1
+	// 2
+	// 4
+	// 5
+	// 8
+	// 3
+	// 6
+	// 7
+	// 9
+}
+
 func ExampleInOrderTraverse() {
 	InOrderTraverse(root)
 	// Output:
@@ -35,8 +49,36 @@ func ExampleInOrderTraverse() {
 	// 9
 }
 
+func ExampleInOrderLoopTraverse() {
+	InOrderLoopTraverse(root)
+	// Output:
+	// 4
+	// 2
+	// 8
+	// 5
+	// 1
+	// 6
+	// 3
+	// 7
+	// 9
+}
+
 func ExamplePostOrderTraverse() {
 	PostOrderTraverse(root)
+	// Output:
+	// 4
+	// 8
+	// 5
+	// 2
+	// 6
+	// 9
+	// 7
+	// 3
+	// 1
+}
+
+func ExamplePostOrderLoopTraverse() {
+	PostOrderLoopTraverse(root)
 	// Output:
 	// 4
 	// 8
@@ -65,7 +107,7 @@ func ExampleLayerOrderTraverse() {
 
 func buildTree() *Node {
 	// Illustration：
-	//                  1
+	//                 1
 	//              /      \
 	//             2        3
 	//           /   \    /   \

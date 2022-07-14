@@ -25,6 +25,28 @@ func PreOrderTraverse(tree *Node) {
 	PreOrderTraverse(tree.Right)
 }
 
+// PreOrderLoopTraverse 使用栈的方式进行前序遍历
+func PreOrderLoopTraverse(tree *Node) {
+	container := list.New()
+	node := tree
+	for node != nil || container.Len() > 0 {
+		for node != nil {
+			fmt.Println(node.Value)
+
+			container.PushBack(node)
+			node = node.Left
+		}
+
+		if container.Len() > 0 {
+			ele := container.Back()
+			node = ele.Value.(*Node)
+			container.Remove(ele)
+
+			node = node.Right
+		}
+	}
+}
+
 // InOrderTraverse 中序遍历
 func InOrderTraverse(tree *Node) {
 	if tree == nil {
@@ -36,6 +58,28 @@ func InOrderTraverse(tree *Node) {
 	InOrderTraverse(tree.Right)
 }
 
+// InOrderLoopTraverse 使用栈的方式进行中序遍历
+func InOrderLoopTraverse(tree *Node) {
+	container := list.New()
+	node := tree
+	for node != nil || container.Len() > 0 {
+		for node != nil {
+			container.PushBack(node)
+			node = node.Left
+		}
+
+		if container.Len() > 0 {
+			ele := container.Back()
+			node = ele.Value.(*Node)
+			container.Remove(ele)
+
+			fmt.Println(node.Value)
+
+			node = node.Right
+		}
+	}
+}
+
 // PostOrderTraverse 后序遍历
 func PostOrderTraverse(tree *Node) {
 	if tree == nil {
@@ -45,6 +89,31 @@ func PostOrderTraverse(tree *Node) {
 	PostOrderTraverse(tree.Left)
 	PostOrderTraverse(tree.Right)
 	fmt.Println(tree.Value)
+}
+
+// PostOrderLoopTraverse 使用栈的方式进行后序遍历
+func PostOrderLoopTraverse(tree *Node) {
+	container := list.New()
+	node := tree
+	lastVisit := tree
+	for node != nil || container.Len() > 0 {
+		for node != nil {
+			container.PushBack(node)
+			node = node.Left
+		}
+
+		ele := container.Back()
+		node = ele.Value.(*Node)
+		if node.Right == nil || node.Right == lastVisit {
+			fmt.Println(node.Value)
+			container.Remove(ele)
+
+			lastVisit = node
+			node = nil
+		} else {
+			node = node.Right
+		}
+	}
 }
 
 // BreadthFirstSearch 广度优先搜索BSF
