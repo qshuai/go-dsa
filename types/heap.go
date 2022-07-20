@@ -4,6 +4,11 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
+// 堆中数据的位置关系，对于索引为idx的元素来说，
+// 其父节点位置为: (idx-1)>>1;
+// 其左子节点为: idx<<1 + 1；
+// 其右子节点为: idx<<1 + 2
+
 // Heap represents a max-heap
 type Heap[T constraints.Ordered] []T
 
@@ -47,7 +52,7 @@ func (h *Heap[T]) DeleteHeapTop() (ele T) {
 	// length - 1
 	*h = (*h)[:len(*h)-1]
 
-	h.MaxHeapify(len(*h)-1, 0)
+	h.MaxHeapify(len(*h), 0)
 
 	return
 }
