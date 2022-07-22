@@ -22,24 +22,16 @@ func Test_widthOfBinaryTree(t *testing.T) {
 						Value: 5,
 						Left: &types.Node{
 							Value: 6,
-							Left:  nil,
-							Right: nil,
 						},
-						Right: nil,
 					},
-					Right: nil,
 				},
 				Right: &types.Node{
 					Value: 2,
-					Left:  nil,
 					Right: &types.Node{
 						Value: 9,
 						Left: &types.Node{
 							Value: 7,
-							Left:  nil,
-							Right: nil,
 						},
-						Right: nil,
 					},
 				},
 			},
