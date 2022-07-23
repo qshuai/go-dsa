@@ -1,5 +1,20 @@
 package utils
 
+import (
+	"golang.org/x/exp/constraints"
+)
+
+// Contain returns true if target is the element of container.
+func Contain[T constraints.Ordered](container []T, target T) bool {
+	for i := 0; i < len(container); i++ {
+		if container[i] == target {
+			return true
+		}
+	}
+
+	return false
+}
+
 // Copy returns the copy of given slice. Maybe shallow copy
 // depending on the type T, eg: pointer or map
 func Copy[T any](src []T) []T {
