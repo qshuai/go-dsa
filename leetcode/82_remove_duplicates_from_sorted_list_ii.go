@@ -11,7 +11,7 @@ import (
 //
 // Constraints:
 // The number of nodes in the list is in the range [0, 300].
-// -100 <= Node.val <= 100
+// -100 <= TreeNode.val <= 100
 // The list is guaranteed to be sorted in ascending order.
 func deleteDuplicates(head *types.ListNode) *types.ListNode {
 	if head == nil || head.Next == nil {

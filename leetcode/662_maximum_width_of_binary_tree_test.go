@@ -9,27 +9,27 @@ import (
 func Test_widthOfBinaryTree(t *testing.T) {
 	tests := []struct {
 		name string
-		args *types.Node
+		args *types.TreeNode
 		want int
 	}{
 		{
 			name: "case-1",
-			args: &types.Node{
+			args: &types.TreeNode{
 				Value: 1,
-				Left: &types.Node{
+				Left: &types.TreeNode{
 					Value: 3,
-					Left: &types.Node{
+					Left: &types.TreeNode{
 						Value: 5,
-						Left: &types.Node{
+						Left: &types.TreeNode{
 							Value: 6,
 						},
 					},
 				},
-				Right: &types.Node{
+				Right: &types.TreeNode{
 					Value: 2,
-					Right: &types.Node{
+					Right: &types.TreeNode{
 						Value: 9,
-						Left: &types.Node{
+						Left: &types.TreeNode{
 							Value: 7,
 						},
 					},

@@ -7,15 +7,15 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
-// Node represents tree node
-type Node struct {
+// TreeNode represents tree node
+type TreeNode struct {
 	Value any
-	Left  *Node
-	Right *Node
+	Left  *TreeNode
+	Right *TreeNode
 }
 
 // PreOrderTraverse 前序遍历
-func PreOrderTraverse(tree *Node) {
+func PreOrderTraverse(tree *TreeNode) {
 	if tree == nil {
 		return
 	}
@@ -26,7 +26,7 @@ func PreOrderTraverse(tree *Node) {
 }
 
 // PreOrderLoopTraverse 使用栈的方式进行前序遍历
-func PreOrderLoopTraverse(tree *Node) {
+func PreOrderLoopTraverse(tree *TreeNode) {
 	container := list.New()
 	node := tree
 	for node != nil || container.Len() > 0 {
@@ -39,7 +39,7 @@ func PreOrderLoopTraverse(tree *Node) {
 
 		if container.Len() > 0 {
 			ele := container.Back()
-			node = ele.Value.(*Node)
+			node = ele.Value.(*TreeNode)
 			container.Remove(ele)
 
 			node = node.Right
@@ -48,7 +48,7 @@ func PreOrderLoopTraverse(tree *Node) {
 }
 
 // InOrderTraverse 中序遍历
-func InOrderTraverse(tree *Node) {
+func InOrderTraverse(tree *TreeNode) {
 	if tree == nil {
 		return
 	}
@@ -59,7 +59,7 @@ func InOrderTraverse(tree *Node) {
 }
 
 // InOrderLoopTraverse 使用栈的方式进行中序遍历
-func InOrderLoopTraverse(tree *Node) {
+func InOrderLoopTraverse(tree *TreeNode) {
 	container := list.New()
 	node := tree
 	for node != nil || container.Len() > 0 {
@@ -70,7 +70,7 @@ func InOrderLoopTraverse(tree *Node) {
 
 		if container.Len() > 0 {
 			ele := container.Back()
-			node = ele.Value.(*Node)
+			node = ele.Value.(*TreeNode)
 			container.Remove(ele)
 
 			fmt.Println(node.Value)
@@ -81,7 +81,7 @@ func InOrderLoopTraverse(tree *Node) {
 }
 
 // PostOrderTraverse 后序遍历
-func PostOrderTraverse(tree *Node) {
+func PostOrderTraverse(tree *TreeNode) {
 	if tree == nil {
 		return
 	}
@@ -92,7 +92,7 @@ func PostOrderTraverse(tree *Node) {
 }
 
 // PostOrderLoopTraverse 使用栈的方式进行后序遍历
-func PostOrderLoopTraverse(tree *Node) {
+func PostOrderLoopTraverse(tree *TreeNode) {
 	container := list.New()
 	node := tree
 	lastVisit := tree
@@ -103,7 +103,7 @@ func PostOrderLoopTraverse(tree *Node) {
 		}
 
 		ele := container.Back()
-		node = ele.Value.(*Node)
+		node = ele.Value.(*TreeNode)
 		if node.Right == nil || node.Right == lastVisit {
 			fmt.Println(node.Value)
 			container.Remove(ele)
@@ -117,7 +117,7 @@ func PostOrderLoopTraverse(tree *Node) {
 }
 
 // BreadthFirstSearch 广度优先搜索BSF
-func BreadthFirstSearch(tree *Node) {
+func BreadthFirstSearch(tree *TreeNode) {
 	if tree == nil {
 		return
 	}
@@ -126,7 +126,7 @@ func BreadthFirstSearch(tree *Node) {
 	l.PushBack(tree)
 
 	for l.Len() > 0 {
-		ele := l.Front().Value.(*Node)
+		ele := l.Front().Value.(*TreeNode)
 		l.Remove(l.Front())
 
 		if ele.Left != nil {
@@ -138,6 +138,36 @@ func BreadthFirstSearch(tree *Node) {
 
 		fmt.Println(ele.Value)
 	}
+}
+
+// NewBinaryTree 根据数组生成二叉树，传入数组的元素顺序需要和广度优先遍历的顺序一致
+func NewBinaryTree(vals []any) *TreeNode {
+	if len(vals) <= 0 || vals[0] == nil {
+		return nil
+	}
+
+	head := &TreeNode{Value: vals[0]}
+	queue := list.New()
+	queue.PushBack(head)
+	i := 1
+	for queue.Len() > 0 && i < len(vals) {
+		item := queue.Front()
+		queue.Remove(item)
+		ele := item.Value.(*TreeNode)
+		if vals[i] != nil {
+			ele.Left = &TreeNode{Value: vals[i]}
+		}
+		queue.PushBack(ele.Left)
+
+		if i+1 < len(vals) && vals[i+1] != nil {
+			ele.Right = &TreeNode{Value: vals[i+1]}
+		}
+		queue.PushBack(ele.Right)
+
+		i += 2
+	}
+
+	return head
 }
 
 // BST represents binary search tree

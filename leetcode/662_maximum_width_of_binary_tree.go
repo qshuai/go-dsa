@@ -18,17 +18,17 @@ import (
 //
 // Constraints:
 // The number of nodes in the tree is in the range [1, 3000].
-// -100 <= Node.val <= 100
-func widthOfBinaryTree(root *types.Node) int {
+// -100 <= TreeNode.val <= 100
+func widthOfBinaryTree(root *types.TreeNode) int {
 	type NodeWithIndex struct {
-		*types.Node
+		*types.TreeNode
 		idx int
 	}
 
 	eles := list.New()
 	eles.PushBack(&NodeWithIndex{
-		Node: root,
-		idx:  0,
+		TreeNode: root,
+		idx:      0,
 	})
 	var res int
 	for eles.Len() > 0 {

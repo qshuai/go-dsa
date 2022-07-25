@@ -11,7 +11,7 @@ import (
 // Constraints:
 //	The number of nodes in the list is sz.
 //	1 <= sz <= 30
-//	0 <= Node.val <= 100
+//	0 <= TreeNode.val <= 100
 //	1 <= n <= sz
 func removeNthFromEnd(head *types.ListNode, n int) *types.ListNode {
 	if head == nil {

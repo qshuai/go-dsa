@@ -10,22 +10,22 @@ import (
 func Test_zigzagLevelOrder(t *testing.T) {
 	tests := []struct {
 		name string
-		args *types.Node
+		args *types.TreeNode
 		want [][]int
 	}{
 		{
 			name: "case-1",
-			args: &types.Node{
+			args: &types.TreeNode{
 				Value: 3,
-				Left: &types.Node{
+				Left: &types.TreeNode{
 					Value: 9,
 				},
-				Right: &types.Node{
+				Right: &types.TreeNode{
 					Value: 20,
-					Left: &types.Node{
+					Left: &types.TreeNode{
 						Value: 15,
 					},
-					Right: &types.Node{
+					Right: &types.TreeNode{
 						Value: 7,
 					},
 				},

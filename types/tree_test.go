@@ -105,7 +105,7 @@ func ExampleLayerOrderTraverse() {
 	// 9
 }
 
-func buildTree() *Node {
+func buildTree() *TreeNode {
 	// Illustration：
 	//                 1
 	//              /      \
@@ -115,17 +115,17 @@ func buildTree() *Node {
 	//               /           \
 	//              8             9
 	//
-	root := Node{1, nil, nil}
-	root.Left = &Node{2, nil, nil}
-	root.Right = &Node{3, nil, nil}
+	root := TreeNode{1, nil, nil}
+	root.Left = &TreeNode{2, nil, nil}
+	root.Right = &TreeNode{3, nil, nil}
 
-	root.Left.Left = &Node{4, nil, nil}
-	root.Left.Right = &Node{5, nil, nil}
-	root.Left.Right.Left = &Node{8, nil, nil}
+	root.Left.Left = &TreeNode{4, nil, nil}
+	root.Left.Right = &TreeNode{5, nil, nil}
+	root.Left.Right.Left = &TreeNode{8, nil, nil}
 
-	root.Right.Left = &Node{6, nil, nil}
-	root.Right.Right = &Node{7, nil, nil}
-	root.Right.Right.Right = &Node{9, nil, nil}
+	root.Right.Left = &TreeNode{6, nil, nil}
+	root.Right.Right = &TreeNode{7, nil, nil}
+	root.Right.Right.Right = &TreeNode{9, nil, nil}
 
 	return &root
 }
@@ -167,6 +167,53 @@ func TestBST_Height(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := tt.args.Height(); got != tt.want {
 				t.Errorf("Height() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestNewBinaryTree(t *testing.T) {
+	tests := []struct {
+		name string
+		args []any
+		want *TreeNode
+	}{
+		{
+			name: "case-1",
+			args: []any{3, 5, 1, 6, 2, 0, 8, nil, nil, 7, 4},
+			want: &TreeNode{
+				Value: 3,
+				Left: &TreeNode{
+					Value: 5,
+					Left: &TreeNode{
+						Value: 6,
+					},
+					Right: &TreeNode{
+						Value: 2,
+						Left: &TreeNode{
+							Value: 7,
+						},
+						Right: &TreeNode{
+							Value: 4,
+						},
+					},
+				},
+				Right: &TreeNode{
+					Value: 1,
+					Left: &TreeNode{
+						Value: 0,
+					},
+					Right: &TreeNode{
+						Value: 8,
+					},
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewBinaryTree(tt.args); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewBinaryTree() = %v, want %v", got, tt.want)
 			}
 		})
 	}

@@ -13,8 +13,8 @@ import (
 //
 // Constraints:
 // The number of nodes in the tree is in the range [0, 2000].
-// -100 <= Node.val <= 100
-func zigzagLevelOrder(root *types.Node) [][]int {
+// -100 <= TreeNode.val <= 100
+func zigzagLevelOrder(root *types.TreeNode) [][]int {
 	if root == nil {
 		return nil
 	}
@@ -30,7 +30,7 @@ func zigzagLevelOrder(root *types.Node) [][]int {
 			top := eles.Front()
 			eles.Remove(top)
 
-			node := top.Value.(*types.Node)
+			node := top.Value.(*types.TreeNode)
 			if node.Left != nil {
 				eles.PushBack(node.Left)
 			}
