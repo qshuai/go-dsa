@@ -22,8 +22,8 @@ func Test_lowestCommonAncestor(t *testing.T) {
 			name: "case-1",
 			args: args{
 				root: types.NewBinaryTree([]any{3, 5, 1, 6, 2, 0, 8, nil, nil, 7, 4}),
-				p:    &types.TreeNode{Value: 5},
-				q:    &types.TreeNode{Value: 1},
+				p:    &types.TreeNode{Val: 5},
+				q:    &types.TreeNode{Val: 1},
 			},
 			want: 3,
 		},
@@ -31,8 +31,8 @@ func Test_lowestCommonAncestor(t *testing.T) {
 			name: "case-2",
 			args: args{
 				root: types.NewBinaryTree([]any{3, 5, 1, 6, 2, 0, 8, nil, nil, 7, 4}),
-				p:    &types.TreeNode{Value: 5},
-				q:    &types.TreeNode{Value: 4},
+				p:    &types.TreeNode{Val: 5},
+				q:    &types.TreeNode{Val: 4},
 			},
 			want: 5,
 		},
@@ -40,16 +40,16 @@ func Test_lowestCommonAncestor(t *testing.T) {
 			name: "case-3",
 			args: args{
 				root: types.NewBinaryTree([]any{1, 2}),
-				p:    &types.TreeNode{Value: 1},
-				q:    &types.TreeNode{Value: 2},
+				p:    &types.TreeNode{Val: 1},
+				q:    &types.TreeNode{Val: 2},
 			},
 			want: 1,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := lowestCommonAncestor(tt.args.root, tt.args.p, tt.args.q); !reflect.DeepEqual(got.Value, tt.want) {
-				t.Errorf("lowestCommonAncestor() = %v, want %v", got.Value, tt.want)
+			if got := lowestCommonAncestor(tt.args.root, tt.args.p, tt.args.q); !reflect.DeepEqual(got.Val, tt.want) {
+				t.Errorf("lowestCommonAncestor() = %v, want %v", got.Val, tt.want)
 			}
 		})
 	}

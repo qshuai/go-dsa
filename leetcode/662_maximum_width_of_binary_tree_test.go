@@ -15,22 +15,22 @@ func Test_widthOfBinaryTree(t *testing.T) {
 		{
 			name: "case-1",
 			args: &types.TreeNode{
-				Value: 1,
+				Val: 1,
 				Left: &types.TreeNode{
-					Value: 3,
+					Val: 3,
 					Left: &types.TreeNode{
-						Value: 5,
+						Val: 5,
 						Left: &types.TreeNode{
-							Value: 6,
+							Val: 6,
 						},
 					},
 				},
 				Right: &types.TreeNode{
-					Value: 2,
+					Val: 2,
 					Right: &types.TreeNode{
-						Value: 9,
+						Val: 9,
 						Left: &types.TreeNode{
-							Value: 7,
+							Val: 7,
 						},
 					},
 				},

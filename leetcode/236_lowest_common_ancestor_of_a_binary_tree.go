@@ -29,18 +29,18 @@ func dfsAncestor(root, p, q, target *types.TreeNode) bool {
 
 	lson := dfsAncestor(root.Left, p, q, target)
 	rson := dfsAncestor(root.Right, p, q, target)
-	if (lson && rson) || ((lson || rson) && (root.Value.(int) == p.Value.(int) || root.Value.(int) == q.Value.(int))) {
+	if (lson && rson) || ((lson || rson) && (root.Val.(int) == p.Val.(int) || root.Val.(int) == q.Val.(int))) {
 		*target = *root
 	}
 
-	return lson || rson || root.Value.(int) == p.Value.(int) || root.Value.(int) == q.Value.(int)
+	return lson || rson || root.Val.(int) == p.Val.(int) || root.Val.(int) == q.Val.(int)
 }
 
 // lowestCommonAncestor2 Solution-2 寻找p、q的父节点路径，通过两个路径并借助hash表得出最近公共祖先
 func lowestCommonAncestor2(root, p, q *types.TreeNode) *types.TreeNode {
 	temp := []*types.TreeNode{root}
 	pPath, qPath := new([]*types.TreeNode), new([]*types.TreeNode)
-	dfsTreePath(root, p.Value.(int), q.Value.(int), &temp, pPath, qPath)
+	dfsTreePath(root, p.Val.(int), q.Val.(int), &temp, pPath, qPath)
 	m := make(map[*types.TreeNode]struct{})
 	for _, item := range *pPath {
 		m[item] = struct{}{}
@@ -59,10 +59,10 @@ func dfsTreePath(node *types.TreeNode, p, q int, temp, pPath, qPath *[]*types.Tr
 	if len(*pPath) > 0 && len(*qPath) > 0 {
 		return
 	}
-	if node.Value == p {
+	if node.Val == p {
 		*pPath = append(*pPath, *temp...)
 	}
-	if node.Value == q {
+	if node.Val == q {
 		*qPath = append(*qPath, *temp...)
 	}
 

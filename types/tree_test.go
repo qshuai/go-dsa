@@ -182,29 +182,29 @@ func TestNewBinaryTree(t *testing.T) {
 			name: "case-1",
 			args: []any{3, 5, 1, 6, 2, 0, 8, nil, nil, 7, 4},
 			want: &TreeNode{
-				Value: 3,
+				Val: 3,
 				Left: &TreeNode{
-					Value: 5,
+					Val: 5,
 					Left: &TreeNode{
-						Value: 6,
+						Val: 6,
 					},
 					Right: &TreeNode{
-						Value: 2,
+						Val: 2,
 						Left: &TreeNode{
-							Value: 7,
+							Val: 7,
 						},
 						Right: &TreeNode{
-							Value: 4,
+							Val: 4,
 						},
 					},
 				},
 				Right: &TreeNode{
-					Value: 1,
+					Val: 1,
 					Left: &TreeNode{
-						Value: 0,
+						Val: 0,
 					},
 					Right: &TreeNode{
-						Value: 8,
+						Val: 8,
 					},
 				},
 			},

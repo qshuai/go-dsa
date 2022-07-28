@@ -39,9 +39,9 @@ func zigzagLevelOrder(root *types.TreeNode) [][]int {
 			}
 
 			if direction {
-				values[length-i-1] = node.Value.(int)
+				values[length-i-1] = node.Val.(int)
 			} else {
-				values[i] = node.Value.(int)
+				values[i] = node.Val.(int)
 			}
 		}
 

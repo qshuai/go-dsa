@@ -23,7 +23,7 @@ func sumNumbers(root *types.TreeNode) int {
 }
 
 func dfsPathDistance(node *types.TreeNode, path *[]int, sum *int) {
-	*path = append(*path, node.Value.(int))
+	*path = append(*path, node.Val.(int))
 	if node.Left == nil && node.Right == nil {
 		// 叶子结点
 		pow := 1

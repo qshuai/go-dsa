@@ -9,7 +9,7 @@ import (
 
 // TreeNode represents tree node
 type TreeNode struct {
-	Value any
+	Val   any
 	Left  *TreeNode
 	Right *TreeNode
 }
@@ -20,7 +20,7 @@ func PreOrderTraverse(tree *TreeNode) {
 		return
 	}
 
-	fmt.Println(tree.Value)
+	fmt.Println(tree.Val)
 	PreOrderTraverse(tree.Left)
 	PreOrderTraverse(tree.Right)
 }
@@ -31,7 +31,7 @@ func PreOrderLoopTraverse(tree *TreeNode) {
 	node := tree
 	for node != nil || container.Len() > 0 {
 		for node != nil {
-			fmt.Println(node.Value)
+			fmt.Println(node.Val)
 
 			container.PushBack(node)
 			node = node.Left
@@ -54,7 +54,7 @@ func InOrderTraverse(tree *TreeNode) {
 	}
 
 	InOrderTraverse(tree.Left)
-	fmt.Println(tree.Value)
+	fmt.Println(tree.Val)
 	InOrderTraverse(tree.Right)
 }
 
@@ -73,7 +73,7 @@ func InOrderLoopTraverse(tree *TreeNode) {
 			node = ele.Value.(*TreeNode)
 			container.Remove(ele)
 
-			fmt.Println(node.Value)
+			fmt.Println(node.Val)
 
 			node = node.Right
 		}
@@ -88,7 +88,7 @@ func PostOrderTraverse(tree *TreeNode) {
 
 	PostOrderTraverse(tree.Left)
 	PostOrderTraverse(tree.Right)
-	fmt.Println(tree.Value)
+	fmt.Println(tree.Val)
 }
 
 // PostOrderLoopTraverse 使用栈的方式进行后序遍历
@@ -105,7 +105,7 @@ func PostOrderLoopTraverse(tree *TreeNode) {
 		ele := container.Back()
 		node = ele.Value.(*TreeNode)
 		if node.Right == nil || node.Right == lastVisit {
-			fmt.Println(node.Value)
+			fmt.Println(node.Val)
 			container.Remove(ele)
 
 			lastVisit = node
@@ -136,7 +136,7 @@ func BreadthFirstSearch(tree *TreeNode) {
 			l.PushBack(ele.Right)
 		}
 
-		fmt.Println(ele.Value)
+		fmt.Println(ele.Val)
 	}
 }
 
@@ -146,7 +146,7 @@ func NewBinaryTree(vals []any) *TreeNode {
 		return nil
 	}
 
-	head := &TreeNode{Value: vals[0]}
+	head := &TreeNode{Val: vals[0]}
 	queue := list.New()
 	queue.PushBack(head)
 	i := 1
@@ -155,12 +155,12 @@ func NewBinaryTree(vals []any) *TreeNode {
 		queue.Remove(item)
 		ele := item.Value.(*TreeNode)
 		if vals[i] != nil {
-			ele.Left = &TreeNode{Value: vals[i]}
+			ele.Left = &TreeNode{Val: vals[i]}
 		}
 		queue.PushBack(ele.Left)
 
 		if i+1 < len(vals) && vals[i+1] != nil {
-			ele.Right = &TreeNode{Value: vals[i+1]}
+			ele.Right = &TreeNode{Val: vals[i+1]}
 		}
 		queue.PushBack(ele.Right)
 

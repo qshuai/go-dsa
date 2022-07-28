@@ -16,17 +16,17 @@ func Test_zigzagLevelOrder(t *testing.T) {
 		{
 			name: "case-1",
 			args: &types.TreeNode{
-				Value: 3,
+				Val: 3,
 				Left: &types.TreeNode{
-					Value: 9,
+					Val: 9,
 				},
 				Right: &types.TreeNode{
-					Value: 20,
+					Val: 20,
 					Left: &types.TreeNode{
-						Value: 15,
+						Val: 15,
 					},
 					Right: &types.TreeNode{
-						Value: 7,
+						Val: 7,
 					},
 				},
 			},
