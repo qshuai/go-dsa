@@ -44,9 +44,12 @@ func lengthOfLIS2(nums []int) int {
 	var offset int
 	for i := 1; i < len(nums); i++ {
 		if nums[i] > d[offset] {
+			// 如果当前元素比offset出的元素大，直接追加（贪心）
 			offset++
 			d[offset] = nums[i]
 		} else if nums[i] < d[offset] {
+			// 之所以能使用二分查找，因为d元素是有序的
+			// 将当前元素nums[i]插入到d中，替换掉原先的元素（第一个小于等于该元素的位置），保持数组的有序性
 			begin, end := 0, offset
 			for begin <= end {
 				mid := begin + (end-begin)>>1
