@@ -169,7 +169,7 @@ func buildListNodes(s string) (*types.DListNode, int, *types.DListNode) {
 
 // isAlphanumeric 判断字节类型
 // return:
-// 1. 是否为字母数字类型的直接
+// 1. 是否为字母数字类型
 // 2. 判断是否为大写字母
 func isAlphanumeric(b byte) (bool, bool) {
 	if (b >= '0' && b <= '9') || (b >= 'a' && b <= 'z') {
