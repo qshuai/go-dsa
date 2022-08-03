@@ -8,11 +8,12 @@ import (
 
 // removeNthFromEnd Given the head of a linked list, remove the nth node
 // from the end of the list and return its head.
+//
 // Constraints:
-//	The number of nodes in the list is sz.
-//	1 <= sz <= 30
-//	0 <= TreeNode.val <= 100
-//	1 <= n <= sz
+// The number of nodes in the list is sz.
+// 1 <= sz <= 30
+// 0 <= TreeNode.val <= 100
+// 1 <= n <= sz
 func removeNthFromEnd(head *types.ListNode, n int) *types.ListNode {
 	if head == nil {
 		return nil
