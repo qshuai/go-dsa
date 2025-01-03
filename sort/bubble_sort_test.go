@@ -6,13 +6,15 @@ import (
 
 	"github.com/qshuai/go-dsa/sort/testdata"
 	"github.com/qshuai/go-dsa/types"
+	"github.com/qshuai/go-dsa/utils"
 )
 
 func Test_BubbleSort(t *testing.T) {
 	for _, tt := range testdata.GetTestCases() {
 		t.Run(tt.Name, func(t *testing.T) {
-			if BubbleSort(tt.Args); !reflect.DeepEqual(tt.Args, tt.Expected) {
-				t.Errorf("BubbleSort() = %v, want: %v", tt.Args, tt.Expected)
+			arr := utils.Copy(tt.Args)
+			if BubbleSort(arr); !reflect.DeepEqual(arr, tt.Expected) {
+				t.Errorf("BubbleSort() = %v, want: %v", arr, tt.Expected)
 			}
 		})
 	}

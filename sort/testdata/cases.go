@@ -2,8 +2,6 @@ package testdata
 
 import (
 	"math"
-
-	"github.com/qshuai/go-dsa/utils"
 )
 
 type TestItem struct {
@@ -31,7 +29,7 @@ var cases = []TestItem{
 		Expected: []int{},
 	},
 	{
-		Name:     "Truffle array",
+		Name:     "Shuffled array",
 		Args:     []int{2, 4, 8, 3, 1, 6, 5, 7},
 		Min:      1,
 		Max:      8,
@@ -73,10 +71,10 @@ func GetTestCases() []TestItem {
 	for _, item := range cases {
 		ret = append(ret, TestItem{
 			Name:     item.Name,
-			Args:     utils.Copy(item.Args),
+			Args:     item.Args,
 			Min:      item.Min,
 			Max:      item.Max,
-			Expected: utils.Copy(item.Expected),
+			Expected: item.Expected,
 		})
 	}
 

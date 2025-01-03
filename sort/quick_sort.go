@@ -28,7 +28,9 @@ func PartitionHead(arr []int) int {
 		i--
 	}
 
-	arr[i], arr[0] = arr[0], arr[i]
+	if arr[0] == pivot {
+		arr[i], arr[0] = arr[0], arr[i]
+	}
 	return i
 }
 
@@ -79,6 +81,7 @@ func PartitionMedian(arr []int) int {
 		if end < begin {
 			return PartitionHead(arr)
 		} else if middle < end {
+
 			return PartitionMiddle(arr)
 		} else {
 			return PartitionTail(arr)
