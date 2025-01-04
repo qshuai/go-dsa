@@ -2,8 +2,6 @@ package other
 
 import (
 	"math"
-
-	"github.com/qshuai/go-dsa/utils"
 )
 
 // maxWeightUsingDfs 已知给出各物品的重量weight，以及背包能够承受的最大重量maxWeight
@@ -285,7 +283,7 @@ func yanghuiTriangleUsingDynamicProgram(matrix [][]int) int {
 				state[i][j] = state[i-1][j-1] + matrix[i][j]
 			} else {
 				// 中间节点可以从两个方先过来，既然都可以达到这个节点，当然选择路径最短的
-				state[i][j] = utils.Min(state[i-1][j-1], state[i-1][j]) + matrix[i][j]
+				state[i][j] = min(state[i-1][j-1], state[i-1][j]) + matrix[i][j]
 			}
 		}
 	}
@@ -321,7 +319,7 @@ func shortestPathInMatrixUsingDynamicProgram(matrix [][]int) int {
 		state[i][0] = state[i-1][0] + matrix[i][0]
 
 		for j := 1; j < len(matrix[i]); j++ {
-			state[i][j] = utils.Min(state[i-1][j], state[i][j-1]) + matrix[i][j]
+			state[i][j] = min(state[i-1][j], state[i][j-1]) + matrix[i][j]
 		}
 	}
 

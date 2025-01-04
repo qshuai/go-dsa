@@ -12,6 +12,7 @@ package leetcode
 // Constraints:
 // 1 <= m, n <= 100
 func uniquePaths(m int, n int) int {
+	// dp[i][j]代表从[0,0]位置移动到[i,j]位置的路径数量
 	dp := make([][]int, m)
 	for idx := range dp {
 		dp[idx] = make([]int, n)
@@ -26,9 +27,6 @@ func uniquePaths(m int, n int) int {
 		// 	第一列统一设置为1
 		dp[idx][0] = 1
 	}
-
-	// 初始值设置
-	dp[0][0] = 0
 
 	for i := 1; i < m; i++ {
 		for j := 1; j < n; j++ {

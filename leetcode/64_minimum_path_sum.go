@@ -2,8 +2,6 @@ package leetcode
 
 import (
 	math2 "math"
-
-	"github.com/qshuai/go-dsa/utils"
 )
 
 // https://leetcode.com/problems/minimum-path-sum/
@@ -31,7 +29,7 @@ func minPathSum(grid [][]int) int {
 			} else if j == 0 {
 				dp[i][j] = dp[i-1][j] + grid[i][j]
 			} else {
-				dp[i][j] = utils.Min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
+				dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]
 			}
 		}
 	}

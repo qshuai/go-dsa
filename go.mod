@@ -1,6 +1,6 @@
 module github.com/qshuai/go-dsa
 
-go 1.18
+go 1.21
 
 require github.com/fatih/set v0.2.1
 

@@ -1,7 +1,5 @@
 package leetcode
 
-import "github.com/qshuai/go-dsa/utils"
-
 // https://leetcode.com/problems/longest-increasing-subsequence/
 
 // lengthOfLIS Given an integer array nums, return the length of the longest strictly increasing subsequence.
@@ -18,19 +16,19 @@ func lengthOfLIS(nums []int) int {
 	// 假设索引为i，值为以nums[i]结尾的最长子序列的长度
 	dp := make([]int, len(nums))
 	dp[0] = 1
-	max := 1
+	m := 1
 	for i := 1; i < len(nums); i++ {
 		dp[i] = 1
 		for j := 0; j < i; j++ {
 			if nums[i] > nums[j] {
-				dp[i] = utils.Max(dp[i], dp[j]+1)
+				dp[i] = max(dp[i], dp[j]+1)
 			}
 		}
 
-		max = utils.Max(max, dp[i])
+		m = max(m, dp[i])
 	}
 
-	return max
+	return m
 }
 
 // lengthOfLIS2 solution-2 使用贪心算法，在查找元素部分使用了二分查找(降低查找的时间复杂度)

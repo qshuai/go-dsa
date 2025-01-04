@@ -2,8 +2,6 @@ package search
 
 import (
 	"math/big"
-
-	"github.com/qshuai/go-dsa/utils"
 )
 
 // IndexOfUsingBF returns the index of the first instance of sub string
@@ -121,8 +119,7 @@ func IndexOfUsingBM(str, sub string) int {
 		}
 
 		// 取坏字符规则、好后缀规则的最大移动步数
-		i += utils.Max(x, y)
-		utils.Max("", "")
+		i += max(x, y)
 	}
 
 	return -1
