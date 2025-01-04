@@ -7,7 +7,7 @@ import (
 	"github.com/qshuai/go-dsa/types"
 )
 
-func Test_deleteDuplicates(t *testing.T) {
+func Test_deleteDuplicates2(t *testing.T) {
 	tests := []struct {
 		name string
 		args *types.ListNode[int]
@@ -31,7 +31,7 @@ func Test_deleteDuplicates(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := deleteDuplicates(tt.args); !reflect.DeepEqual(got, tt.want) {
+			if got := deleteDuplicates2(tt.args); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("deleteDuplicates() = %v, want %v", got, tt.want)
 			}
 		})

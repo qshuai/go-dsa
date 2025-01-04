@@ -13,7 +13,7 @@ import (
 // The number of nodes in the list is in the range [0, 300].
 // -100 <= TreeNode.val <= 100
 // The list is guaranteed to be sorted in ascending order.
-func deleteDuplicates[T comparable](head *types.ListNode[T]) *types.ListNode[T] {
+func deleteDuplicates2[T comparable](head *types.ListNode[T]) *types.ListNode[T] {
 	if head == nil || head.Next == nil {
 		return head
 	}
