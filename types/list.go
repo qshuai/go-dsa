@@ -101,10 +101,9 @@ func (n *ListNode[T]) RemoveByPosition(idx int) *ListNode[T] {
 func ReverseSingleList[T any](list *ListNode[T]) *ListNode[T] {
 	cur := list
 	var prev *ListNode[T]
-	var tmp *ListNode[T]
 
 	for cur != nil {
-		tmp = cur.Next
+		tmp := cur.Next
 		cur.Next = prev
 		prev = cur
 		cur = tmp

@@ -8,7 +8,7 @@ func Test_bitCount(t *testing.T) {
 	tests := []struct {
 		name string
 		args uint32
-		want uint32
+		want int
 	}{
 		{
 			name: "case-1",
@@ -29,6 +29,10 @@ func Test_bitCount(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := BitCountUint32(tt.args); got != tt.want {
+				t.Errorf("bitCount() = %v, want %v", got, tt.want)
+			}
+
+			if got := BitCountUint64(uint64(tt.args)); got != tt.want {
 				t.Errorf("bitCount() = %v, want %v", got, tt.want)
 			}
 		})
