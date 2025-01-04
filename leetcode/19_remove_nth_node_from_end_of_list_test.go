@@ -9,13 +9,13 @@ import (
 
 func Test_removeNthFromEnd(t *testing.T) {
 	type args struct {
-		head *types.ListNode
+		head *types.ListNode[int]
 		n    int
 	}
 	tests := []struct {
 		name string
 		args args
-		want *types.ListNode
+		want *types.ListNode[int]
 	}{
 		{
 			name: "general case",
@@ -23,7 +23,7 @@ func Test_removeNthFromEnd(t *testing.T) {
 				head: types.NewListNode(1, 5),
 				n:    2,
 			},
-			want: types.NewListNode(1, 3).Append(&types.ListNode{
+			want: types.NewListNode(1, 3).Append(&types.ListNode[int]{
 				Value: 5,
 				Next:  nil,
 			}),

@@ -5,14 +5,14 @@ import (
 	"strings"
 )
 
-type ListNode struct {
-	Value any
-	Next  *ListNode
+type ListNode[T any] struct {
+	Value T
+	Next  *ListNode[T]
 }
 
 // NewListNode creates a singly linked list
-func NewListNode(start, length int) *ListNode {
-	head := &ListNode{
+func NewListNode[T Number](start T, length int) *ListNode[T] {
+	head := &ListNode[T]{
 		Value: start,
 		Next:  nil,
 	}
@@ -20,7 +20,7 @@ func NewListNode(start, length int) *ListNode {
 	prev := head
 	for i := 1; i < length; i++ {
 		start++
-		newNode := &ListNode{
+		newNode := &ListNode[T]{
 			Value: start,
 			Next:  nil,
 		}
@@ -32,15 +32,15 @@ func NewListNode(start, length int) *ListNode {
 }
 
 // NewListNodeFromSlice construct linked list from slice
-func NewListNodeFromSlice(s []int) *ListNode {
+func NewListNodeFromSlice[T any](s []T) *ListNode[T] {
 	if len(s) <= 0 {
 		return nil
 	}
 
-	head := &ListNode{Value: s[0]}
+	head := &ListNode[T]{Value: s[0]}
 	cursor := head
 	for i := 1; i < len(s); i++ {
-		newNode := &ListNode{Value: s[i]}
+		newNode := &ListNode[T]{Value: s[i]}
 		cursor.Next = newNode
 		cursor = newNode
 	}
@@ -49,9 +49,9 @@ func NewListNodeFromSlice(s []int) *ListNode {
 }
 
 // Append the node to the tail. panic if the linked list is nil.
-func (n *ListNode) Append(node *ListNode) *ListNode {
+func (n *ListNode[T]) Append(node *ListNode[T]) *ListNode[T] {
 	if n == nil {
-		panic("nil linked list can not append node")
+		panic("append to nil linked list")
 	}
 
 	head, cursor := n, n
@@ -65,7 +65,7 @@ func (n *ListNode) Append(node *ListNode) *ListNode {
 
 // RemoveByPosition remove the Nth using 0-based indexing node
 // from begin of linked list
-func (n *ListNode) RemoveByPosition(idx int) *ListNode {
+func (n *ListNode[T]) RemoveByPosition(idx int) *ListNode[T] {
 	if n == nil {
 		panic("nil linked list can not remove element")
 	}
@@ -83,7 +83,7 @@ func (n *ListNode) RemoveByPosition(idx int) *ListNode {
 	for cursor != nil {
 		if i == idx {
 			if cursor.Next == nil {
-				panic("idx out of bounds")
+				panic("index out of bound")
 			}
 
 			cursor.Next = cursor.Next.Next
@@ -98,10 +98,10 @@ func (n *ListNode) RemoveByPosition(idx int) *ListNode {
 }
 
 // ReverseSingleList 单链表反转
-func ReverseSingleList(list *ListNode) *ListNode {
+func ReverseSingleList[T any](list *ListNode[T]) *ListNode[T] {
 	cur := list
-	var prev *ListNode
-	var tmp *ListNode
+	var prev *ListNode[T]
+	var tmp *ListNode[T]
 
 	for cur != nil {
 		tmp = cur.Next
@@ -113,48 +113,46 @@ func ReverseSingleList(list *ListNode) *ListNode {
 	return prev
 }
 
-func (n *ListNode) String() string {
+func (n *ListNode[T]) String() string {
+	if n == nil {
+		return "nil"
+	}
+
 	sb := strings.Builder{}
-	sb.WriteString("singly linked list: [")
 	cursor := n
 	for cursor != nil {
-		if v, ok := cursor.Value.(fmt.Stringer); ok {
-			sb.WriteString(fmt.Sprintf("%s", v))
-		} else {
-			sb.WriteString(fmt.Sprintf("%v", cursor.Value))
-		}
+		sb.WriteString(fmt.Sprintf("%v", cursor.Value))
 
 		cursor = cursor.Next
 		if cursor != nil {
-			sb.WriteString(", ")
+			sb.WriteString(" -> ")
 		}
 	}
-	sb.WriteString("]")
 
 	return sb.String()
 }
 
 // DListNode represents doubly linked list
-type DListNode struct {
+type DListNode[T any] struct {
 	Value any
-	Prev  *DListNode
-	Next  *DListNode
+	Prev  *DListNode[T]
+	Next  *DListNode[T]
 }
 
 // NewDoublyLinkedListFromSlice 从数组生成双向链表
-func NewDoublyLinkedListFromSlice(arr []int) *DListNode {
+func NewDoublyLinkedListFromSlice[T any](arr []T) *DListNode[T] {
 	if len(arr) <= 0 {
 		return nil
 	}
 
-	head := &DListNode{
+	head := &DListNode[T]{
 		Value: arr[0],
 		Prev:  nil,
 		Next:  nil,
 	}
 	prev := head
 	for i := 1; i < len(arr); i++ {
-		newNode := &DListNode{
+		newNode := &DListNode[T]{
 			Value: arr[i],
 			Prev:  prev,
 			Next:  nil,
@@ -168,19 +166,25 @@ func NewDoublyLinkedListFromSlice(arr []int) *DListNode {
 }
 
 // String return readable string representing doubly linked list
-func (n *DListNode) String() string {
+func (n *DListNode[T]) String() string {
 	if n == nil {
-		return ""
+		return "nil"
 	}
 
 	sb := strings.Builder{}
-	sb.WriteString("nil")
 	cursor := n
 	for cursor != nil {
-		sb.WriteString(fmt.Sprintf(" <=> %v", n.Value))
+		if v, ok := cursor.Value.(fmt.Stringer); ok {
+			sb.WriteString(v.String())
+		} else {
+			sb.WriteString(fmt.Sprintf("%v", cursor.Value))
+		}
+
 		cursor = cursor.Next
+		if cursor != nil {
+			sb.WriteString(" <-> ")
+		}
 	}
-	sb.WriteString(" <=> nil")
 
 	return sb.String()
 }

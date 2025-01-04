@@ -9,13 +9,13 @@ import (
 
 func Test_addTwoNumbers(t *testing.T) {
 	type args struct {
-		l1 *types.ListNode
-		l2 *types.ListNode
+		l1 *types.ListNode[int]
+		l2 *types.ListNode[int]
 	}
 	tests := []struct {
 		name string
 		args args
-		want *types.ListNode
+		want *types.ListNode[int]
 	}{
 		{
 			name: "case-1",

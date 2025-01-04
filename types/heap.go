@@ -58,13 +58,13 @@ func (h *Heap[T]) DeleteHeapTop() (ele T) {
 }
 
 // Sort heap in natural order
-func (h Heap[T]) Sort() {
-	if len(h) <= 0 {
+func (h *Heap[T]) Sort() {
+	if len(*h) <= 0 {
 		return
 	}
 
-	for i := len(h) - 1; i > 0; i-- {
-		h[i], h[0] = h[0], h[i]
+	for i := len(*h) - 1; i > 0; i-- {
+		(*h)[i], (*h)[0] = (*h)[0], (*h)[i]
 
 		for j := 0; j < i<<1-1; j++ {
 			h.MaxHeapify(i, 0)
@@ -106,15 +106,15 @@ func NewHeapWithCapacity[T constraints.Ordered](nums []T, capacity int) Heap[T] 
 }
 
 // Heapify according to dir
-func (h Heap[T]) Heapify(dir HeapDir) {
+func (h *Heap[T]) Heapify(dir HeapDir) {
 	switch dir {
 	case HeapMinDir:
-		for i := len(h)>>1 - 1; i >= 0; i-- {
-			h.MinHeapify(len(h), i)
+		for i := len(*h)>>1 - 1; i >= 0; i-- {
+			h.MinHeapify(len(*h), i)
 		}
 	case HeapMaxDir:
-		for i := len(h)>>1 - 1; i >= 0; i-- {
-			h.MaxHeapify(len(h), i)
+		for i := len(*h)>>1 - 1; i >= 0; i-- {
+			h.MaxHeapify(len(*h), i)
 		}
 	default:
 		panic("unrecognised heap dir")
@@ -122,39 +122,39 @@ func (h Heap[T]) Heapify(dir HeapDir) {
 }
 
 // MinHeapify maintains a min-heap property from top to bottom
-func (h Heap[T]) MinHeapify(length int, index int) {
+func (h *Heap[T]) MinHeapify(length int, index int) {
 	for {
 		minPos := index
-		if index<<1+1 < length && h[index] > h[index<<1+1] {
+		if index<<1+1 < length && (*h)[index] > (*h)[index<<1+1] {
 			minPos = index<<1 + 1
 		}
-		if index<<1+2 < length && h[minPos] > h[index<<1+2] {
+		if index<<1+2 < length && (*h)[minPos] > (*h)[index<<1+2] {
 			minPos = index<<1 + 2
 		}
 		if minPos == index {
 			break
 		}
 
-		h[index], h[minPos] = h[minPos], h[index]
+		(*h)[index], (*h)[minPos] = (*h)[minPos], (*h)[index]
 		index = minPos
 	}
 }
 
 // MaxHeapify maintains a max-heap property from top to bottom
-func (h Heap[T]) MaxHeapify(length int, index int) {
+func (h *Heap[T]) MaxHeapify(length int, index int) {
 	for {
 		maxPos := index
-		if index<<1+1 < length && h[index] < h[index<<1+1] {
+		if index<<1+1 < length && (*h)[index] < (*h)[index<<1+1] {
 			maxPos = index<<1 + 1
 		}
-		if index<<1+2 < length && h[maxPos] < h[index<<1+2] {
+		if index<<1+2 < length && (*h)[maxPos] < (*h)[index<<1+2] {
 			maxPos = index<<1 + 2
 		}
 		if maxPos == index {
 			break
 		}
 
-		h[index], h[maxPos] = h[maxPos], h[index]
+		(*h)[index], (*h)[maxPos] = (*h)[maxPos], (*h)[index]
 		index = maxPos
 	}
 }

@@ -9,17 +9,17 @@ import (
 func Test_hasCycle(t *testing.T) {
 	tests := []struct {
 		name string
-		args *types.ListNode
+		args *types.ListNode[int]
 		want bool
 	}{
 		{
 			name: "cycle linked list",
-			args: buildCycleLinkedList(4, 1),
+			args: buildCycleLinkedList[int](4, 1),
 			want: true,
 		},
 		{
 			name: "head-tail cycle linked list",
-			args: buildCycleLinkedList(2, 0),
+			args: buildCycleLinkedList[int](2, 0),
 			want: true,
 		},
 		{
@@ -41,7 +41,7 @@ func Test_hasCycle(t *testing.T) {
 // params:
 // 1. length: 链表元素的个数
 // 2. pos: 尾节点和和链表相交的位置 0-based
-func buildCycleLinkedList(length, pos int) *types.ListNode {
+func buildCycleLinkedList[T types.Number](length, pos int) *types.ListNode[T] {
 	if length <= 0 {
 		return nil
 	}
@@ -49,11 +49,11 @@ func buildCycleLinkedList(length, pos int) *types.ListNode {
 		panic("invalid pos")
 	}
 
-	head := types.NewListNode(0, 1)
+	head := types.NewListNode[T](0, 1)
 	prev := head
 	target := head
 	for i := 1; i < length; i++ {
-		newNode := types.NewListNode(i, 1)
+		newNode := types.NewListNode[T](T(i), 1)
 		prev.Next = newNode
 		prev = newNode
 

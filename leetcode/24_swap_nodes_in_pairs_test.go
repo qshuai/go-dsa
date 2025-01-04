@@ -10,8 +10,8 @@ import (
 func Test_swapPairs(t *testing.T) {
 	tests := []struct {
 		name string
-		args *types.ListNode
-		want *types.ListNode
+		args *types.ListNode[int]
+		want *types.ListNode[int]
 	}{
 		{
 			name: "linked list with even number elements",

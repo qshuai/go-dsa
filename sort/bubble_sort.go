@@ -3,6 +3,8 @@ package sort
 import (
 	"math"
 
+	"golang.org/x/exp/constraints"
+
 	"github.com/qshuai/go-dsa/types"
 )
 
@@ -24,15 +26,14 @@ func BubbleSort(arr []int) {
 
 // ListBubbleSort 单向链表的冒泡排序算法（元素值为int类型）
 // Constraints: 不修改元素字段值
-func ListBubbleSort(node *types.ListNode) *types.ListNode {
+func ListBubbleSort[T constraints.Ordered](node *types.ListNode[T]) *types.ListNode[T] {
 	if node == nil || node.Next == nil {
 		return node
 	}
 
 	// 哨兵节点
-	guard := &types.ListNode{
-		Value: math.MinInt,
-		Next:  node,
+	guard := &types.ListNode[T]{
+		Next: node,
 	}
 
 	cursor := guard.Next
@@ -51,7 +52,7 @@ func ListBubbleSort(node *types.ListNode) *types.ListNode {
 			continue
 		}
 
-		if cursor.Value.(int) <= cursor.Next.Value.(int) {
+		if cursor.Value <= cursor.Next.Value {
 			// 下一个节点
 			prev = cursor
 			cursor = cursor.Next
@@ -71,7 +72,7 @@ func ListBubbleSort(node *types.ListNode) *types.ListNode {
 
 // ListBubbleSortChangValue 单向链表的冒泡排序算法（元素值为int类型）
 // Constraints: 可以修改元素字段值
-func ListBubbleSortChangValue(node *types.ListNode) {
+func ListBubbleSortChangValue[T types.Number](node *types.ListNode[T]) {
 	if node == nil || node.Next == nil {
 		return
 	}
@@ -88,7 +89,7 @@ func ListBubbleSortChangValue(node *types.ListNode) {
 			swapCnt = 0
 		}
 
-		if cursor.Value.(int) <= cursor.Next.Value.(int) {
+		if cursor.Value <= cursor.Next.Value {
 			cursor = cursor.Next
 			continue
 		}
@@ -100,12 +101,12 @@ func ListBubbleSortChangValue(node *types.ListNode) {
 
 // DoublyListBubbleSort 双向链表的冒泡排序算法（元素值为int类型）
 // Constraints: 不可以修改元素值
-func DoublyListBubbleSort(head *types.DListNode) *types.DListNode {
+func DoublyListBubbleSort[T comparable](head *types.DListNode[T]) *types.DListNode[T] {
 	if head == nil || head.Next == nil {
 		return head
 	}
 
-	guard := &types.DListNode{
+	guard := &types.DListNode[T]{
 		Value: math.MinInt,
 		Prev:  nil,
 		Next:  head,
@@ -152,7 +153,7 @@ func DoublyListBubbleSort(head *types.DListNode) *types.DListNode {
 
 // DoublyListBubbleSortChangeValue 双向链表的冒泡排序算法（元素值为int类型）
 // Constraints: 可以修改元素值
-func DoublyListBubbleSortChangeValue(head *types.DListNode) {
+func DoublyListBubbleSortChangeValue[T comparable](head *types.DListNode[T]) {
 	if head == nil || head.Next == nil {
 		return
 	}

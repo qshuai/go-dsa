@@ -23,8 +23,8 @@ func Test_BubbleSort(t *testing.T) {
 func Test_ListBubbleSort(t *testing.T) {
 	tests := []struct {
 		name string
-		args *types.ListNode
-		want *types.ListNode
+		args *types.ListNode[int]
+		want *types.ListNode[int]
 	}{
 		{
 			name: "case-1",
@@ -50,8 +50,8 @@ func Test_ListBubbleSort(t *testing.T) {
 func Test_ListBubbleSortChangValue(t *testing.T) {
 	tests := []struct {
 		name string
-		args *types.ListNode
-		want *types.ListNode
+		args *types.ListNode[int]
+		want *types.ListNode[int]
 	}{
 		{
 			name: "case-1",
@@ -77,8 +77,8 @@ func Test_ListBubbleSortChangValue(t *testing.T) {
 func Test_DoublyListBubbleSort(t *testing.T) {
 	tests := []struct {
 		name string
-		args *types.DListNode
-		want *types.DListNode
+		args *types.DListNode[int]
+		want *types.DListNode[int]
 	}{
 		{
 			name: "case-1",
@@ -104,8 +104,8 @@ func Test_DoublyListBubbleSort(t *testing.T) {
 func Test_DoublyListBubbleSortChangeValue(t *testing.T) {
 	tests := []struct {
 		name string
-		args *types.DListNode
-		want *types.DListNode
+		args *types.DListNode[int]
+		want *types.DListNode[int]
 	}{
 		{
 			name: "case-1",

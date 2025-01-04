@@ -9,13 +9,13 @@ import (
 
 func Test_mergeSortedList(t *testing.T) {
 	type args struct {
-		l1 *types.ListNode
-		l2 *types.ListNode
+		l1 *types.ListNode[int]
+		l2 *types.ListNode[int]
 	}
 	tests := []struct {
 		name string
 		args args
-		want *types.ListNode
+		want *types.ListNode[int]
 	}{
 		{
 			name: "case-1",
@@ -28,15 +28,15 @@ func Test_mergeSortedList(t *testing.T) {
 		{
 			name: "case-2",
 			args: args{
-				l1: types.NewListNodeFromSlice(nil),
-				l2: types.NewListNodeFromSlice(nil),
+				l1: types.NewListNodeFromSlice[int](nil),
+				l2: types.NewListNodeFromSlice[int](nil),
 			},
-			want: types.NewListNodeFromSlice(nil),
+			want: types.NewListNodeFromSlice[int](nil),
 		},
 		{
 			name: "case-3",
 			args: args{
-				l1: types.NewListNodeFromSlice(nil),
+				l1: types.NewListNodeFromSlice[int](nil),
 				l2: types.NewListNodeFromSlice([]int{0}),
 			},
 			want: types.NewListNodeFromSlice([]int{0}),

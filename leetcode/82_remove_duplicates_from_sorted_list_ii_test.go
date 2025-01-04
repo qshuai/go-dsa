@@ -10,8 +10,8 @@ import (
 func Test_deleteDuplicates(t *testing.T) {
 	tests := []struct {
 		name string
-		args *types.ListNode
-		want *types.ListNode
+		args *types.ListNode[int]
+		want *types.ListNode[int]
 	}{
 		{
 			name: "case-1",

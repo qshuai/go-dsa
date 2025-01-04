@@ -9,23 +9,23 @@ import (
 func TestListNode_String(t *testing.T) {
 	tests := []struct {
 		name string
-		arg  *ListNode
+		arg  *ListNode[int]
 		want string
 	}{
 		{
 			name: "general singly linked list",
 			arg:  NewListNode(1, 3),
-			want: "singly linked list: [1, 2, 3]",
+			want: "1 -> 2 -> 3",
 		},
 		{
 			name: "single element linked list",
 			arg:  NewListNode(1, 1),
-			want: "singly linked list: [1]",
+			want: "1",
 		},
 		{
 			name: "empty linked list",
 			arg:  nil,
-			want: "singly linked list: []",
+			want: "nil",
 		},
 	}
 	for _, tt := range tests {
@@ -39,13 +39,13 @@ func TestListNode_String(t *testing.T) {
 
 func TestListNode_RemoveByPosition(t *testing.T) {
 	type arg struct {
-		head *ListNode
+		head *ListNode[int]
 		idx  int
 	}
 	tests := []struct {
 		name string
 		args arg
-		want *ListNode
+		want *ListNode[int]
 	}{
 		{
 			name: "general case",
@@ -58,7 +58,7 @@ func TestListNode_RemoveByPosition(t *testing.T) {
 		{
 			name: "remove the first node of linked list having one element",
 			args: arg{
-				head: &ListNode{1, nil},
+				head: &ListNode[int]{1, nil},
 				idx:  0,
 			},
 			want: nil,
@@ -78,7 +78,7 @@ func TestNewListNodeFromSlice(t *testing.T) {
 	tests := []struct {
 		name string
 		args []int
-		want *ListNode
+		want *ListNode[int]
 	}{
 		{
 			name: "general case",
@@ -97,36 +97,37 @@ func TestNewListNodeFromSlice(t *testing.T) {
 }
 
 func ExampleReverseSingleList() {
-	list := NewListNode(1, 5)
-
-	reversed := ReverseSingleList(list)
-	for reversed != nil {
-		fmt.Println(reversed.Value)
-
-		reversed = reversed.Next
-	}
+	l := NewListNode(1, 5)
+	fmt.Println(ReverseSingleList(l))
 
 	// Output:
-	// 5
+	// 5 -> 4 -> 3 -> 2 -> 1
+}
+
+func ExampleListNode_String() {
+	fmt.Println((*ListNode[any])(nil))
+	fmt.Println(&ListNode[int]{Value: 4})
+	fmt.Println(NewListNodeFromSlice([]int{5, 2, 3, 5, 9, 1}))
+
+	// Output:
+	// nil
 	// 4
-	// 3
-	// 2
-	// 1
+	// 5 -> 2 -> 3 -> 5 -> 9 -> 1
 }
 
 func TestNewDoublyLinkedListFromSlice(t *testing.T) {
-	head := &DListNode{
+	head := &DListNode[int]{
 		Value: 1,
 		Prev:  nil,
 		Next:  nil,
 	}
-	node2 := &DListNode{
+	node2 := &DListNode[int]{
 		Value: 2,
 		Prev:  head,
 		Next:  nil,
 	}
 	head.Next = node2
-	node3 := &DListNode{
+	node3 := &DListNode[int]{
 		Value: 3,
 		Prev:  node2,
 		Next:  nil,
@@ -136,7 +137,7 @@ func TestNewDoublyLinkedListFromSlice(t *testing.T) {
 	tests := []struct {
 		name string
 		args []int
-		want *DListNode
+		want *DListNode[int]
 	}{
 		{
 			name: "general case",
@@ -153,4 +154,15 @@ func TestNewDoublyLinkedListFromSlice(t *testing.T) {
 			}
 		})
 	}
+}
+
+func ExampleDListNode_String() {
+	fmt.Println((*DListNode[any])(nil))
+
+	dl := NewDoublyLinkedListFromSlice([]string{"hello", "goland", "awesome"})
+	fmt.Println(dl.String())
+
+	// Output:
+	// nil
+	// hello <-> goland <-> awesome
 }

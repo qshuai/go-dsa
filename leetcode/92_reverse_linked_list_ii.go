@@ -14,15 +14,15 @@ import (
 // 1 <= n <= 500
 // -500 <= Node.val <= 500
 // 1 <= left <= right <= n
-func reverseBetween(head *types.ListNode, left int, right int) *types.ListNode {
+func reverseBetween[T any](head *types.ListNode[T], left int, right int) *types.ListNode[T] {
 	if left == right {
 		return head
 	}
 
-	mock := &types.ListNode{Next: head}
+	mock := &types.ListNode[T]{Next: head}
 	prev := mock
 	cursor := head
-	var lPoint, lPointNext *types.ListNode
+	var lPoint, lPointNext *types.ListNode[T]
 	i := 1
 	for i != left {
 		prev = cursor

@@ -1,6 +1,8 @@
 package leetcode
 
 import (
+	"golang.org/x/exp/constraints"
+
 	"github.com/qshuai/go-dsa/types"
 )
 
@@ -11,7 +13,7 @@ import (
 // the nodes of the first two lists.
 //
 // Return the head of the merged linked list.
-func mergeSortedList(list1 *types.ListNode, list2 *types.ListNode) *types.ListNode {
+func mergeSortedList[T constraints.Ordered](list1 *types.ListNode[T], list2 *types.ListNode[T]) *types.ListNode[T] {
 	if list1 == nil {
 		return list2
 	}
@@ -20,10 +22,10 @@ func mergeSortedList(list1 *types.ListNode, list2 *types.ListNode) *types.ListNo
 	}
 
 	// singly linked list with guard
-	ret := &types.ListNode{}
+	ret := &types.ListNode[T]{}
 	cursor := ret
 	for list1 != nil && list2 != nil {
-		if list1.Value.(int) <= list2.Value.(int) {
+		if list1.Value <= list2.Value {
 			cursor.Next = list1
 			list1 = list1.Next
 		} else {

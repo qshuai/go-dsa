@@ -5,7 +5,7 @@ import (
 )
 
 // FindMiddleNode 给定一个链表的头结点，要求找到中间节点并返回
-func FindMiddleNode(node *types.ListNode) *types.ListNode {
+func FindMiddleNode[T any](node *types.ListNode[T]) *types.ListNode[T] {
 	if node == nil {
 		return nil
 	}

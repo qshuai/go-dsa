@@ -9,8 +9,8 @@ import (
 func TestContainLoopInList1(t *testing.T) {
 	tests := []struct {
 		name     string
-		node     *types.ListNode
-		loopFunc func(node *types.ListNode)
+		node     *types.ListNode[int]
+		loopFunc func(node *types.ListNode[int])
 		want     bool
 	}{
 		{
@@ -34,7 +34,7 @@ func TestContainLoopInList1(t *testing.T) {
 		{
 			name: "list with loop",
 			node: types.NewListNode(1, 4),
-			loopFunc: func(node *types.ListNode) {
+			loopFunc: func(node *types.ListNode[int]) {
 				node.Next.Next.Next = node.Next
 			},
 			want: true,

@@ -9,13 +9,13 @@ import (
 
 func Test_swapNodes(t *testing.T) {
 	type args struct {
-		head *types.ListNode
+		head *types.ListNode[int]
 		k    int
 	}
 	tests := []struct {
 		name string
 		args args
-		want *types.ListNode
+		want *types.ListNode[int]
 	}{
 		{
 			name: "general case",

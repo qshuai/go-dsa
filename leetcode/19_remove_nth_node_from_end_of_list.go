@@ -14,7 +14,7 @@ import (
 // 1 <= sz <= 30
 // 0 <= TreeNode.val <= 100
 // 1 <= n <= sz
-func removeNthFromEnd(head *types.ListNode, n int) *types.ListNode {
+func removeNthFromEnd[T any](head *types.ListNode[T], n int) *types.ListNode[T] {
 	if head == nil {
 		return nil
 	}
@@ -41,12 +41,12 @@ func removeNthFromEnd(head *types.ListNode, n int) *types.ListNode {
 	return head
 }
 
-func removeNthFromEnd2(head *types.ListNode, n int) *types.ListNode {
+func removeNthFromEnd2[T any](head *types.ListNode[T], n int) *types.ListNode[T] {
 	if head == nil {
 		return nil
 	}
 
-	var a [30]*types.ListNode
+	var a [30]*types.ListNode[T]
 	var cursor int
 	for head != nil {
 		a[cursor] = head

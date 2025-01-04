@@ -72,7 +72,7 @@ func isPalindrome2(s string) bool {
 		return true
 	}
 
-	l, size, middleNode := buildListNodes(s)
+	l, size, middleNode := buildListNodes[any](s)
 	if l == nil {
 		return true
 	}
@@ -113,8 +113,8 @@ func isPalindrome2(s string) bool {
 // 1. 链表头结点
 // 2. 元素数量size
 // 3. 中间节点元素(位置为 size / 2，结果四舍五入)
-func buildListNodes(s string) (*types.DListNode, int, *types.DListNode) {
-	var l *types.DListNode
+func buildListNodes[T any](s string) (*types.DListNode[T], int, *types.DListNode[T]) {
+	var l *types.DListNode[T]
 
 	// 将字符串转换成byte数组
 	sh := (*reflect.StringHeader)(unsafe.Pointer(&s))
@@ -125,8 +125,8 @@ func buildListNodes(s string) (*types.DListNode, int, *types.DListNode) {
 	}
 	bs := *(*[]byte)(unsafe.Pointer(sliceHeader))
 
-	var currentNode *types.DListNode
-	var middleNode *types.DListNode
+	var currentNode *types.DListNode[T]
+	var middleNode *types.DListNode[T]
 	var size int
 	for _, b := range bs {
 		ok, isUpper := isAlphanumeric(b)
@@ -141,7 +141,7 @@ func buildListNodes(s string) (*types.DListNode, int, *types.DListNode) {
 		}
 
 		if currentNode == nil {
-			l = &types.DListNode{
+			l = &types.DListNode[T]{
 				Value: b,
 			}
 
@@ -150,7 +150,7 @@ func buildListNodes(s string) (*types.DListNode, int, *types.DListNode) {
 			continue
 		}
 
-		newNode := &types.DListNode{
+		newNode := &types.DListNode[T]{
 			Value: b,
 			Prev:  currentNode,
 		}

@@ -7,7 +7,7 @@ import "github.com/qshuai/go-dsa/types"
 // findKthLargest 构建k个元素的小顶堆，遍历将k到n-1的元素，如果比堆顶元素大就加入，否则忽略，
 // 最终堆顶元素即为kth大的元素
 func findKthLargest(nums []int, k int) int {
-	(types.Heap[int])(nums).Heapify(types.HeapMinDir)
+	(*types.Heap[int])(&nums).Heapify(types.HeapMinDir)
 
 	for i := k; i < len(nums); i++ {
 		if nums[i] <= nums[0] {
@@ -15,7 +15,7 @@ func findKthLargest(nums []int, k int) int {
 		}
 
 		nums[0] = nums[i]
-		(types.Heap[int])(nums).MinHeapify(k, 0)
+		(*types.Heap[int])(&nums).MinHeapify(k, 0)
 	}
 
 	return nums[0]

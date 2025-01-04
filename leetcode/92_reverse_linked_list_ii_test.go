@@ -9,14 +9,14 @@ import (
 
 func Test_reverseBetween(t *testing.T) {
 	type args struct {
-		head  *types.ListNode
+		head  *types.ListNode[int]
 		left  int
 		right int
 	}
 	tests := []struct {
 		name string
 		args args
-		want *types.ListNode
+		want *types.ListNode[int]
 	}{
 		{
 			name: "case-1",
@@ -30,11 +30,11 @@ func Test_reverseBetween(t *testing.T) {
 		{
 			name: "case-2",
 			args: args{
-				head:  &types.ListNode{Value: 5},
+				head:  &types.ListNode[int]{Value: 5},
 				left:  1,
 				right: 1,
 			},
-			want: &types.ListNode{Value: 5},
+			want: &types.ListNode[int]{Value: 5},
 		},
 	}
 	for _, tt := range tests {
