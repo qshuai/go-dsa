@@ -3,6 +3,8 @@ package types
 import (
 	"reflect"
 	"testing"
+
+	"golang.org/x/exp/constraints"
 )
 
 var root = buildTree()
@@ -214,6 +216,28 @@ func TestNewBinaryTree(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := NewBinaryTree(tt.args); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewBinaryTree() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestBST_Find(t *testing.T) {
+	type args[T constraints.Ordered] struct {
+		target T
+	}
+	type testCase[T constraints.Ordered] struct {
+		name string
+		bst  BST[T]
+		args args[T]
+		want *BST[T]
+	}
+	tests := []testCase[int]{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.bst.Find(tt.args.target); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Find() = %v, want %v", got, tt.want)
 			}
 		})
 	}

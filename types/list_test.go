@@ -81,6 +81,11 @@ func TestNewListNodeFromSlice(t *testing.T) {
 		want *ListNode[int]
 	}{
 		{
+			name: "nil slice given",
+			args: nil,
+			want: nil,
+		},
+		{
 			name: "general case",
 			args: []int{1, 2, 3},
 			want: NewListNodeSequence(1, 3),
@@ -216,6 +221,11 @@ func TestNewDoublyLinkedListFromSlice(t *testing.T) {
 		args []int
 		want *DListNode[int]
 	}{
+		{
+			name: "nil slice given",
+			args: nil,
+			want: nil,
+		},
 		{
 			name: "general case",
 			args: []int{1, 2, 3},

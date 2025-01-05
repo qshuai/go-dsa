@@ -1,8 +1,6 @@
 package sort
 
 import (
-	"math"
-
 	"golang.org/x/exp/constraints"
 
 	"github.com/qshuai/go-dsa/types"
@@ -101,15 +99,14 @@ func ListBubbleSortChangValue[T types.Number](node *types.ListNode[T]) {
 
 // DoublyListBubbleSort 双向链表的冒泡排序算法（元素值为int类型）
 // Constraints: 不可以修改元素值
-func DoublyListBubbleSort[T comparable](head *types.DListNode[T]) *types.DListNode[T] {
+func DoublyListBubbleSort[T constraints.Ordered](head *types.DListNode[T]) *types.DListNode[T] {
 	if head == nil || head.Next == nil {
 		return head
 	}
 
 	guard := &types.DListNode[T]{
-		Value: math.MinInt,
-		Prev:  nil,
-		Next:  head,
+		Prev: nil,
+		Next: head,
 	}
 	head.Prev = guard
 
@@ -128,7 +125,7 @@ func DoublyListBubbleSort[T comparable](head *types.DListNode[T]) *types.DListNo
 			continue
 		}
 
-		if cursor.Value.(int) <= cursor.Next.Value.(int) {
+		if cursor.Value <= cursor.Next.Value {
 			cursor = cursor.Next
 			prev = cursor
 			continue
@@ -153,7 +150,7 @@ func DoublyListBubbleSort[T comparable](head *types.DListNode[T]) *types.DListNo
 
 // DoublyListBubbleSortChangeValue 双向链表的冒泡排序算法（元素值为int类型）
 // Constraints: 可以修改元素值
-func DoublyListBubbleSortChangeValue[T comparable](head *types.DListNode[T]) {
+func DoublyListBubbleSortChangeValue[T constraints.Ordered](head *types.DListNode[T]) {
 	if head == nil || head.Next == nil {
 		return
 	}
@@ -171,7 +168,7 @@ func DoublyListBubbleSortChangeValue[T comparable](head *types.DListNode[T]) {
 			continue
 		}
 
-		if cursor.Value.(int) <= cursor.Next.Value.(int) {
+		if cursor.Value <= cursor.Next.Value {
 			cursor = cursor.Next
 			continue
 		}

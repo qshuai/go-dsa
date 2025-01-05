@@ -162,7 +162,7 @@ func NewListNode[T any]() *ListNode[T] {
 
 // DListNode represents doubly linked list
 type DListNode[T any] struct {
-	Value any
+	Value T
 	Prev  *DListNode[T]
 	Next  *DListNode[T]
 }
@@ -195,11 +195,7 @@ func (n *DListNode[T]) String() string {
 	sb := strings.Builder{}
 	cursor := n
 	for cursor != nil {
-		if v, ok := cursor.Value.(fmt.Stringer); ok {
-			sb.WriteString(v.String())
-		} else {
-			sb.WriteString(fmt.Sprintf("%v", cursor.Value))
-		}
+		sb.WriteString(fmt.Sprintf("%v", cursor.Value))
 
 		cursor = cursor.Next
 		if cursor != nil {

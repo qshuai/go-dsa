@@ -128,6 +128,11 @@ func TestBitMap_String(t *testing.T) {
 		want string
 	}{
 		{
+			name: "empty bits",
+			b:    nil,
+			want: "",
+		},
+		{
 			name: "case-1",
 			b:    NewBitMap(0, 64),
 			want: strings.Repeat("0", 64),
