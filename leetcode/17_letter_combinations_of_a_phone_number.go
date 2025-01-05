@@ -16,10 +16,10 @@ func letterCombinations(digits string) []string {
 		return []string{}
 	}
 
-	ret := make([]string, 0)
-	combine(digits, 0, "", &ret)
+	res := make([]string, 0)
+	combine(digits, 0, "", &res)
 
-	return ret
+	return res
 }
 
 func combine(data string, idx int, middle string, collector *[]string) {

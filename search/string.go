@@ -160,12 +160,12 @@ func buildAsciiPos(m string) []int {
 		return nil
 	}
 
-	ret := make([]int, 256)
+	res := make([]int, 256)
 	for i := 0; i < len(m); i++ {
-		ret[m[i]] = i + 1
+		res[m[i]] = i + 1
 	}
 
-	return ret
+	return res
 }
 
 // buildMatchedSegment 在模式串中构建和后缀子串匹配的前向字符串位置信息。suffix数组：索引代表匹配的长度，

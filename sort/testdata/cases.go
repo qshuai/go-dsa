@@ -67,9 +67,9 @@ var cases = []TestItem{
 
 // GetTestCases 获取排序所需的测试case。采用深拷贝方式，以防修改测试数据，影响后续测试
 func GetTestCases() []TestItem {
-	ret := make([]TestItem, 0, len(cases))
+	res := make([]TestItem, 0, len(cases))
 	for _, item := range cases {
-		ret = append(ret, TestItem{
+		res = append(res, TestItem{
 			Name:     item.Name,
 			Args:     item.Args,
 			Min:      item.Min,
@@ -78,5 +78,5 @@ func GetTestCases() []TestItem {
 		})
 	}
 
-	return ret
+	return res
 }

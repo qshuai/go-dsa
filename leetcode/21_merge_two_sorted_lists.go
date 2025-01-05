@@ -22,8 +22,8 @@ func mergeTwoLists[T constraints.Ordered](list1 *types.ListNode[T], list2 *types
 	}
 
 	// singly linked list with guard
-	ret := &types.ListNode[T]{}
-	cursor := ret
+	res := &types.ListNode[T]{}
+	cursor := res
 	for list1 != nil && list2 != nil {
 		if list1.Value <= list2.Value {
 			cursor.Next = list1
@@ -42,5 +42,5 @@ func mergeTwoLists[T constraints.Ordered](list1 *types.ListNode[T], list2 *types
 		cursor.Next = list2
 	}
 
-	return ret.Next
+	return res.Next
 }

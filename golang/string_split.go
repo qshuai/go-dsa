@@ -14,7 +14,7 @@ func SplitStringWithRepeatedChar(str string) []string {
 		}
 	}
 
-	var ret []string
+	var res []string
 	var flag bool
 	var start, offset int
 
@@ -27,7 +27,7 @@ func SplitStringWithRepeatedChar(str string) []string {
 
 		if flag {
 			if start != i-offset-1 {
-				ret = append(ret, str[start:i-offset-1])
+				res = append(res, str[start:i-offset-1])
 			}
 			flag = false
 			start = i
@@ -36,16 +36,16 @@ func SplitStringWithRepeatedChar(str string) []string {
 	}
 
 	if !flag {
-		ret = append(ret, str[start:])
+		res = append(res, str[start:])
 	} else {
-		ret = append(ret, str[start:len(str)-offset-1])
+		res = append(res, str[start:len(str)-offset-1])
 	}
 
-	return ret
+	return res
 }
 
 func SplitStringWithRepeatedChar2(str string) []string {
-	var ret []string
+	var res []string
 
 	var tmp string
 	for i := 0; i < len(str); {
@@ -58,7 +58,7 @@ func SplitStringWithRepeatedChar2(str string) []string {
 			tmp += string(str[i])
 		} else {
 			if tmp != "" {
-				ret = append(ret, tmp)
+				res = append(res, tmp)
 			}
 			tmp = ""
 		}
@@ -67,8 +67,8 @@ func SplitStringWithRepeatedChar2(str string) []string {
 	}
 
 	if tmp != "" {
-		ret = append(ret, tmp)
+		res = append(res, tmp)
 	}
 
-	return ret
+	return res
 }

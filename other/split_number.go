@@ -10,15 +10,15 @@ func SplitNum(num int) []int {
 	}
 
 	bits := GetNumBits(num)
-	ret := make([]int, bits)
+	res := make([]int, bits)
 
 	for num > 0 {
 		bits--
-		ret[bits] = num % 10
+		res[bits] = num % 10
 		num /= 10
 	}
 
-	return ret
+	return res
 }
 
 // GetNumBits 获取十进制数据有由几位组成的

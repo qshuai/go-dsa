@@ -32,12 +32,12 @@ func arange(start, end, step int) []int {
 	if (end-start)%step != 0 {
 		length++
 	}
-	ret := make([]int, 0, length)
+	res := make([]int, 0, length)
 	for i := start; i < end; i += step {
-		ret = append(ret, i)
+		res = append(res, i)
 	}
 
-	return ret
+	return res
 }
 
 func hist(data []int, start, step int) {

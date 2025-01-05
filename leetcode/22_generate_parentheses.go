@@ -10,10 +10,10 @@ const closeParenthesis byte = ')'
 // Constraints:
 // 1 <= n <= 8
 func generateParenthesis(n int) []string {
-	ret := make([]string, 0)
-	generate(n, 0, 0, "", &ret)
+	res := make([]string, 0)
+	generate(n, 0, 0, "", &res)
 
-	return ret
+	return res
 }
 
 func generate(n int, opens, closes int, target string, collector *[]string) {

@@ -12,10 +12,10 @@ func ExampleSequence() {
 	var wg sync.WaitGroup
 	wg.Add(len(numbers))
 
-	ret := make(chan int, len(numbers))
+	res := make(chan int, len(numbers))
 	for _, c := range numbers {
 		go func() {
-			ret <- <-ch
+			res <- <-ch
 			wg.Done()
 		}()
 
@@ -24,8 +24,8 @@ func ExampleSequence() {
 	close(ch)
 	wg.Wait()
 
-	close(ret)
-	for v := range ret {
+	close(res)
+	for v := range res {
 		fmt.Println(v)
 	}
 

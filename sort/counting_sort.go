@@ -35,46 +35,16 @@ func CountingSort(nums []int, min, max int) {
 	}
 
 	// create a new array to store sorted integer
-	ret := make([]int, len(nums))
+	res := make([]int, len(nums))
 	var key int // 减少内存分配
 	for i := len(nums) - 1; i >= 0; i-- {
 		key = nums[i] - min // 避免多次计算
 		// -1是将次数转化为索引（比如一个最小的数，他的出现的次数是1，
 		// 即counting[key]为1，但是在数组中的索引为0）
 		counting[key]--
-		ret[counting[key]] = nums[i]
+		res[counting[key]] = nums[i]
 	}
 
 	// replace in place
-	copy(nums, ret)
+	copy(nums, res)
 }
-
-// import (
-//	"os"
-//
-//	"github.com/olekukonko/tablewriter"
-// )
-//
-// func main() {
-//	table := tablewriter.NewWriter(os.Stdout)
-//	table.SetHeader([]string{"index", "0", "1", "2", "3", "4", "5"})
-//	table.SetColumnAlignment([]int{tablewriter.ALIGN_RIGHT, tablewriter.ALIGN_CENTER, tablewriter.ALIGN_CENTER,
-//		tablewriter.ALIGN_CENTER, tablewriter.ALIGN_CENTER, tablewriter.ALIGN_CENTER, tablewriter.ALIGN_CENTER})
-//	table.Append([]string{"unsorted numbers", "3", "2", "1", "0", "2", "2"})
-//	table.Append([]string{"counting array", "1", "1", "3", "1", "", ""})
-//	table.Append([]string{"cumulative count", "1", "2", "5", "6", "", ""})
-//	table.Append([]string{"Iteration in reverse order[2]", "", "", "", "", "2", ""})
-//	table.Append([]string{"cumulative count", "1", "2", "4", "6", "", ""})
-//	table.Append([]string{"Iteration in reverse order[2]", "", "", "", "2", "2", ""})
-//	table.Append([]string{"cumulative count", "1", "2", "3", "6", "", ""})
-//	table.Append([]string{"Iteration in reverse order[0]", "0", "", "", "2", "2", ""})
-//	table.Append([]string{"cumulative count", "0", "2", "3", "6", "", ""})
-//	table.Append([]string{"Iteration in reverse order[1]", "0", "1", "", "2", "2", ""})
-//	table.Append([]string{"cumulative count", "0", "1", "3", "6", "", ""})
-//	table.Append([]string{"Iteration in reverse order[2]", "0", "1", "2", "2", "2", ""})
-//	table.Append([]string{"cumulative count", "0", "1", "2", "6", "", ""})
-//	table.Append([]string{"Iteration in reverse order[3]", "0", "1", "2", "2", "2", "3"})
-//	table.Append([]string{"cumulative count", "0", "1", "2", "5", "", ""})
-//
-//	table.Render()
-// }

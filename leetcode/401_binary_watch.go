@@ -18,18 +18,18 @@ func readBinaryWatch(turnedOn int) []string {
 		return []string{"0:00"}
 	}
 
-	ret := make([]string, 0)
+	res := make([]string, 0)
 	for hour := 0; hour < 12; hour++ {
 		for minute := 0; minute < 60; minute++ {
 			if utils.BitCountUint32(uint32(hour))+utils.BitCountUint32(uint32(minute)) == turnedOn {
 				if minute < 10 {
-					ret = append(ret, fmt.Sprintf("%d:0%d", hour, minute))
+					res = append(res, fmt.Sprintf("%d:0%d", hour, minute))
 				} else {
-					ret = append(ret, fmt.Sprintf("%d:%d", hour, minute))
+					res = append(res, fmt.Sprintf("%d:%d", hour, minute))
 				}
 			}
 		}
 	}
 
-	return ret
+	return res
 }

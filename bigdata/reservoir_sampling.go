@@ -15,10 +15,10 @@ func sampling(data *[]int, k int) []int {
 		return *data
 	}
 
-	ret := make([]int, 0, k)
+	res := make([]int, 0, k)
 	elements := *data
 	for i := 0; i < k; i++ {
-		ret = append(ret, elements[i])
+		res = append(res, elements[i])
 	}
 
 	source := rand.NewSource(time.Now().UnixMilli())
@@ -26,9 +26,9 @@ func sampling(data *[]int, k int) []int {
 	for i := k; i < len(elements); i++ {
 		idx := r.Int63n(int64(i) + 1)
 		if idx < int64(k) {
-			ret[idx] = elements[i]
+			res[idx] = elements[i]
 		}
 	}
 
-	return ret
+	return res
 }

@@ -72,15 +72,15 @@ func (t *TrieNode) Search(prefix string) []string {
 	}
 
 	// 遍历节点获取，所有可能的字符串
-	var ret []string
+	var res []string
 	if travel.leaf {
-		ret = append(ret, travel.keyword)
+		res = append(res, travel.keyword)
 	}
 	for i := 0; i < len(travel.children); i++ {
-		trieDfs(travel.children[i], &([]byte{}), &ret)
+		trieDfs(travel.children[i], &([]byte{}), &res)
 	}
 
-	return ret
+	return res
 }
 
 // trieDfs travels all entries after this node
@@ -155,7 +155,7 @@ func (t *AcTrieNode) Match(text string) []string {
 	t.buildFailurePtr()
 
 	p := t
-	var ret []string
+	var res []string
 	for i := 0; i < len(text); i++ {
 		idx := text[i] - startPoint
 		for p.children[idx] == nil && p != t {
@@ -170,14 +170,14 @@ func (t *AcTrieNode) Match(text string) []string {
 		tmp := p
 		for tmp != t {
 			if tmp.leaf {
-				ret = append(ret, tmp.keyword)
+				res = append(res, tmp.keyword)
 			}
 
 			tmp = tmp.failPtr
 		}
 	}
 
-	return ret
+	return res
 }
 
 // buildFailurePtr 构建AC自动机的失败指针

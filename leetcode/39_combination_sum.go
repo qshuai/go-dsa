@@ -8,10 +8,10 @@ package leetcode
 // The same number may be chosen from candidates an unlimited number of times.
 // Two combinations are unique if the frequency of at least one of the chosen numbers is different.
 func combinationSum(candidates []int, target int) [][]int {
-	ret := make([][]int, 0)
+	res := make([][]int, 0)
 	data := make([]int, 0)
-	sum(candidates, 0, target, data, &ret)
-	return ret
+	sum(candidates, 0, target, data, &res)
+	return res
 }
 
 func sum(candidates []int, idx, target int, data []int, collector *[][]int) {

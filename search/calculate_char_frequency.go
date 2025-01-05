@@ -6,18 +6,18 @@ func CalcCharCntWithCaseSensitive(str string) []int {
 		return nil
 	}
 
-	ret := make([]int, 52)
+	res := make([]int, 52)
 	for _, c := range str {
 		if c < 'a' {
 			// Uppercase
 			// +26将大写字母放在后面
-			ret[c-'A'+26]++
+			res[c-'A'+26]++
 		} else {
-			ret[c-'a']++
+			res[c-'a']++
 		}
 	}
 
-	return ret
+	return res
 }
 
 // CalcCharCntWithCaseInsensitive 一个字符串由26个英文字母组成，计算字符串中各个字符出现的次数[注意不区分大小写]
@@ -26,14 +26,14 @@ func CalcCharCntWithCaseInsensitive(str string) []int {
 		return nil
 	}
 
-	ret := make([]int, 26)
+	res := make([]int, 26)
 	for _, c := range str {
 		if c < 'a' {
-			ret[c-'A']++
+			res[c-'A']++
 		} else {
-			ret[c-'a']++
+			res[c-'a']++
 		}
 	}
 
-	return ret
+	return res
 }

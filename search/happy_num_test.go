@@ -35,24 +35,24 @@ func TestGetSquareSum(t *testing.T) {
 	tests := []struct {
 		name string
 		num  int
-		ret  int
+		res  int
 	}{
 		{
 			name: "number without 0",
 			num:  12345,
-			ret:  55,
+			res:  55,
 		},
 		{
 			name: "number suffixed with 0",
 			num:  21000,
-			ret:  5,
+			res:  5,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := getSquareSum(tt.num); got != tt.ret {
-				t.Errorf("getSquareSum() = %d, want: %d ", got, tt.ret)
+			if got := getSquareSum(tt.num); got != tt.res {
+				t.Errorf("getSquareSum() = %d, want: %d ", got, tt.res)
 			}
 		})
 	}
