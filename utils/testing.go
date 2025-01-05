@@ -1,6 +1,9 @@
 package utils
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 // PanicHelper wraps panic branch
 func PanicHelper(t *testing.T, fn func(), shouldPanic bool) {
@@ -33,4 +36,28 @@ func ShouldNotPanic(t *testing.T, fn func()) {
 	}()
 
 	fn()
+}
+
+func AssertEqual(t *testing.T, got, want any) {
+	if reflect.DeepEqual(got, want) {
+		return
+	}
+
+	t.Fatalf("%s want: %v but got: %v", t.Name(), want, got)
+}
+
+func AssertTrue(t *testing.T, res bool) {
+	if res {
+		return
+	}
+
+	t.Fatalf("%s want true but got false", t.Name())
+}
+
+func AssertFalse(t *testing.T, res bool) {
+	if !res {
+		return
+	}
+
+	t.Fatalf("%s want false but got true", t.Name())
 }
