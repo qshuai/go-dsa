@@ -2,7 +2,7 @@ package leetcode
 
 import "github.com/qshuai/go-dsa/types"
 
-// https://leetcode.com/problems/reverse-linked-list/description/
+// https://leetcode.com/problems/reverse-linked-list
 //
 // Given the head of a singly linked list, reverse the list, and return the reversed list.
 //
@@ -18,16 +18,12 @@ import "github.com/qshuai/go-dsa/types"
 // The number of nodes in the list is the range [0, 5000].
 // -5000 <= Node.val <= 5000
 func reverseList[T any](head *types.ListNode[T]) *types.ListNode[T] {
-	if head == nil || head.Next == nil {
-		return head
-	}
-
-	prev, cur := (*types.ListNode[T])(nil), head
-	for cur != nil {
-		tmp := cur.Next
-		cur.Next = prev
-		prev = cur
-		cur = tmp
+	var prev *types.ListNode[T]
+	for head != nil {
+		tmp := head.Next
+		head.Next = prev
+		prev = head
+		head = tmp
 	}
 
 	return prev
