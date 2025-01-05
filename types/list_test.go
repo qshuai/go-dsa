@@ -115,6 +115,83 @@ func ExampleListNode_String() {
 	// 5 -> 2 -> 3 -> 5 -> 9 -> 1
 }
 
+func TestListNode_Clone(t *testing.T) {
+	type testCase[T any] struct {
+		name string
+		n    *ListNode[T]
+		want *ListNode[T]
+	}
+	tests := []testCase[int]{
+		{
+			name: "nil list",
+			n:    nil,
+			want: nil,
+		},
+		{
+			name: "single node list",
+			n:    NewListNodeWithValue(3),
+			want: NewListNodeWithValue(3),
+		},
+		{
+			name: "multi node list",
+			n:    NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+			want: NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.n.Clone(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Clone() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestDListNode_Reverse(t *testing.T) {
+	type testCase[T any] struct {
+		name string
+		n    *DListNode[T]
+		want *DListNode[T]
+	}
+
+	tests := []testCase[int]{
+		{
+			name: "nil list",
+			n:    nil,
+			want: nil,
+		},
+		{
+			name: "single node list",
+			n:    &DListNode[int]{Value: 1},
+			want: &DListNode[int]{Value: 1},
+		},
+		{
+			name: "multi node list",
+			n:    NewDoublyLinkedListFromSlice([]int{1, 2, 3}),
+			want: NewDoublyLinkedListFromSlice([]int{3, 2, 1}),
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.n.Reverse(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Reverse() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func ExampleDListNode_String() {
+	fmt.Println((*DListNode[any])(nil))
+
+	dl := NewDoublyLinkedListFromSlice([]string{"hello", "goland", "awesome"})
+	fmt.Println(dl.String())
+
+	// Output:
+	// nil
+	// hello <-> goland <-> awesome
+}
+
 func TestNewDoublyLinkedListFromSlice(t *testing.T) {
 	head := &DListNode[int]{
 		Value: 1,
@@ -151,49 +228,6 @@ func TestNewDoublyLinkedListFromSlice(t *testing.T) {
 			if got := NewDoublyLinkedListFromSlice(test.args); !reflect.DeepEqual(got, test.want) {
 				t.Errorf("NewDoublyLinkedListFromSlice() %s want: %s, but got: %s",
 					test.name, test.want.String(), got.String())
-			}
-		})
-	}
-}
-
-func ExampleDListNode_String() {
-	fmt.Println((*DListNode[any])(nil))
-
-	dl := NewDoublyLinkedListFromSlice([]string{"hello", "goland", "awesome"})
-	fmt.Println(dl.String())
-
-	// Output:
-	// nil
-	// hello <-> goland <-> awesome
-}
-
-func TestListNode_Clone(t *testing.T) {
-	type testCase[T any] struct {
-		name string
-		n    *ListNode[T]
-		want *ListNode[T]
-	}
-	tests := []testCase[int]{
-		{
-			name: "nil list",
-			n:    nil,
-			want: nil,
-		},
-		{
-			name: "single node list",
-			n:    NewListNodeWithValue(3),
-			want: NewListNodeWithValue(3),
-		},
-		{
-			name: "multi node list",
-			n:    NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
-			want: NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := tt.n.Clone(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Clone() = %v, want %v", got, tt.want)
 			}
 		})
 	}

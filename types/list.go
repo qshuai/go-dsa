@@ -167,30 +167,23 @@ type DListNode[T any] struct {
 	Next  *DListNode[T]
 }
 
-// NewDoublyLinkedListFromSlice 从数组生成双向链表
-func NewDoublyLinkedListFromSlice[T any](arr []T) *DListNode[T] {
-	if len(arr) <= 0 {
-		return nil
-	}
-
-	head := &DListNode[T]{
-		Value: arr[0],
-		Prev:  nil,
-		Next:  nil,
-	}
-	prev := head
-	for i := 1; i < len(arr); i++ {
-		newNode := &DListNode[T]{
-			Value: arr[i],
-			Prev:  prev,
-			Next:  nil,
+func (n *DListNode[T]) Reverse() *DListNode[T] {
+	var prev *DListNode[T]
+	for n != nil {
+		tmp := n.Next
+		n.Next = prev
+		if prev != nil {
+			prev.Prev = n
 		}
-		prev.Next = newNode
 
-		prev = newNode
+		prev = n
+		n = tmp
+	}
+	if prev != nil {
+		prev.Prev = nil
 	}
 
-	return head
+	return prev
 }
 
 // String return readable string representing doubly linked list
@@ -215,4 +208,30 @@ func (n *DListNode[T]) String() string {
 	}
 
 	return sb.String()
+}
+
+// NewDoublyLinkedListFromSlice 从数组生成双向链表
+func NewDoublyLinkedListFromSlice[T any](arr []T) *DListNode[T] {
+	if len(arr) <= 0 {
+		return nil
+	}
+
+	head := &DListNode[T]{
+		Value: arr[0],
+		Prev:  nil,
+		Next:  nil,
+	}
+	prev := head
+	for i := 1; i < len(arr); i++ {
+		newNode := &DListNode[T]{
+			Value: arr[i],
+			Prev:  prev,
+			Next:  nil,
+		}
+		prev.Next = newNode
+
+		prev = newNode
+	}
+
+	return head
 }
