@@ -13,53 +13,34 @@ import (
 // the two numbers and return the sum as a linked list.
 // You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 func addTwoNumbers[T constraints.Integer](l1 *types.ListNode[T], l2 *types.ListNode[T]) *types.ListNode[T] {
-	var ret types.ListNode[T]
-	tmp := &ret
+	res := types.NewListNode[T]()
+	cursor := res
 
-	var sum, carry, store T
-	var num1, num2 T
-	for {
-		if l1 != nil && l2 == nil {
+	var num1, num2, carry T
+	for l1 != nil || l2 != nil {
+		if l1 != nil {
 			num1 = l1.Value
-			num2 = 0
-
 			l1 = l1.Next
-
-			tmp.Next = &types.ListNode[T]{}
-		} else if l1 == nil && l2 != nil {
-			num1 = 0
+		}
+		if l2 != nil {
 			num2 = l2.Value
-
 			l2 = l2.Next
-
-			tmp.Next = &types.ListNode[T]{}
-		} else if l1 != nil && l2 != nil {
-			num1 = l1.Value
-			num2 = l2.Value
-
-			l1 = l1.Next
-			l2 = l2.Next
-
-			tmp.Next = &types.ListNode[T]{}
-		} else {
-			if carry != 0 {
-				tmp.Next.Value = carry
-			} else {
-				tmp.Next = nil
-			}
-
-			break
 		}
 
-		sum = num1 + num2 + carry
-		carry = sum / 10
-		store = sum % 10
+		addition := num1 + num2 + carry
+		cursor.Next = types.NewListNodeWithValue[T](addition % 10)
+		cursor = cursor.Next
 
-		tmp.Value = store
-		if l1 != nil || l2 != nil {
-			tmp = tmp.Next
+		// next loop
+		num1, num2, carry = 0, 0, 0
+		if addition >= 10 {
+			carry = 1
 		}
 	}
 
-	return &ret
+	if carry > 0 {
+		cursor.Next = types.NewListNodeWithValue[T](1)
+	}
+
+	return res.Next
 }
