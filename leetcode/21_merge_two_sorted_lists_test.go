@@ -44,7 +44,7 @@ func Test_mergeSortedList(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := mergeSortedList(tt.args.l1, tt.args.l2); !reflect.DeepEqual(got, tt.want) {
+			if got := mergeTwoLists(tt.args.l1, tt.args.l2); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("mergeSortedList() = %v, want %v", got, tt.want)
 			}
 		})

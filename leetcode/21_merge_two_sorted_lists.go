@@ -13,7 +13,7 @@ import (
 // the nodes of the first two lists.
 //
 // Return the head of the merged linked list.
-func mergeSortedList[T constraints.Ordered](list1 *types.ListNode[T], list2 *types.ListNode[T]) *types.ListNode[T] {
+func mergeTwoLists[T constraints.Ordered](list1 *types.ListNode[T], list2 *types.ListNode[T]) *types.ListNode[T] {
 	if list1 == nil {
 		return list2
 	}
