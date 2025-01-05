@@ -51,3 +51,29 @@ func partitionList[T constraints.Ordered](head *types.ListNode[T], x T) *types.L
 
 	return head.Next
 }
+
+// partitionList2 遍历链表，分发到分别存储大小数的两个链表中，最后将两个链表合并即可
+func partitionList2[T constraints.Ordered](head *types.ListNode[T], x T) *types.ListNode[T] {
+	slist := types.NewListNode[T]()
+	blist := types.NewListNode[T]()
+
+	small := slist
+	big := blist
+
+	for head != nil {
+		if head.Value < x {
+			small.Next = head
+			small = small.Next
+		} else {
+			big.Next = head
+			big = big.Next
+		}
+
+		head = head.Next
+	}
+
+	small.Next = blist.Next
+	big.Next = nil
+
+	return slist.Next
+}
