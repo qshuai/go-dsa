@@ -15,7 +15,7 @@ func Test_swapPairs(t *testing.T) {
 	}{
 		{
 			name: "linked list with even number elements",
-			args: types.NewListNode(1, 4),
+			args: types.NewListNodeSequence(1, 4),
 			want: types.NewListNodeFromSlice([]int{2, 1, 4, 3}),
 		},
 	}

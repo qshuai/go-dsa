@@ -28,10 +28,10 @@ func Test_addTwoNumbers(t *testing.T) {
 		{
 			name: "case-2",
 			args: args{
-				l1: types.NewListNode(0, 1),
-				l2: types.NewListNode(0, 1),
+				l1: types.NewListNodeWithValue(0),
+				l2: types.NewListNodeWithValue(0),
 			},
-			want: types.NewListNode(0, 1),
+			want: types.NewListNodeWithValue(0),
 		},
 		{
 			name: "case-3",

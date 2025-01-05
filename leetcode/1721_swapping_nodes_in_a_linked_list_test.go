@@ -20,7 +20,7 @@ func Test_swapNodes(t *testing.T) {
 		{
 			name: "general case",
 			args: args{
-				head: types.NewListNode(1, 5),
+				head: types.NewListNodeSequence(1, 5),
 				k:    2,
 			},
 			want: types.NewListNodeFromSlice([]int{1, 4, 3, 2, 5}),
@@ -29,7 +29,7 @@ func Test_swapNodes(t *testing.T) {
 		{
 			name: "swap head and tail element",
 			args: args{
-				head: types.NewListNode(1, 3),
+				head: types.NewListNodeSequence(1, 3),
 				k:    1,
 			},
 			want: types.NewListNodeFromSlice([]int{3, 2, 1}),

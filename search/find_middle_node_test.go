@@ -7,7 +7,7 @@ import (
 )
 
 func ExampleFindMiddleNode() {
-	node := types.NewListNode(1, 5)
+	node := types.NewListNodeSequence(1, 5)
 	fmt.Println(FindMiddleNode(node).Value)
 
 	// Output:

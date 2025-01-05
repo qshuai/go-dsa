@@ -12,6 +12,7 @@ func Test_removeNthFromEnd(t *testing.T) {
 		head *types.ListNode[int]
 		n    int
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -20,10 +21,10 @@ func Test_removeNthFromEnd(t *testing.T) {
 		{
 			name: "general case",
 			args: args{
-				head: types.NewListNode(1, 5),
+				head: types.NewListNodeSequence(1, 5),
 				n:    2,
 			},
-			want: types.NewListNode(1, 3).Append(&types.ListNode[int]{
+			want: types.NewListNodeSequence(1, 3).Append(&types.ListNode[int]{
 				Value: 5,
 				Next:  nil,
 			}),
@@ -31,25 +32,20 @@ func Test_removeNthFromEnd(t *testing.T) {
 		{
 			name: "single element linked list",
 			args: args{
-				head: types.NewListNode(1, 1),
+				head: types.NewListNodeWithValue(1),
 				n:    1,
 			},
 			want: nil,
 		},
 	}
-	for i, tt := range tests {
+
+	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := removeNthFromEnd(tt.args.head, tt.args.n); !reflect.DeepEqual(got, tt.want) {
+			if got := removeNthFromEnd(tt.args.head.Clone(), tt.args.n); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("removeNthFromEnd() = %v, want %v", got, tt.want)
 			}
 
-			// 恢复上面修改的原始参数
-			if i == 0 {
-				tt.args.head = types.NewListNode(1, 5)
-			} else if i == 1 {
-				tt.args.head = types.NewListNode(1, 1)
-			}
-			if got := removeNthFromEnd2(tt.args.head, tt.args.n); !reflect.DeepEqual(got, tt.want) {
+			if got := removeNthFromEnd2(tt.args.head.Clone(), tt.args.n); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("removeNthFromEnd2() = %v, want %v", got, tt.want)
 			}
 		})

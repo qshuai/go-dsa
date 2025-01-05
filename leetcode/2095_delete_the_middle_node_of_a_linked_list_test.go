@@ -15,17 +15,17 @@ func Test_deleteMiddle(t *testing.T) {
 	}{
 		{
 			name: "general case",
-			args: types.NewListNode(1, 7),
-			want: types.NewListNode(1, 7).RemoveByPosition(3),
+			args: types.NewListNodeSequence(1, 7),
+			want: types.NewListNodeSequence(1, 7).RemoveByPosition(3),
 		},
 		{
 			name: "two elements linked list",
-			args: types.NewListNode(1, 2),
-			want: types.NewListNode(1, 1),
+			args: types.NewListNodeSequence(1, 2),
+			want: types.NewListNodeWithValue(1),
 		},
 		{
 			name: "single element linked list",
-			args: types.NewListNode(1, 1),
+			args: types.NewListNodeWithValue(1),
 			want: nil,
 		},
 	}

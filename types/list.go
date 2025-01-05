@@ -10,44 +10,6 @@ type ListNode[T any] struct {
 	Next  *ListNode[T]
 }
 
-// NewListNode creates a singly linked list
-func NewListNode[T Number](start T, length int) *ListNode[T] {
-	head := &ListNode[T]{
-		Value: start,
-		Next:  nil,
-	}
-
-	prev := head
-	for i := 1; i < length; i++ {
-		start++
-		newNode := &ListNode[T]{
-			Value: start,
-			Next:  nil,
-		}
-		prev.Next = newNode
-		prev = newNode
-	}
-
-	return head
-}
-
-// NewListNodeFromSlice construct linked list from slice
-func NewListNodeFromSlice[T any](s []T) *ListNode[T] {
-	if len(s) <= 0 {
-		return nil
-	}
-
-	head := &ListNode[T]{Value: s[0]}
-	cursor := head
-	for i := 1; i < len(s); i++ {
-		newNode := &ListNode[T]{Value: s[i]}
-		cursor.Next = newNode
-		cursor = newNode
-	}
-
-	return head
-}
-
 // Append the node to the tail. panic if the linked list is nil.
 func (n *ListNode[T]) Append(node *ListNode[T]) *ListNode[T] {
 	if n == nil {
@@ -97,9 +59,9 @@ func (n *ListNode[T]) RemoveByPosition(idx int) *ListNode[T] {
 	return head
 }
 
-// ReverseSingleList 单链表反转
-func ReverseSingleList[T any](list *ListNode[T]) *ListNode[T] {
-	cur := list
+// Reverse 单链表反转
+func (n *ListNode[T]) Reverse() *ListNode[T] {
+	cur := n
 	var prev *ListNode[T]
 
 	for cur != nil {
@@ -110,6 +72,26 @@ func ReverseSingleList[T any](list *ListNode[T]) *ListNode[T] {
 	}
 
 	return prev
+}
+
+func (n *ListNode[T]) Clone() *ListNode[T] {
+	if n == nil {
+		return nil
+	}
+
+	res := NewListNode[T]()
+
+	cursor := res
+	for n != nil {
+		cursor.Next = &ListNode[T]{
+			Value: n.Value,
+		}
+		cursor = cursor.Next
+
+		n = n.Next
+	}
+
+	return res.Next
 }
 
 func (n *ListNode[T]) String() string {
@@ -129,6 +111,53 @@ func (n *ListNode[T]) String() string {
 	}
 
 	return sb.String()
+}
+
+// NewListNodeSequence creates a singly linked list
+func NewListNodeSequence[T Number](start T, length int) *ListNode[T] {
+	head := &ListNode[T]{
+		Value: start,
+		Next:  nil,
+	}
+
+	prev := head
+	for i := 1; i < length; i++ {
+		start++
+		newNode := &ListNode[T]{
+			Value: start,
+			Next:  nil,
+		}
+		prev.Next = newNode
+		prev = newNode
+	}
+
+	return head
+}
+
+// NewListNodeFromSlice construct linked list from slice
+func NewListNodeFromSlice[T any](s []T) *ListNode[T] {
+	if len(s) <= 0 {
+		return nil
+	}
+
+	head := &ListNode[T]{Value: s[0]}
+	cursor := head
+	for i := 1; i < len(s); i++ {
+		newNode := &ListNode[T]{Value: s[i]}
+		cursor.Next = newNode
+		cursor = newNode
+	}
+
+	return head
+}
+
+func NewListNodeWithValue[T any](value T) *ListNode[T] {
+	return &ListNode[T]{Value: value}
+}
+
+// NewListNode return a singly linked list with single node
+func NewListNode[T any]() *ListNode[T] {
+	return &ListNode[T]{}
 }
 
 // DListNode represents doubly linked list

@@ -26,7 +26,7 @@ func Test_deleteDuplicates2(t *testing.T) {
 		{
 			name: "case-3",
 			args: types.NewListNodeFromSlice([]int{1, 2, 2, 2}),
-			want: types.NewListNodeFromSlice([]int{1}),
+			want: types.NewListNodeWithValue(1),
 		},
 	}
 	for _, tt := range tests {

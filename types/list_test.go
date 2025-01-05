@@ -14,12 +14,12 @@ func TestListNode_String(t *testing.T) {
 	}{
 		{
 			name: "general singly linked list",
-			arg:  NewListNode(1, 3),
+			arg:  NewListNodeSequence(1, 3),
 			want: "1 -> 2 -> 3",
 		},
 		{
 			name: "single element linked list",
-			arg:  NewListNode(1, 1),
+			arg:  NewListNodeWithValue(1),
 			want: "1",
 		},
 		{
@@ -50,10 +50,10 @@ func TestListNode_RemoveByPosition(t *testing.T) {
 		{
 			name: "general case",
 			args: arg{
-				head: NewListNode(1, 5),
+				head: NewListNodeSequence(1, 5),
 				idx:  2,
 			},
-			want: NewListNode(1, 2).Append(NewListNode(4, 2)),
+			want: NewListNodeSequence(1, 2).Append(NewListNodeSequence(4, 2)),
 		},
 		{
 			name: "remove the first node of linked list having one element",
@@ -83,7 +83,7 @@ func TestNewListNodeFromSlice(t *testing.T) {
 		{
 			name: "general case",
 			args: []int{1, 2, 3},
-			want: NewListNode(1, 3),
+			want: NewListNodeSequence(1, 3),
 		},
 	}
 
@@ -96,9 +96,9 @@ func TestNewListNodeFromSlice(t *testing.T) {
 	}
 }
 
-func ExampleReverseSingleList() {
-	l := NewListNode(1, 5)
-	fmt.Println(ReverseSingleList(l))
+func ExampleListNode_Reverse() {
+	l := NewListNodeSequence(1, 5)
+	fmt.Println(l.Reverse())
 
 	// Output:
 	// 5 -> 4 -> 3 -> 2 -> 1
@@ -165,4 +165,36 @@ func ExampleDListNode_String() {
 	// Output:
 	// nil
 	// hello <-> goland <-> awesome
+}
+
+func TestListNode_Clone(t *testing.T) {
+	type testCase[T any] struct {
+		name string
+		n    *ListNode[T]
+		want *ListNode[T]
+	}
+	tests := []testCase[int]{
+		{
+			name: "nil list",
+			n:    nil,
+			want: nil,
+		},
+		{
+			name: "single node list",
+			n:    NewListNodeWithValue(3),
+			want: NewListNodeWithValue(3),
+		},
+		{
+			name: "multi node list",
+			n:    NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+			want: NewListNodeFromSlice([]int{1, 2, 3, 4, 5}),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.n.Clone(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Clone() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

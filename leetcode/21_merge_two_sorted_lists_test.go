@@ -28,18 +28,18 @@ func Test_mergeSortedList(t *testing.T) {
 		{
 			name: "case-2",
 			args: args{
-				l1: types.NewListNodeFromSlice[int](nil),
-				l2: types.NewListNodeFromSlice[int](nil),
+				l1: nil,
+				l2: nil,
 			},
-			want: types.NewListNodeFromSlice[int](nil),
+			want: nil,
 		},
 		{
 			name: "case-3",
 			args: args{
-				l1: types.NewListNodeFromSlice[int](nil),
-				l2: types.NewListNodeFromSlice([]int{0}),
+				l1: nil,
+				l2: types.NewListNodeWithValue(0),
 			},
-			want: types.NewListNodeFromSlice([]int{0}),
+			want: types.NewListNodeWithValue(0),
 		},
 	}
 	for _, tt := range tests {

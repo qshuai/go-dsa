@@ -51,7 +51,7 @@ func Test_deleteDuplicates(t *testing.T) {
 			args: args[int]{
 				head: types.NewListNodeFromSlice([]int{0, 0, 0, 0, 0}),
 			},
-			want: types.NewListNodeFromSlice([]int{0}),
+			want: types.NewListNodeWithValue(0),
 		},
 		{
 			name: "duplicates4",
