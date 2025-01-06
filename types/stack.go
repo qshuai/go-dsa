@@ -33,6 +33,10 @@ func (s *Stack[T]) Size() int {
 	return len(s.container)
 }
 
+func (s *Stack[T]) Empty() bool {
+	return len(s.container) == 0
+}
+
 func NewStack[T any]() *Stack[T] {
 	return &Stack[T]{}
 }

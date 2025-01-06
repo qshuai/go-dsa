@@ -48,13 +48,6 @@ type MyQueue[T any] struct {
 	stack2 *types.Stack[T]
 }
 
-func NewMyQueue[T any]() *MyQueue[T] {
-	return &MyQueue[T]{
-		stack1: types.NewStack[T](),
-		stack2: types.NewStack[T](),
-	}
-}
-
 func (mq *MyQueue[T]) Push(x T) {
 	mq.stack1.Push(x)
 }
@@ -90,5 +83,12 @@ func (mq *MyQueue[T]) Peek() T {
 }
 
 func (mq *MyQueue[T]) Empty() bool {
-	return mq.stack1.Size() == 0 && mq.stack2.Size() == 0
+	return mq.stack1.Empty() && mq.stack2.Empty()
+}
+
+func NewMyQueue[T any]() *MyQueue[T] {
+	return &MyQueue[T]{
+		stack1: types.NewStack[T](),
+		stack2: types.NewStack[T](),
+	}
 }

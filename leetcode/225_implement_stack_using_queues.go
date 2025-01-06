@@ -6,12 +6,6 @@ type MyStack[T any] struct {
 	queue *types.Queue[T]
 }
 
-func NewMyStack[T any]() *MyStack[T] {
-	return &MyStack[T]{
-		queue: types.NewQueue[T](),
-	}
-}
-
 func (ms *MyStack[T]) Push(x T) {
 	ms.queue.Push(x)
 
@@ -33,4 +27,10 @@ func (ms *MyStack[T]) Top() T {
 
 func (ms *MyStack[T]) Empty() bool {
 	return ms.queue.Size() == 0
+}
+
+func NewMyStack[T any]() *MyStack[T] {
+	return &MyStack[T]{
+		queue: types.NewQueue[T](),
+	}
 }
