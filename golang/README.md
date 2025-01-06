@@ -43,4 +43,4 @@ type bmap struct {
 
 - bmap的结构示意图：
 
-  ![bmap](../static/bmap.png)
+  ![bmap](../images/bmap.png)

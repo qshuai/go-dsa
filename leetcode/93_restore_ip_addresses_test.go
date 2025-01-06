@@ -24,7 +24,7 @@ func Test_restoreIpAddresses(t *testing.T) {
 		},
 		{
 			name: "case-3",
-			args: "101023", // 递归树：https://github.com/qshuai/go-dsa/blob/master/static/restore_ip_addresses.png
+			args: "101023", // 递归树：https://github.com/qshuai/go-dsa/blob/master/images/restore_ip_addresses.png
 			want: []string{"1.0.10.23", "1.0.102.3", "10.1.0.23", "10.10.2.3", "101.0.2.3"},
 		},
 	}

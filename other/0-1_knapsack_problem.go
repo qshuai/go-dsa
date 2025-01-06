@@ -263,7 +263,7 @@ func minimumLimitValueUsingDynamicPrograming(value []int, limit int) []int {
 
 // yanghuiTriangleUsingDynamicProgram 给出一个杨辉三角，节点值为该路径的长度。
 // 要求从顶点出发，求出到达最底层的最短路径长度。
-// image: ../static/yanghui_triangle.png
+// image: ../images/yanghui_triangle.png
 func yanghuiTriangleUsingDynamicProgram(matrix [][]int) int {
 	if len(matrix) <= 0 {
 		return 0
