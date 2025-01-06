@@ -1,5 +1,7 @@
 package leetcode
 
+import "sort"
+
 // https://leetcode.com/problems/permutations-ii/
 
 // permuteUnique returns all possible unique permutations in any order.
@@ -12,6 +14,7 @@ func permuteUnique(nums []int) [][]int {
 	collector := make([][]int, 0)
 	path := make([]int, 0, len(nums))
 	visited := make([]bool, len(nums))
+	sort.Ints(nums)
 	dfsWithClip(nums, 0, &path, visited, &collector)
 	return collector
 }
@@ -30,7 +33,7 @@ func dfsWithClip(nums []int, depth int, path *[]int, visited []bool, collector *
 			continue
 		}
 		// 同一层去除重复元素[important]
-		if i > 0 && !visited[i-1] && nums[i] == nums[i-1] {
+		if i > 0 && visited[i-1] && nums[i] == nums[i-1] {
 			continue
 		}
 
