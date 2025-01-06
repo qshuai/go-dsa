@@ -48,8 +48,8 @@ type MyQueue[T any] struct {
 	stack2 *types.Stack[T]
 }
 
-func NewMyQueue[T any]() MyQueue[T] {
-	return MyQueue[T]{
+func NewMyQueue[T any]() *MyQueue[T] {
+	return &MyQueue[T]{
 		stack1: types.NewStack[T](),
 		stack2: types.NewStack[T](),
 	}
