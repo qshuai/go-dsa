@@ -22,7 +22,7 @@ func Test_partitionList(t *testing.T) {
 
 	tests := []testCase[int]{
 		{
-			name: "case1",
+			name: "case-1",
 			args: args[int]{
 				head: types.NewListNodeFromSlice([]int{1, 4, 3, 2, 5, 2}),
 				x:    3,
@@ -30,7 +30,7 @@ func Test_partitionList(t *testing.T) {
 			want: types.NewListNodeFromSlice([]int{1, 2, 2, 4, 3, 5}),
 		},
 		{
-			name: "case2",
+			name: "case-2",
 			args: args[int]{
 				head: types.NewListNodeFromSlice([]int{2, 1}),
 				x:    2,

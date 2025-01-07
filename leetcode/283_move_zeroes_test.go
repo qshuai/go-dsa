@@ -29,14 +29,14 @@ func Test_moveZeroes(t *testing.T) {
 			want: []int{3},
 		},
 		{
-			name: "case1",
+			name: "case-1",
 			args: args{
 				nums: []int{0, 1, 0, 3, 12},
 			},
 			want: []int{1, 3, 12, 0, 0},
 		},
 		{
-			name: "case2",
+			name: "case-2",
 			args: args{
 				nums: []int{1, 1, 1, 3, 12},
 			},
