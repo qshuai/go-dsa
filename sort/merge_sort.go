@@ -21,10 +21,6 @@ func MergeSort(arr []int) []int {
 }
 
 func merge(left, right []int) []int {
-	if len(left) <= 0 && len(right) <= 0 {
-		return []int{}
-	}
-
 	// 创建临时slice只存放left部分，可以减少内存分配
 	tmp := make([]int, len(left))
 	copy(tmp, left)
