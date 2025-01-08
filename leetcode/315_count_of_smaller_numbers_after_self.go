@@ -7,8 +7,8 @@ package leetcode
 // elements to the right of nums[i].
 //
 // Constraints:
-// 1 <= nums.length <= 105
-// -104 <= nums[i] <= 104
+// 1 <= nums.length <= 10^5
+// -10^4 <= nums[i] <= 10^4
 func countSmaller(nums []int) []int {
 	if len(nums) <= 0 {
 		return nil

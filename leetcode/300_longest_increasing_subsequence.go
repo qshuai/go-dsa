@@ -6,7 +6,7 @@ package leetcode
 //
 // Constraints:
 // 1 <= nums.length <= 2500
-// -104 <= nums[i] <= 104
+// -10^4 <= nums[i] <= 10^4
 // 使用动态规划的思路
 func lengthOfLIS(nums []int) int {
 	if len(nums) <= 0 {

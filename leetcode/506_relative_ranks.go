@@ -12,8 +12,8 @@ import (
 //
 // Constraints:
 // n == score.length
-// 1 <= n <= 104
-// 0 <= score[i] <= 106
+// 1 <= n <= 10^4
+// 0 <= score[i] <= 10^6
 // All the values in score are unique.
 func findRelativeRanks(score []int) []string {
 	scoreWithIdx := make([][2]int, len(score))

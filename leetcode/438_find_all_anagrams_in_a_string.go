@@ -8,7 +8,7 @@ package leetcode
 // typically using all the original letters exactly once.
 //
 // Constraints:
-// 1 <= s.length, p.length <= 3 * 104
+// 1 <= s.length, p.length <= 3 * 10^4
 // s and p consist of lowercase English letters.
 func findanagrams(s string, p string) []int {
 	if len(p) > len(s) {

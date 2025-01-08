@@ -5,9 +5,9 @@ package leetcode
 // arrayPairSum
 //
 // Constraints:
-// 1 <= n <= 104
+// 1 <= n <= 10^4
 // nums.length == 2 * n
-// -104 <= nums[i] <= 104
+// -10^4 <= nums[i] <= 10^4
 func arrayPairSum(nums []int) int {
 	min, max := nums[0], nums[0]
 	for _, num := range nums {

@@ -25,7 +25,7 @@ package leetcode
 //
 // Constraints:
 // n == s.length
-// 4 <= n <= 105
+// 4 <= n <= 10^5
 // n is a multiple of 4.
 // s contains only 'Q', 'W', 'E', and 'R'.
 func balancedString(s string) int {

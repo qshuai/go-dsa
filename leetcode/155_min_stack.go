@@ -38,10 +38,9 @@ import (
 // minStack.getMin(); // return -2
 //
 // Constraints:
-//
-// -231 <= val <= 231 - 1
+// -2^31 <= val <= 2^31 - 1
 // Methods pop, top and getMin operations will always be called on non-empty stacks.
-// At most 3 * 104 calls will be made to push, pop, top, and getMin.
+// At most 3 * 10^4 calls will be made to push, pop, top, and getMin.
 
 // 解题思路：栈是一个支持有限制操作(push、pop)的数据容器，由于集合元素添加、删除的约束性，只需要维护对应元素集合的最小值即可。
 

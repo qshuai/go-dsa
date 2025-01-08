@@ -29,7 +29,7 @@ import "math"
 // Constraints:
 // m == s.length
 // n == t.length
-// 1 <= m, n <= 105
+// 1 <= m, n <= 10^5
 // s and t consist of uppercase and lowercase English letters.
 //
 // Follow up: Could you find an algorithm that runs in O(m + n) time?
