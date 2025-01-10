@@ -10,11 +10,12 @@ import (
 func TestSampling(t *testing.T) {
 	// 准备一个大数组
 	n := 100000
-	data := arange(0, n, 1)
-	samples := sampling(&data, 1000)
+	k := 1000
+	samples := sampling(arange(0, n, 1), k)
 
 	// 检查样本的分布情况
-	hist(samples, 0, 5000)
+	bucket := 5000
+	hist(samples, 0, bucket)
 }
 
 func arange(start, end, step int) []int {
