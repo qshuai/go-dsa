@@ -82,3 +82,14 @@ func EmbeddedSliceEqual[T constraints.Ordered](a [][]T, b [][]T) bool {
 
 	return len(passedMapping) == len(b)
 }
+
+func ContainEqual[T constraints.Ordered](arrs [][]T, target []T) bool {
+	for _, arr := range arrs {
+		equal := ElementEqual(arr, target)
+		if equal {
+			return true
+		}
+	}
+
+	return false
+}

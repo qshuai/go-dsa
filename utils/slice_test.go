@@ -179,3 +179,48 @@ func TestEmbeddedSliceEqual(t *testing.T) {
 		})
 	}
 }
+
+func TestContainEqual(t *testing.T) {
+	type args[T constraints.Ordered] struct {
+		arrs   [][]T
+		target []T
+	}
+	type testCase[T constraints.Ordered] struct {
+		name string
+		args args[T]
+		want bool
+	}
+	tests := []testCase[int]{
+		{
+			name: "case-1",
+			args: args[int]{
+				arrs:   [][]int{nil, {1, 2, 3}},
+				target: nil,
+			},
+			want: true,
+		},
+		{
+			name: "case-2",
+			args: args[int]{
+				arrs:   [][]int{{4, 5, 6}, {1, 2, 3}},
+				target: nil,
+			},
+			want: false,
+		},
+		{
+			name: "case-3",
+			args: args[int]{
+				arrs:   [][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
+				target: []int{5, 4, 6},
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ContainEqual(tt.args.arrs, tt.args.target); got != tt.want {
+				t.Errorf("ContainEqual() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
