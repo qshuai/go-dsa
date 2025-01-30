@@ -28,9 +28,7 @@ func PartitionHead(arr []int) int {
 		i--
 	}
 
-	if arr[0] == pivot {
-		arr[i], arr[0] = arr[0], arr[i]
-	}
+	arr[i], arr[0] = arr[0], arr[i]
 	return i
 }
 
