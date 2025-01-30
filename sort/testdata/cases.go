@@ -65,18 +65,7 @@ var cases = []TestItem{
 	},
 }
 
-// GetTestCases 获取排序所需的测试case。采用深拷贝方式，以防修改测试数据，影响后续测试
+// GetTestCases 获取排序所需的测试cases
 func GetTestCases() []TestItem {
-	res := make([]TestItem, 0, len(cases))
-	for _, item := range cases {
-		res = append(res, TestItem{
-			Name:     item.Name,
-			Args:     item.Args,
-			Min:      item.Min,
-			Max:      item.Max,
-			Expected: item.Expected,
-		})
-	}
-
-	return res
+	return cases
 }
