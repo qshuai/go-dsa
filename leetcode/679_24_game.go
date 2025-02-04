@@ -29,32 +29,24 @@ import "math"
 // Constraints:
 // cards.length == 4
 // 1 <= cards[i] <= 9
-
-var (
-	res bool
-	eps = 0.001
-)
-
 func judgePoint24(cards []int) bool {
-	// reset
-	res = false
-
 	list := make([]float64, len(cards))
 	for idx, num := range cards {
 		list[idx] = float64(num)
 	}
 
-	return helper(list)
+	var success bool
+	return helper(list, &success)
 }
 
-func helper(cards []float64) bool {
-	if res {
+func helper(cards []float64, success *bool) bool {
+	if *success {
 		return true
 	}
 
 	n := len(cards)
 	if n == 1 {
-		return math.Abs(cards[0]-24) < eps
+		return math.Abs(cards[0]-24) < 0.001
 	}
 
 	for i := 0; i < n; i++ {
@@ -70,8 +62,8 @@ func helper(cards []float64) bool {
 			for _, op := range ops {
 				list = append(list, op)
 
-				if helper(list) {
-					res = true
+				if helper(list, success) {
+					*success = true
 					return true
 				}
 
