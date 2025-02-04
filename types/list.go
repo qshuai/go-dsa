@@ -94,6 +94,18 @@ func (n *ListNode[T]) Clone() *ListNode[T] {
 	return res.Next
 }
 
+func (n *ListNode[T]) Tail() *ListNode[T] {
+	if n == nil {
+		return nil
+	}
+
+	res := n
+	for res.Next != nil {
+		res = res.Next
+	}
+	return res
+}
+
 func (n *ListNode[T]) String() string {
 	if n == nil {
 		return "nil"
