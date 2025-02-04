@@ -70,11 +70,14 @@ func (b *BitMap) checkBound(ele uint64) {
 
 // NewBitMap return a bitmap instance
 func NewBitMap(base uint64, length int) *BitMap {
-	mod := length % bitSize
-	nums := length / bitSize
-	if mod != 0 {
-		nums = length/bitSize + 1
-	}
+	// mod := length % bitSize
+	// nums := length / bitSize
+	// if mod != 0 {
+	// 	nums += 1
+	// }
+
+	// optimize: replace the above code
+	nums := (length + bitSize - 1) / bitSize
 
 	return &BitMap{
 		base: base,
