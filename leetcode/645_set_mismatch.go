@@ -69,6 +69,7 @@ func findErrorNums3(nums []int) []int {
 
 	for i := 0; i < len(nums); i++ {
 		if nums[i] > 0 {
+			// 该位置的数大于0，说明没有元素指向过该位置，使其变成负数；而指向是通过数值-1得到的，所以i+1就是缺失的数
 			res[1] = i + 1
 			return res
 		}
