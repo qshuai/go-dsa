@@ -12,13 +12,18 @@ slug="$1"
 # 发送 GraphQL 请求获取题目信息
 response=$(curl -s 'https://leetcode.com/graphql' \
   -H 'Content-Type: application/json' \
-  --data-binary "{\"query\":\"query { question(titleSlug: \\\"$slug\\\") { questionFrontendId title content codeSnippets { lang langSlug code } } }\"}")
+  --data-binary "{\"query\":\"query { question(titleSlug: \\\"$slug\\\") { questionFrontendId content codeSnippets { lang langSlug code } } }\"}")
+
+question=$(echo "$response" | jq -r '.data.question')
+if [ "null" == "$question" ]; then
+  echo "The question Not Found, please check the question name"
+  exit 1
+fi
 
 # 解析标题
-questionId=$(echo "$response" | jq -r '.data.question.questionFrontendId')
-title=$(echo "$response" | jq -r '.data.question.title')
+questionId=$(echo "$question" | jq -r '.questionFrontendId')
 # 格式化描述信息
-desc=$(echo "$response" | jq -r '.data.question.content' |
+desc=$(echo "$question" | jq -r '.content' |
  sed 's/<sup>/^/g' | # 处理指数符号
  sed 's/<[^>]*>//g' | # 去掉HTML标签
  sed -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&amp;/\&/g' -e 's/&quot;/"/g' -e "s/&apos;/'/g" -e 's/&nbsp;/ /g' | # 处理HTML实体转换
@@ -29,7 +34,7 @@ desc=$(echo "$response" | jq -r '.data.question.content' |
  sed -e 's/^\(Follow up:\)$/\n\1/g' | # 在Follow up:之前添加空行
  sed 's/^\(.*\)$/\/\/ \1/g') # 添加注释符
 # 解析默认代码模板（以 Python 为例）
-code=$(echo "$response" | jq -r '.data.question.codeSnippets[] | select(.langSlug=="golang") | .code')
+code=$(echo "$question" | jq -r '.codeSnippets[] | select(.langSlug=="golang") | .code')
 
 # 判断文件是否存在
 filename=$(echo "$questionId""_$slug.go" | sed 's/-/_/g')
