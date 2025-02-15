@@ -9,10 +9,6 @@ package leetcode
 // -10^4 <= nums[i] <= 10^4
 // 使用动态规划的思路
 func lengthOfLIS(nums []int) int {
-	if len(nums) <= 0 {
-		return 0
-	}
-
 	// 假设索引为i，值为以nums[i]结尾的最长子序列的长度
 	dp := make([]int, len(nums))
 	dp[0] = 1
@@ -33,16 +29,12 @@ func lengthOfLIS(nums []int) int {
 
 // lengthOfLIS2 solution-2 使用贪心算法，在查找元素部分使用了二分查找(降低查找的时间复杂度)
 func lengthOfLIS2(nums []int) int {
-	if len(nums) <= 0 {
-		return 0
-	}
-
 	d := make([]int, len(nums))
 	d[0] = nums[0]
 	var offset int
 	for i := 1; i < len(nums); i++ {
 		if nums[i] > d[offset] {
-			// 如果当前元素比offset出的元素大，直接追加（贪心）
+			// 如果当前元素比offset处的元素大，直接追加（贪心）
 			offset++
 			d[offset] = nums[i]
 		} else if nums[i] < d[offset] {
